@@ -5,9 +5,9 @@
 
 import UIKit
 
-extension IntroViewController: XibLoadable {}
+extension InstructionsViewController: XibLoadable {}
 
-class IntroViewController: UIViewController, Coordinated {
+class InstructionsViewController: UIViewController, Coordinated {
     var coordinator: AppCoordinatorProtocol?
     
     enum Scenario {
