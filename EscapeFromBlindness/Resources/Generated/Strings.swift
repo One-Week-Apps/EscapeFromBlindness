@@ -159,6 +159,8 @@ enum L10n {
   static let e = L10n.tr("Localizable", "E")
   /// This can be a completely new story based on the game modes you just played!
   static let f = L10n.tr("Localizable", "F")
+  /// Go !
+  static let go = L10n.tr("Localizable", "go")
   /// hint
   static let hint = L10n.tr("Localizable", "hint")
   /// Niveau

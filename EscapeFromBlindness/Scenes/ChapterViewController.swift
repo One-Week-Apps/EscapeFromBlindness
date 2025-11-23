@@ -24,7 +24,7 @@ class ChapterViewController: UIViewController, Coordinated {
     
     var continueButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle("Go !", for: .normal)
+        button.setTitle(L10n.go, for: .normal)
         button.titleLabel?.font = .custom(style: .montserratExtraBold, size: 40)
         return button
     }()

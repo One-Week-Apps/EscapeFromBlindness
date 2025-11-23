@@ -38,6 +38,7 @@
 "complete" = "complete";
 "locked" = "locked";
 "continue" = "continue";
+"go" = "Go !";
 "level" = "Niveau";
 "hint" = "hint";
 "door_script" = "A door stands in front of me. It seems to be locked. I need to find the code.";

@@ -39,6 +39,7 @@
 "complete" = "terminé";
 "locked" = "vérouillé";
 "continue" = "continuer";
+"go" = "Go !";
 "level" = "Niveau";
 "hint" = "indice";
 "door_script" = "Une porte se situe en face de moi. Elle semble vérouillée par un cadenas circulaire. Je dois trouver le code.";
