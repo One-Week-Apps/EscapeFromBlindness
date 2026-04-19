@@ -1,0 +1,33 @@
+{
+  "planPath": "docs/superpowers/plans/2026-04-20-swipe-gesture-level.md",
+  "tasks": [
+    {
+      "id": 3,
+      "subject": "Task 1: SwipeGestureLevel model",
+      "status": "pending",
+      "description": "**Goal:** Créer le modèle `SwipeGestureLevel` avec `SwipeDirection` et ses tests unitaires.\n\n**Files:**\n- Create: `EscapeFromBlindness/Models/SwipeGestureLevel.swift`\n- Create: `EscapeFromBlindnessTests/Level Types/SwipeGestureLevelTests.swift`\n\n**Acceptance Criteria:**\n- [ ] `SwipeDirection` enum avec cases `.vertical` et `.horizontal`\n- [ ] `SwipeGestureLevel` est une sous-classe de `Level`\n- [ ] L'init accepte `instruction`, `swipeDirections`, `pages`, `validAnswer`, `hints`\n- [ ] `validAnswers` hérité de `Level` est initialisé à `[validAnswer]`\n- [ ] Les tests passent\n\n```json:metadata\n{\"files\": [\"EscapeFromBlindness/Models/SwipeGestureLevel.swift\", \"EscapeFromBlindnessTests/Level Types/SwipeGestureLevelTests.swift\"], \"verifyCommand\": \"xcodebuild test -workspace EscapeFromBlindness.xcworkspace -scheme EscapeFromBlindness -destination 'platform=iOS Simulator,name=iPhone 16e' -only-testing:EscapeFromBlindnessTests/SwipeGestureLevelTests\", \"acceptanceCriteria\": [\"SwipeDirection enum avec .vertical et .horizontal\", \"SwipeGestureLevel sous-classe de Level\", \"validAnswers initialisé à [validAnswer]\", \"Tests passent\"]}\n```"
+    },
+    {
+      "id": 4,
+      "subject": "Task 2: Routing AppCoordinator + Spy + test",
+      "status": "pending",
+      "blockedBy": [3],
+      "description": "**Goal:** Enregistrer `SwipeGestureLevel` dans le routing.\n\n**Files:**\n- Modify: `EscapeFromBlindness/Application/Coordinators/AppCoordinator.swift`\n- Modify: `EscapeFromBlindnessTests/Test Doubles/AppCoordinatorSpy.swift`\n- Modify: `EscapeFromBlindnessTests/AppCoordinatorTests.swift`\n\n```json:metadata\n{\"files\": [\"EscapeFromBlindness/Application/Coordinators/AppCoordinator.swift\", \"EscapeFromBlindnessTests/Test Doubles/AppCoordinatorSpy.swift\", \"EscapeFromBlindnessTests/AppCoordinatorTests.swift\"], \"verifyCommand\": \"xcodebuild test -workspace EscapeFromBlindness.xcworkspace -scheme EscapeFromBlindness -destination 'platform=iOS Simulator,name=iPhone 16e' -only-testing:EscapeFromBlindnessTests/AppCoordinatorTests\", \"acceptanceCriteria\": [\"presentSwipeGestureController dans le protocole\", \"case is SwipeGestureLevel dans routeToLevel\", \"Spy mis à jour\", \"Test routing passe\"]}\n```"
+    },
+    {
+      "id": 5,
+      "subject": "Task 3: SwipeGestureViewController",
+      "status": "pending",
+      "blockedBy": [3, 4],
+      "description": "**Goal:** Créer la vue qui présente les parchemins scrollables.\n\n**Files:**\n- Create: `EscapeFromBlindness/Scenes/Levels/SwipeGestureViewController.swift`\n- Create: `EscapeFromBlindnessTests/Level Types/SwipeGestureViewControllerTests.swift`\n\n```json:metadata\n{\"files\": [\"EscapeFromBlindness/Scenes/Levels/SwipeGestureViewController.swift\", \"EscapeFromBlindnessTests/Level Types/SwipeGestureViewControllerTests.swift\"], \"verifyCommand\": \"xcodebuild test -workspace EscapeFromBlindness.xcworkspace -scheme EscapeFromBlindness -destination 'platform=iOS Simulator,name=iPhone 16e' -only-testing:EscapeFromBlindnessTests/SwipeGestureViewControllerTests\", \"acceptanceCriteria\": [\"instructionLabel affiche level.instruction\", \"Boutons créés pour chaque section\", \"validate appelé au tap\", \"isPagingEnabled pour niveau horizontal\"]}\n```"
+    },
+    {
+      "id": 6,
+      "subject": "Task 4: Chapitre 5 — Localisation + contenu + factory",
+      "status": "pending",
+      "blockedBy": [3, 4, 5],
+      "description": "**Goal:** Ajouter strings EN/FR, L10n, et chapitre 5 dans LocalLevelFactory.\n\n**Files:**\n- Modify: `EscapeFromBlindness/Resources/en.lproj/Localizable.strings`\n- Modify: `EscapeFromBlindness/Resources/fr.lproj/Localizable.strings`\n- Modify: `EscapeFromBlindness/Resources/Generated/Strings.swift`\n- Modify: `EscapeFromBlindness/Application/Factories/LocalLevelFactory.swift`\n- Modify: `EscapeFromBlindnessTests/LocalLevelFactoryTests.swift`\n\n```json:metadata\n{\"files\": [\"EscapeFromBlindness/Resources/en.lproj/Localizable.strings\", \"EscapeFromBlindness/Resources/fr.lproj/Localizable.strings\", \"EscapeFromBlindness/Resources/Generated/Strings.swift\", \"EscapeFromBlindness/Application/Factories/LocalLevelFactory.swift\", \"EscapeFromBlindnessTests/LocalLevelFactoryTests.swift\"], \"verifyCommand\": \"xcodebuild test -workspace EscapeFromBlindness.xcworkspace -scheme EscapeFromBlindness -destination 'platform=iOS Simulator,name=iPhone 16e'\", \"acceptanceCriteria\": [\"5 chapitres retournés\", \"Chapitre 5 avec 2 SwipeGestureLevel\", \"Niveau 1 vertical only\", \"Niveau 2 vertical+horizontal avec 3 parchemins\"]}\n```"
+    }
+  ],
+  "lastUpdated": "2026-04-20T00:00:00Z"
+}
