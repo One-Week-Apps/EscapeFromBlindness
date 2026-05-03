@@ -194,17 +194,17 @@ enum L10n {
   /// Three parchments lie before you. Navigate between them and scroll each one to find the secret passage word.
   static let chapter5L2Instruction = L10n.tr("Localizable", "chapter5_l2_instruction")
   /// Parchment I — 'The first scribe wrote of the mountains...'
-  static let chapter5L2P1S1 = L10n.tr("Localizable", "chapter5_l2_p1s1")
+  static let chapter5L2P1S1 = L10n.tr("Localizable", "chapter5_l2_p1_s1")
   /// '...and the rivers that flow beneath the ancient stones.'
-  static let chapter5L2P1S2 = L10n.tr("Localizable", "chapter5_l2_p1s2")
+  static let chapter5L2P1S2 = L10n.tr("Localizable", "chapter5_l2_p1_s2")
   /// Parchment II — 'The second scribe speaks of a hidden path...'
-  static let chapter5L2P2S1 = L10n.tr("Localizable", "chapter5_l2_p2s1")
+  static let chapter5L2P2S1 = L10n.tr("Localizable", "chapter5_l2_p2_s1")
   /// MOONGATE
   static let chapter5L2P2Answer = L10n.tr("Localizable", "chapter5_l2_p2_answer")
   /// Parchment III — 'The third scribe warns of false passages...'
-  static let chapter5L2P3S1 = L10n.tr("Localizable", "chapter5_l2_p3s1")
+  static let chapter5L2P3S1 = L10n.tr("Localizable", "chapter5_l2_p3_s1")
   /// '...do not be deceived by the golden door.'
-  static let chapter5L2P3S2 = L10n.tr("Localizable", "chapter5_l2_p3s2")
+  static let chapter5L2P3S2 = L10n.tr("Localizable", "chapter5_l2_p3_s2")
   /// Swipe left or right with three fingers to navigate between parchments.
   static let chapter5L2H1 = L10n.tr("Localizable", "chapter5_l2_h1")
 }

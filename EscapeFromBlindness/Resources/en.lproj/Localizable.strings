@@ -163,10 +163,10 @@
 
 // Level 2
 "chapter5_l2_instruction" = "Three parchments lie before you. Navigate between them and scroll each one to find the secret passage word.";
-"chapter5_l2_p1s1" = "Parchment I — 'The first scribe wrote of the mountains...'";
-"chapter5_l2_p1s2" = "'...and the rivers that flow beneath the ancient stones.'";
-"chapter5_l2_p2s1" = "Parchment II — 'The second scribe speaks of a hidden path...'";
+"chapter5_l2_p1_s1" = "Parchment I — 'The first scribe wrote of the mountains...'";
+"chapter5_l2_p1_s2" = "'...and the rivers that flow beneath the ancient stones.'";
+"chapter5_l2_p2_s1" = "Parchment II — 'The second scribe speaks of a hidden path...'";
 "chapter5_l2_p2_answer" = "MOONGATE";
-"chapter5_l2_p3s1" = "Parchment III — 'The third scribe warns of false passages...'";
-"chapter5_l2_p3s2" = "'...do not be deceived by the golden door.'";
+"chapter5_l2_p3_s1" = "Parchment III — 'The third scribe warns of false passages...'";
+"chapter5_l2_p3_s2" = "'...do not be deceived by the golden door.'";
 "chapter5_l2_h1" = "Swipe left or right with three fingers to navigate between parchments.";

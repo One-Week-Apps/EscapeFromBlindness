@@ -164,11 +164,11 @@
 
 // Niveau 2
 "chapter5_l2_instruction" = "Trois parchemins sont posés devant toi. Navigue entre eux et fais défiler chacun pour trouver le mot de passe secret.";
-"chapter5_l2_p1s1" = "Parchemin I — 'Le premier scribe a écrit sur les montagnes...'";
-"chapter5_l2_p1s2" = "'...et les rivières qui coulent sous les pierres anciennes.'";
-"chapter5_l2_p2s1" = "Parchemin II — 'Le second scribe parle d'un chemin caché...'";
+"chapter5_l2_p1_s1" = "Parchemin I — 'Le premier scribe a écrit sur les montagnes...'";
+"chapter5_l2_p1_s2" = "'...et les rivières qui coulent sous les pierres anciennes.'";
+"chapter5_l2_p2_s1" = "Parchemin II — 'Le second scribe parle d'un chemin caché...'";
 "chapter5_l2_p2_answer" = "MOONGATE";
-"chapter5_l2_p3s1" = "Parchemin III — 'Le troisième scribe avertit des faux passages...'";
-"chapter5_l2_p3s2" = "'...ne te laisse pas tromper par la porte dorée.'";
+"chapter5_l2_p3_s1" = "Parchemin III — 'Le troisième scribe avertit des faux passages...'";
+"chapter5_l2_p3_s2" = "'...ne te laisse pas tromper par la porte dorée.'";
 "chapter5_l2_h1" = "Glisse vers la gauche ou la droite avec trois doigts pour naviguer entre les parchemins.";
 
