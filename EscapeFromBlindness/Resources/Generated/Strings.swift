@@ -175,21 +175,37 @@ enum L10n {
   static let vo2 = L10n.tr("Localizable", "vo2")
 
   // MARK: - Chapter 5
+  /// You made your way through the Hidden Tomb and now discover a secret library, untouched for centuries...
   static let chapter5Description = L10n.tr("Localizable", "chapter5_description")
+  /// A single parchment lies unrolled before you. Scroll it to find the hidden word.
   static let chapter5L1Instruction = L10n.tr("Localizable", "chapter5_l1_instruction")
+  /// The first line reads: 'In the year of the great flood...'
   static let chapter5L1S1 = L10n.tr("Localizable", "chapter5_l1_s1")
+  /// '...the priests hid their most sacred treasure...'
   static let chapter5L1S2 = L10n.tr("Localizable", "chapter5_l1_s2")
+  /// '...behind the stone marked with the symbol of...'
   static let chapter5L1S3 = L10n.tr("Localizable", "chapter5_l1_s3")
+  /// LOTUS
   static let chapter5L1Answer = L10n.tr("Localizable", "chapter5_l1_answer")
+  /// Scroll down to find more text on the parchment.
   static let chapter5L1H1 = L10n.tr("Localizable", "chapter5_l1_h1")
+  /// The answer is the last word on the parchment.
   static let chapter5L1H2 = L10n.tr("Localizable", "chapter5_l1_h2")
+  /// Three parchments lie before you. Navigate between them and scroll each one to find the secret passage word.
   static let chapter5L2Instruction = L10n.tr("Localizable", "chapter5_l2_instruction")
+  /// Parchment I — 'The first scribe wrote of the mountains...'
   static let chapter5L2P1S1 = L10n.tr("Localizable", "chapter5_l2_p1s1")
+  /// '...and the rivers that flow beneath the ancient stones.'
   static let chapter5L2P1S2 = L10n.tr("Localizable", "chapter5_l2_p1s2")
+  /// Parchment II — 'The second scribe speaks of a hidden path...'
   static let chapter5L2P2S1 = L10n.tr("Localizable", "chapter5_l2_p2s1")
+  /// MOONGATE
   static let chapter5L2P2Answer = L10n.tr("Localizable", "chapter5_l2_p2_answer")
+  /// Parchment III — 'The third scribe warns of false passages...'
   static let chapter5L2P3S1 = L10n.tr("Localizable", "chapter5_l2_p3s1")
+  /// '...do not be deceived by the golden door.'
   static let chapter5L2P3S2 = L10n.tr("Localizable", "chapter5_l2_p3s2")
+  /// Swipe left or right with three fingers to navigate between parchments.
   static let chapter5L2H1 = L10n.tr("Localizable", "chapter5_l2_h1")
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name

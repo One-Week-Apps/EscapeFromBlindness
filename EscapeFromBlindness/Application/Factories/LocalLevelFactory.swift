@@ -112,8 +112,7 @@ class LocalLevelFactory: LevelFactory {
                    hints: ["what shape does a mountain have?", "pull each bloc to represent a mountain", "a mountain represents a triangle so the first bloc should be pulled once, the second twice ..."]
                )!
             ]
-        )
-        ,
+        ),
 
         Chapter(
             index: 5,
