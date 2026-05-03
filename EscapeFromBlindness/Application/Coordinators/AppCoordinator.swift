@@ -17,7 +17,8 @@ protocol AppCoordinatorProtocol: class {
     func presentOpenQuestionController(_ level: Level)
     func presentRotorQuestionController(_ level: Level)
     func presentSearchQuestionController(_ level: Level)
-    
+    func presentSwipeGestureController(_ level: Level)
+
     func presentLoadLevelController()
     
     func validateChapter()
@@ -178,13 +179,20 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
     
     func presentSearchQuestionController(_ level: Level) {
         guard let level = level as? SearchLevel else { return }
-        
+
         let viewController = SearchViewController(level: level)
         viewController.coordinator = self
-        
+
         resetNavigationStack(viewController)
     }
-    
+
+    func presentSwipeGestureController(_ level: Level) {
+        guard let level = level as? SwipeGestureLevel else { return }
+        let viewController = SwipeGestureViewController(level: level)
+        viewController.coordinator = self
+        resetNavigationStack(viewController)
+    }
+
     // MARK: - Replay
     func replay() {
         guard let window = window else { return }
@@ -252,6 +260,8 @@ extension AppCoordinator: Router {
             presentRotorQuestionController(level)
         case is SearchLevel:
             presentSearchQuestionController(level)
+        case is SwipeGestureLevel:
+            presentSwipeGestureController(level)
         default:
             break
         }

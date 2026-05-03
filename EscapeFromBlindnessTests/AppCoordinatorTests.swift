@@ -154,9 +154,26 @@ class AppCoordinatorTests: XCTestCase {
         assertNavBar(chapterName: title, level: 1)
     }
 
+    func test_routeToLevel_withSwipeGestureLevel_shouldCallPresentSwipeGestureController() {
+        sut.start(window: UIWindow())
+
+        let title = "test title"
+        gameFlowMock.expectedChapterTitle = title
+        let level = SwipeGestureLevel(
+            instruction: "Scroll",
+            swipeDirections: [.vertical],
+            pages: [["Section 1"]],
+            validAnswer: "Section 1"
+        )
+
+        sut.presentSwipeGestureController(level)
+
+        assertNavBar(chapterName: title, level: 1)
+    }
+
     private func assertNavBar(chapterName: String, level: Int) {
         XCTAssertEqual(sut.navigationController.viewControllers.first!.navigationItem.title, "\(chapterName)")
         XCTAssertEqual(sut.navigationController.viewControllers.first!.navigationItem.accessibilityLabel, "\(chapterName) - \(L10n.level) \(level)")
     }
-    
+
 }

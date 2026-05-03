@@ -70,7 +70,13 @@ class AppCoordinatorSpy: AppCoordinatorProtocol {
     func presentSearchQuestionController(_ level: Level) {
         presentSearchQuestionControllerCalled = true
     }
-    
+
+    var presentSwipeGestureControllerCalled = false
+
+    func presentSwipeGestureController(_ level: Level) {
+        presentSwipeGestureControllerCalled = true
+    }
+
     // Validation
     var validateChapterCalled = false
     var validateAnswers: [Level.Answer]?

@@ -21,6 +21,7 @@
 		D83B70EB23C4935200516628 /* OpenQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83B70EA23C4935200516628 /* OpenQuestionViewController.swift */; };
 		D83B70ED23C4936900516628 /* RotorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83B70EC23C4936900516628 /* RotorViewController.swift */; };
 		D83B70EF23C4938600516628 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83B70EE23C4938600516628 /* SearchViewController.swift */; };
+		D83B70F123C4940000516628 /* SwipeGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83B70F023C4940000516628 /* SwipeGestureViewController.swift */; };
 		D8458EDA23F9FAFF006FA087 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8458ED923F9FAFE006FA087 /* NavigationController.swift */; };
 		D847609723C146E800DF4825 /* GameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847609623C146E800DF4825 /* GameFlow.swift */; };
 		D847609A23C1490400DF4825 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847609923C1490400DF4825 /* Level.swift */; };
@@ -111,6 +112,7 @@
 		D83B70EA23C4935200516628 /* OpenQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuestionViewController.swift; sourceTree = "<group>"; };
 		D83B70EC23C4936900516628 /* RotorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotorViewController.swift; sourceTree = "<group>"; };
 		D83B70EE23C4938600516628 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		D83B70F023C4940000516628 /* SwipeGestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureViewController.swift; sourceTree = "<group>"; };
 		D8458ED923F9FAFE006FA087 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		D847609623C146E800DF4825 /* GameFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFlow.swift; sourceTree = "<group>"; };
 		D847609923C1490400DF4825 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				D83B70EA23C4935200516628 /* OpenQuestionViewController.swift */,
 				D83B70EC23C4936900516628 /* RotorViewController.swift */,
 				D83B70EE23C4938600516628 /* SearchViewController.swift */,
+				D83B70F023C4940000516628 /* SwipeGestureViewController.swift */,
 				D88E3702244F173100872550 /* LevelBaseViewController.swift */,
 			);
 			path = Levels;
@@ -668,6 +671,7 @@
 				D832B24B24A7CD100020EE25 /* NSObject+Extensions.swift in Sources */,
 				D8C2C0F623C0CE6C00F8BE78 /* StoryboardLoadable.swift in Sources */,
 				D83B70EF23C4938600516628 /* SearchViewController.swift in Sources */,
+				D83B70F123C4940000516628 /* SwipeGestureViewController.swift in Sources */,
 				D8F1809723BFE4A2003291D4 /* String+Extensions.swift in Sources */,
 				D8C2C0F023C0CDF400F8BE78 /* InstructionsViewController.swift in Sources */,
 				D83B70EB23C4935200516628 /* OpenQuestionViewController.swift in Sources */,
