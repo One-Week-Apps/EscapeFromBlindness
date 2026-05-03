@@ -166,7 +166,7 @@ class AppCoordinatorTests: XCTestCase {
             validAnswer: "Section 1"
         )
 
-        sut.presentSwipeGestureController(level)
+        sut.routeToLevel(level)
 
         assertNavBar(chapterName: title, level: 1)
     }
