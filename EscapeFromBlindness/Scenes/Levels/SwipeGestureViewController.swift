@@ -22,6 +22,7 @@ class SwipeGestureViewController: LevelBaseViewController {
     }()
 
     private var level: SwipeGestureLevel!
+    private var pageButtons: [[UIButton]] = []
 
     convenience init(level: SwipeGestureLevel) {
         self.init()
@@ -62,28 +63,82 @@ class SwipeGestureViewController: LevelBaseViewController {
     }
 
     private func buildContent() {
-        let screenWidth = UIScreen.main.bounds.width
+        pageButtons = []
 
-        for (pageIndex, page) in level.pages.enumerated() {
-            var previousAnchor = scrollView.topAnchor
+        if level.swipeDirections.contains(.horizontal) {
+            buildHorizontalContent()
+        } else {
+            buildVerticalContent()
+        }
+    }
 
-            for (sectionIndex, text) in page.enumerated() {
+    private func buildVerticalContent() {
+        let contentGuide = scrollView.contentLayoutGuide
+        let frameGuide = scrollView.frameLayoutGuide
+
+        guard let page = level.pages.first else { return }
+        var previousAnchor = contentGuide.topAnchor
+
+        for (index, text) in page.enumerated() {
+            let button = makeButton(text: text)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.addSubview(button)
+
+            button.topAnchor.constraint(equalTo: previousAnchor, constant: 20).isActive = true
+            button.leadingAnchor.constraint(equalTo: contentGuide.leadingAnchor, constant: 30).isActive = true
+            button.widthAnchor.constraint(equalTo: frameGuide.widthAnchor, constant: -60).isActive = true
+
+            if index == page.count - 1 {
+                button.bottomAnchor.constraint(equalTo: contentGuide.bottomAnchor, constant: -20).isActive = true
+            }
+
+            previousAnchor = button.bottomAnchor
+        }
+    }
+
+    private func buildHorizontalContent() {
+        for page in level.pages {
+            var buttons: [UIButton] = []
+            for text in page {
                 let button = makeButton(text: text)
+                button.translatesAutoresizingMaskIntoConstraints = true
                 scrollView.addSubview(button)
+                buttons.append(button)
+            }
+            pageButtons.append(buttons)
+        }
+    }
 
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.topAnchor.constraint(equalTo: previousAnchor, constant: 20).isActive = true
-                button.leftAnchor.constraint(
-                    equalTo: scrollView.leftAnchor,
-                    constant: CGFloat(pageIndex) * screenWidth + 30
-                ).isActive = true
-                button.widthAnchor.constraint(equalToConstant: screenWidth - 60).isActive = true
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if level.swipeDirections.contains(.horizontal) {
+            layoutHorizontalContent()
+        }
+    }
 
-                if sectionIndex == page.count - 1 && !level.swipeDirections.contains(.horizontal) {
-                    button.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20).isActive = true
-                }
+    private func layoutHorizontalContent() {
+        let pageWidth = scrollView.frame.width
+        let pageHeight = scrollView.frame.height
+        guard pageWidth > 0 else { return }
 
-                previousAnchor = button.bottomAnchor
+        scrollView.contentSize = CGSize(
+            width: pageWidth * CGFloat(level.pages.count),
+            height: pageHeight
+        )
+
+        for (pageIndex, buttons) in pageButtons.enumerated() {
+            let sectionHeight: CGFloat = 44
+            let spacing: CGFloat = 10
+            var y: CGFloat = 20
+
+            for button in buttons {
+                button.frame = CGRect(
+                    x: CGFloat(pageIndex) * pageWidth + 30,
+                    y: y,
+                    width: pageWidth - 60,
+                    height: sectionHeight
+                )
+                y += sectionHeight + spacing
             }
         }
     }

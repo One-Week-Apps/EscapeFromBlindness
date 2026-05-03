@@ -19,6 +19,7 @@ class SwipeGestureViewControllerTests: XCTestCase {
     }
 
     override func tearDown() {
+        sut = nil
         window = nil
         super.tearDown()
     }
