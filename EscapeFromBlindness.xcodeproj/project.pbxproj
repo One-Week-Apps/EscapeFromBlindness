@@ -31,6 +31,7 @@
 		D84760A223C149F300DF4825 /* SearchLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84760A123C149F300DF4825 /* SearchLevel.swift */; };
 		D84760B023C14A0000DF4826 /* SwipeGestureLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84760AF23C14A0000DF4826 /* SwipeGestureLevel.swift */; };
 		D84760B123C14A0100DF4826 /* SwipeGestureLevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84760AE23C14A0000DF4826 /* SwipeGestureLevelTests.swift */; };
+		A1B2C3D4E5F601234567890A /* SwipeGestureViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F601234567890B /* SwipeGestureViewControllerTests.swift */; };
 		D84760A723C14AB200DF4825 /* LevelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84760A623C14AB200DF4825 /* LevelFactory.swift */; };
 		D84760A923C14AC500DF4825 /* LocalLevelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84760A823C14AC500DF4825 /* LocalLevelFactory.swift */; };
 		D84760AB23C14B5A00DF4825 /* LocalLevelFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84760AA23C14B5A00DF4825 /* LocalLevelFactoryTests.swift */; };
@@ -121,6 +122,7 @@
 		D847609F23C1499E00DF4825 /* RotorLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotorLevel.swift; sourceTree = "<group>"; };
 		D84760A123C149F300DF4825 /* SearchLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLevel.swift; sourceTree = "<group>"; };
 		D84760AE23C14A0000DF4826 /* SwipeGestureLevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureLevelTests.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F601234567890B /* SwipeGestureViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureViewControllerTests.swift; sourceTree = "<group>"; };
 		D84760AF23C14A0000DF4826 /* SwipeGestureLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureLevel.swift; sourceTree = "<group>"; };
 		D84760A623C14AB200DF4825 /* LevelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelFactory.swift; sourceTree = "<group>"; };
 		D84760A823C14AC500DF4825 /* LocalLevelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLevelFactory.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				D88B1A9923B43E32008BB85D /* SearchLevelViewControllerTests.swift */,
 				D8C2C0EC23C0CD8500F8BE78 /* ChapterViewControllerTests.swift */,
 				D84760AE23C14A0000DF4826 /* SwipeGestureLevelTests.swift */,
+				A1B2C3D4E5F601234567890B /* SwipeGestureViewControllerTests.swift */,
 			);
 			path = "Level Types";
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				D88E36F2244EE20100872550 /* LoadLevelViewControllerTests.swift in Sources */,
 				D88B1A9A23B43E32008BB85D /* SearchLevelViewControllerTests.swift in Sources */,
 				D84760B123C14A0100DF4826 /* SwipeGestureLevelTests.swift in Sources */,
+				A1B2C3D4E5F601234567890A /* SwipeGestureViewControllerTests.swift in Sources */,
 				D84760AB23C14B5A00DF4825 /* LocalLevelFactoryTests.swift in Sources */,
 				D88B1A7323B4337A008BB85D /* ClosedQuestionLevelViewControllerTests.swift in Sources */,
 				D8C2C10823C0DEBD00F8BE78 /* AppCoordinatorSpy.swift in Sources */,
