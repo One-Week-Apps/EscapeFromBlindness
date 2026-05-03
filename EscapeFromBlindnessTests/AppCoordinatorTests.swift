@@ -169,6 +169,7 @@ class AppCoordinatorTests: XCTestCase {
         sut.routeToLevel(level)
 
         assertNavBar(chapterName: title, level: 1)
+        XCTAssertTrue(sut.navigationController.viewControllers.first is SwipeGestureViewController)
     }
 
     private func assertNavBar(chapterName: String, level: Int) {
