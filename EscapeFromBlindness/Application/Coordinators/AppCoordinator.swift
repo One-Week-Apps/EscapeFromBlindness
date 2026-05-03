@@ -188,8 +188,10 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
 
     func presentSwipeGestureController(_ level: Level) {
         guard let level = level as? SwipeGestureLevel else { return }
+
         let viewController = SwipeGestureViewController(level: level)
         viewController.coordinator = self
+
         resetNavigationStack(viewController)
     }
 
