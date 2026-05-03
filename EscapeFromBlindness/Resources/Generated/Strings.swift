@@ -173,6 +173,24 @@ enum L10n {
   static let vo1 = L10n.tr("Localizable", "vo1")
   /// Let's continue exploring !\n\nEnjoy your play !
   static let vo2 = L10n.tr("Localizable", "vo2")
+
+  // MARK: - Chapter 5
+  static let chapter5Description = L10n.tr("Localizable", "chapter5_description")
+  static let chapter5L1Instruction = L10n.tr("Localizable", "chapter5_l1_instruction")
+  static let chapter5L1S1 = L10n.tr("Localizable", "chapter5_l1_s1")
+  static let chapter5L1S2 = L10n.tr("Localizable", "chapter5_l1_s2")
+  static let chapter5L1S3 = L10n.tr("Localizable", "chapter5_l1_s3")
+  static let chapter5L1Answer = L10n.tr("Localizable", "chapter5_l1_answer")
+  static let chapter5L1H1 = L10n.tr("Localizable", "chapter5_l1_h1")
+  static let chapter5L1H2 = L10n.tr("Localizable", "chapter5_l1_h2")
+  static let chapter5L2Instruction = L10n.tr("Localizable", "chapter5_l2_instruction")
+  static let chapter5L2P1S1 = L10n.tr("Localizable", "chapter5_l2_p1s1")
+  static let chapter5L2P1S2 = L10n.tr("Localizable", "chapter5_l2_p1s2")
+  static let chapter5L2P2S1 = L10n.tr("Localizable", "chapter5_l2_p2s1")
+  static let chapter5L2P2Answer = L10n.tr("Localizable", "chapter5_l2_p2_answer")
+  static let chapter5L2P3S1 = L10n.tr("Localizable", "chapter5_l2_p3s1")
+  static let chapter5L2P3S2 = L10n.tr("Localizable", "chapter5_l2_p3s2")
+  static let chapter5L2H1 = L10n.tr("Localizable", "chapter5_l2_h1")
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 

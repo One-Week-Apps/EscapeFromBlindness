@@ -147,3 +147,26 @@
 "chapter4_cq2desc2" = "The bloc in the middle.";
 
 "chapter4_cq2desc3" = "The bloc on the right.";
+
+//======================================================
+/* Chapter 5 */
+"chapter5_description" = "You made your way through the Hidden Tomb and now discover a secret library, untouched for centuries. Ancient parchments hold the key to escape. When VoiceOver is turned on, scroll through content by swiping up or down with THREE fingers. Swipe left or right with THREE fingers to move between parchments.";
+
+// Level 1
+"chapter5_l1_instruction" = "A single parchment lies unrolled before you. Scroll it to find the hidden word.";
+"chapter5_l1_s1" = "The first line reads: 'In the year of the great flood...'";
+"chapter5_l1_s2" = "'...the priests hid their most sacred treasure...'";
+"chapter5_l1_s3" = "'...behind the stone marked with the symbol of...'";
+"chapter5_l1_answer" = "LOTUS";
+"chapter5_l1_h1" = "Scroll down to find more text on the parchment.";
+"chapter5_l1_h2" = "The answer is the last word on the parchment.";
+
+// Level 2
+"chapter5_l2_instruction" = "Three parchments lie before you. Navigate between them and scroll each one to find the secret passage word.";
+"chapter5_l2_p1s1" = "Parchment I — 'The first scribe wrote of the mountains...'";
+"chapter5_l2_p1s2" = "'...and the rivers that flow beneath the ancient stones.'";
+"chapter5_l2_p2s1" = "Parchment II — 'The second scribe speaks of a hidden path...'";
+"chapter5_l2_p2_answer" = "MOONGATE";
+"chapter5_l2_p3s1" = "Parchment III — 'The third scribe warns of false passages...'";
+"chapter5_l2_p3s2" = "'...do not be deceived by the golden door.'";
+"chapter5_l2_h1" = "Swipe left or right with three fingers to navigate between parchments.";

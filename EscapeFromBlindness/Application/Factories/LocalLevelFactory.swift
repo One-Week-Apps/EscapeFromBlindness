@@ -113,6 +113,39 @@ class LocalLevelFactory: LevelFactory {
                )!
             ]
         )
-        
+        ,
+
+        Chapter(
+            index: 5,
+            title: "The Whispering Library",
+            description: L10n.chapter5Description,
+            keywords: ["parchments", "scrolls", "library", "ancient text", "lotus", "moongate"],
+            levels: [
+                SwipeGestureLevel(
+                    instruction: L10n.chapter5L1Instruction,
+                    swipeDirections: [.vertical],
+                    pages: [[
+                        L10n.chapter5L1S1,
+                        L10n.chapter5L1S2,
+                        L10n.chapter5L1S3,
+                        L10n.chapter5L1Answer
+                    ]],
+                    validAnswer: L10n.chapter5L1Answer,
+                    hints: [L10n.chapter5L1H1, L10n.chapter5L1H2]
+                ),
+                SwipeGestureLevel(
+                    instruction: L10n.chapter5L2Instruction,
+                    swipeDirections: [.vertical, .horizontal],
+                    pages: [
+                        [L10n.chapter5L2P1S1, L10n.chapter5L2P1S2],
+                        [L10n.chapter5L2P2S1, L10n.chapter5L2P2Answer],
+                        [L10n.chapter5L2P3S1, L10n.chapter5L2P3S2]
+                    ],
+                    validAnswer: L10n.chapter5L2P2Answer,
+                    hints: [L10n.chapter5L2H1]
+                )
+            ]
+        )
+
     ]
 }

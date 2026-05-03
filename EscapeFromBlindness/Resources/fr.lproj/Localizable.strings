@@ -149,3 +149,26 @@
 
 "chapter4_cq2desc3" = "Le bloc sur ta droite.";
 
+//======================================================
+/* Chapitre 5 */
+"chapter5_description" = "Tu as traversé le Tombeau Caché et tu découvres maintenant une bibliothèque secrète, intacte depuis des siècles. D'anciens parchemins contiennent la clé pour s'échapper. Lorsque VoiceOver est activé, fais défiler le contenu en glissant vers le haut ou le bas avec TROIS doigts. Glisse vers la gauche ou la droite avec TROIS doigts pour passer d'un parchemin à l'autre.";
+
+// Niveau 1
+"chapter5_l1_instruction" = "Un unique parchemin est déroulé devant toi. Fais-le défiler pour trouver le mot caché.";
+"chapter5_l1_s1" = "La première ligne dit : 'En l'an du grand déluge...'";
+"chapter5_l1_s2" = "'...les prêtres cachèrent leur trésor le plus sacré...'";
+"chapter5_l1_s3" = "'...derrière la pierre marquée du symbole de...'";
+"chapter5_l1_answer" = "LOTUS";
+"chapter5_l1_h1" = "Fais défiler vers le bas pour lire la suite du parchemin.";
+"chapter5_l1_h2" = "La réponse est le dernier mot du parchemin.";
+
+// Niveau 2
+"chapter5_l2_instruction" = "Trois parchemins sont posés devant toi. Navigue entre eux et fais défiler chacun pour trouver le mot de passe secret.";
+"chapter5_l2_p1s1" = "Parchemin I — 'Le premier scribe a écrit sur les montagnes...'";
+"chapter5_l2_p1s2" = "'...et les rivières qui coulent sous les pierres anciennes.'";
+"chapter5_l2_p2s1" = "Parchemin II — 'Le second scribe parle d'un chemin caché...'";
+"chapter5_l2_p2_answer" = "MOONGATE";
+"chapter5_l2_p3s1" = "Parchemin III — 'Le troisième scribe avertit des faux passages...'";
+"chapter5_l2_p3s2" = "'...ne te laisse pas tromper par la porte dorée.'";
+"chapter5_l2_h1" = "Glisse vers la gauche ou la droite avec trois doigts pour naviguer entre les parchemins.";
+
