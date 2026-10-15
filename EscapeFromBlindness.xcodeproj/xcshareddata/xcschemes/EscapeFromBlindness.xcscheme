@@ -38,6 +38,16 @@
                ReferencedContainer = "container:EscapeFromBlindness.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "618725C1A786C85FD7A84897"
+               BuildableName = "EscapeFromBlindnessUITests.xctest"
+               BlueprintName = "EscapeFromBlindnessUITests"
+               ReferencedContainer = "container:EscapeFromBlindness.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
