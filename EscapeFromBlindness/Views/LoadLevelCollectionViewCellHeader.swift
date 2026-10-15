@@ -11,6 +11,9 @@ class LoadLevelCollectionViewCellHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        titleLabel.numberOfLines = 2
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.7
         addSubview(titleLabel)
     }
 
@@ -20,8 +23,6 @@ class LoadLevelCollectionViewCellHeader: UICollectionReusableView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        titleLabel.sizeToFit()
-//        titleLabel.frame.origin = CGPoint(x: 15, y: 64 + (frame.height - 64 - titleLabel.frame.height) / 2)
-        titleLabel.frame = CGRect(origin: CGPoint(x: 15, y: 64 + (frame.height - 64 - titleLabel.frame.height) / 2), size: CGSize(width: UIScreen.main.bounds.width - 35, height: titleLabel.frame.height))
+        titleLabel.frame = bounds.inset(by: UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0))
     }
 }

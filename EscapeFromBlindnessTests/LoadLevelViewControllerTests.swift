@@ -82,5 +82,59 @@ class LoadLevelViewControllerTests: XCTestCase {
         
         XCTAssertEqual(accessibilitySpy.notification, .layoutChanged)
     }
-    
+
+    private func layoutInLightMode(width: CGFloat = 390) {
+        window = UIWindow(frame: CGRect(x: 0, y: 0, width: width, height: 844))
+        window.overrideUserInterfaceStyle = .light
+        window.rootViewController = sut
+        window.makeKeyAndVisible()
+        sut.view.layoutIfNeeded()
+        sut.collectionView.layoutIfNeeded()
+    }
+
+    func test_inLightMode_backgroundStaysBlackSoWhiteTitlesRemainVisible() {
+        layoutInLightMode()
+
+        XCTAssertEqual(sut.view.backgroundColor, .black)
+        XCTAssertEqual(sut.collectionView.backgroundColor, .black)
+    }
+
+    func test_inLightMode_currentLevelShowsDarkNumberOnWhiteTile() {
+        layoutInLightMode()
+        let current = IndexPath(item: currentLevel, section: currentChapter - 1)
+        sut.collectionView.scrollToItem(at: current, at: .top, animated: false)
+        sut.collectionView.layoutIfNeeded()
+
+        let cell = sut.collectionView.cellForItem(at: current) as? LoadLevelCollectionViewCell
+
+        XCTAssertEqual(cell?.containerView.backgroundColor, .white)
+        XCTAssertEqual(cell?.levelLabel.textColor, .black)
+    }
+
+    func test_lockedLevelTile_standsOutFromBlackBackground() {
+        layoutInLightMode()
+        let locked = IndexPath(item: currentLevel + 1, section: currentChapter - 1)
+        sut.collectionView.scrollToItem(at: locked, at: .top, animated: false)
+        sut.collectionView.layoutIfNeeded()
+
+        let cell = sut.collectionView.cellForItem(at: locked) as? LoadLevelCollectionViewCell
+
+        let tile = cell?.containerView.backgroundColor?.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
+        XCTAssertNotNil(tile)
+        XCTAssertNotEqual(tile, .black)
+        XCTAssertNotEqual(tile, .white)
+        XCTAssertFalse(cell?.levelLockedImageView.isHidden ?? true)
+    }
+
+    func test_grid_staysInsideScreenMarginsWithThreeColumns_onNarrowScreen() {
+        layoutInLightMode(width: 320)
+
+        let frames = sut.collectionView.visibleCells.map { sut.view.convert($0.frame, from: sut.collectionView) }
+
+        XCTAssertFalse(frames.isEmpty)
+        XCTAssertGreaterThanOrEqual(frames.map(\.minX).min()!, 15)
+        XCTAssertLessThanOrEqual(frames.map(\.maxX).max()!, 320 - 15)
+        XCTAssertEqual(Set(frames.map { Int($0.minX) }).count, 3)
+    }
+
 }

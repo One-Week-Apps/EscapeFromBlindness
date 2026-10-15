@@ -11,12 +11,19 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private var currentChapterIndex: Int = 0
     private var currentLevelIndex: Int = 0
     private static let headerReuseId = "header"
-    
+    private static let columns: CGFloat = 3
+    private static let spacing: CGFloat = 20
+    private static let maxTileSide: CGFloat = 100
+    private static let sideMargin: CGFloat = 15
+
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 100, height: 100)
         flowLayout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: flowLayout)
+        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.minimumLineSpacing = spacing
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: spacing, right: 0)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = .black
         return collectionView
     }()
     
@@ -34,7 +41,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize(width: view.bounds.width, height: 156)
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize(width: collectionView.bounds.width, height: 80)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,8 +63,16 @@ class LoadLevelViewController: UIViewController, Coordinated {
         self.collectionView.delegate = self
         self.collectionView.register(LoadLevelCollectionViewCell.self)
         
-        self.collectionView.frame = CGRect(x: 15, y: 0, width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height)
+        self.view.backgroundColor = .black
         self.view.addSubview(self.collectionView)
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let safeArea = self.view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            self.collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
+            self.collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
+        ])
     }
     
 }
@@ -73,7 +88,10 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        let columns = LoadLevelViewController.columns
+        let available = collectionView.bounds.width - LoadLevelViewController.spacing * (columns - 1)
+        let side = min(LoadLevelViewController.maxTileSide, floor(available / columns))
+        return CGSize(width: side, height: side)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -89,6 +107,7 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
             header.titleLabel.text = "\(L10n.chapter) \(chapter.index): \(chapter.title ?? "")"
             header.titleLabel.textColor = .white
             header.titleLabel.font = .custom(style: .montserratExtraBold, size: 20.0)
+            header.titleLabel.accessibilityTraits = .header
             header.setNeedsLayout()
             return header
         default:
