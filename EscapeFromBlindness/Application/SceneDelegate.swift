@@ -15,8 +15,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
 
         let chapters = LocalLevelFactory.build()
-        let currentChapterIndex = UserDefaults.standard.value(forKey: UserDefaultsKeys.currentChapterIndex.rawValue) as? Int ?? 0
-        let currentLevelIndex = UserDefaults.standard.value(forKey: UserDefaultsKeys.currentLevelIndex.rawValue) as? Int ?? 0
+        // integer(forKey:) vaut 0 si la clé manque, et lit aussi la progression passée en argument de lancement (tests UI).
+        let currentChapterIndex = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentChapterIndex.rawValue)
+        let currentLevelIndex = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentLevelIndex.rawValue)
 
         let gameFlow = GameFlow(
             chapters: chapters,

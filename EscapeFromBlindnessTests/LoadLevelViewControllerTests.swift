@@ -137,4 +137,62 @@ class LoadLevelViewControllerTests: XCTestCase {
         XCTAssertEqual(Set(frames.map { Int($0.minX) }).count, 3)
     }
 
+    private func localizedSubtitle(_ language: String) -> String? {
+        let bundle = Bundle(for: LoadLevelViewController.self)
+        guard let path = bundle.path(forResource: language, ofType: "lproj") else { return nil }
+        return Bundle(path: path)?.localizedString(forKey: "level_selection_subtitle", value: nil, table: "Localizable")
+    }
+
+    func test_subtitleKey_isTranslatedInFrenchAndEnglish() {
+        XCTAssertEqual(localizedSubtitle("fr"), "Choisis ton niveau")
+        XCTAssertEqual(localizedSubtitle("en"), "Choose your level")
+    }
+
+    func test_subtitle_returnsLocalizedChooseYourLevel() {
+        XCTAssertEqual(sut.subtitle, L10n.levelSelectionSubtitle)
+        XCTAssertTrue(["Choisis ton niveau", "Choose your level"].contains(sut.subtitle))
+    }
+
+    func test_subtitleLabel_displaysSubtitleInWhiteAndWraps() {
+        layoutInLightMode()
+
+        XCTAssertEqual(sut.subtitleLabel.text, sut.subtitle)
+        XCTAssertEqual(sut.subtitleLabel.textColor, .white)
+        XCTAssertEqual(sut.subtitleLabel.numberOfLines, 0)
+        XCTAssertTrue(sut.subtitleLabel.adjustsFontForContentSizeCategory)
+    }
+
+    func test_subtitleLabel_isAccessibleHeaderWithStableIdentifier() {
+        layoutInLightMode()
+
+        XCTAssertTrue(sut.subtitleLabel.isAccessibilityElement)
+        XCTAssertEqual(sut.subtitleLabel.accessibilityLabel, sut.subtitle)
+        XCTAssertTrue(sut.subtitleLabel.accessibilityTraits.contains(.header))
+        XCTAssertFalse(sut.subtitleLabel.accessibilityTraits.contains(.button))
+        XCTAssertEqual(sut.subtitleLabel.accessibilityIdentifier, "levelSelectionSubtitle")
+    }
+
+    func test_subtitleLabel_sitsInSafeAreaAboveGridWithoutOverlap() {
+        layoutInLightMode()
+
+        let subtitle = sut.subtitleLabel.frame
+        let grid = sut.collectionView.frame
+        XCTAssertGreaterThan(subtitle.height, 0)
+        XCTAssertEqual(subtitle.minY, sut.view.safeAreaInsets.top + 8, accuracy: 0.5)
+        XCTAssertEqual(grid.minY, subtitle.maxY + 16, accuracy: 0.5)
+        XCTAssertEqual(subtitle.minX, grid.minX, accuracy: 0.5)
+        XCTAssertEqual(subtitle.maxX, grid.maxX, accuracy: 0.5)
+        XCTAssertGreaterThanOrEqual(subtitle.minX, 16)
+    }
+
+    func test_levelTiles_keepMinimumTouchTargetOnNarrowScreen() {
+        layoutInLightMode(width: 320)
+
+        let sizes = sut.collectionView.visibleCells.map(\.frame.size)
+
+        XCTAssertFalse(sizes.isEmpty)
+        XCTAssertGreaterThanOrEqual(sizes.map(\.width).min()!, 44)
+        XCTAssertGreaterThanOrEqual(sizes.map(\.height).min()!, 44)
+    }
+
 }

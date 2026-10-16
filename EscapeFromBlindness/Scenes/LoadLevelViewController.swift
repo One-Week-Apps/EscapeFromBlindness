@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import os
 
 class LoadLevelViewController: UIViewController, Coordinated {
     var coordinator: AppCoordinatorProtocol?
@@ -14,7 +15,26 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private static let columns: CGFloat = 3
     private static let spacing: CGFloat = 20
     private static let maxTileSide: CGFloat = 100
-    private static let sideMargin: CGFloat = 15
+    private static let sideMargin: CGFloat = 16
+    private static let subtitleTopSpacing: CGFloat = 8
+    private static let subtitleBottomSpacing: CGFloat = 16
+    private static let subtitleKey = "level_selection_subtitle"
+    private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LevelSelection")
+
+    var subtitle: String {
+        return L10n.levelSelectionSubtitle
+    }
+
+    let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: .custom(style: .lucioleRegular, size: 17))
+        label.adjustsFontForContentSizeCategory = true
+        label.numberOfLines = 0
+        label.accessibilityTraits.insert(.header)
+        label.accessibilityIdentifier = "levelSelectionSubtitle"
+        return label
+    }()
 
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -36,6 +56,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSubtitle()
         setupCollectionView()
     }
     
@@ -46,6 +67,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        LoadLevelViewController.logger.debug("Level selection displayed, subtitle shown")
         let indexPath = IndexPath(item: self.currentLevelIndex, section: self.currentChapterIndex - 1)
         if isRunningTest {
             EscapeFromBlindnessAccessibility.shared.post(notification: .layoutChanged, argument: self.collectionView.cellForItem(at: indexPath))
@@ -57,6 +79,23 @@ class LoadLevelViewController: UIViewController, Coordinated {
         }
     }
     
+    private func setupSubtitle() {
+        let key = LoadLevelViewController.subtitleKey
+        if Bundle(for: LoadLevelViewController.self).localizedString(forKey: key, value: nil, table: "Localizable") == key {
+            LoadLevelViewController.logger.error("Missing localization for key \(key, privacy: .public)")
+        }
+        self.subtitleLabel.text = self.subtitle
+
+        self.view.addSubview(self.subtitleLabel)
+        self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        let safeArea = self.view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            self.subtitleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: LoadLevelViewController.subtitleTopSpacing),
+            self.subtitleLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
+            self.subtitleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
+        ])
+    }
+
     private func setupCollectionView() {
         self.collectionView.register(LoadLevelCollectionViewCellHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LoadLevelViewController.headerReuseId)
         self.collectionView.dataSource = self
@@ -68,7 +107,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         let safeArea = self.view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            self.collectionView.topAnchor.constraint(equalTo: self.subtitleLabel.bottomAnchor, constant: LoadLevelViewController.subtitleBottomSpacing),
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             self.collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
             self.collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
