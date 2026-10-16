@@ -7,42 +7,36 @@ import Foundation
 
 /// Version de l'app telle qu'affichée à l'utilisateur, par exemple « Version 1.4.2 (87) ».
 struct AppVersion: Equatable {
-    let version: String
+    static let marketingKey = "CFBundleShortVersionString"
+    static let buildKey = "CFBundleVersion"
+
+    let marketing: String
     let build: String?
 
+    init(marketing: String, build: String?) {
+        self.marketing = marketing
+        // Un build identique à la version n'apporte rien : on ne l'affiche pas.
+        self.build = build == marketing ? nil : build
+    }
+
+    /// `nil` quand `CFBundleShortVersionString` est absent ou vide.
+    static func from(infoDictionary: [String: Any]?) -> AppVersion? {
+        guard let marketing = value(for: marketingKey, in: infoDictionary) else { return nil }
+        return AppVersion(marketing: marketing, build: value(for: buildKey, in: infoDictionary))
+    }
+
     var displayText: String {
-        guard let build = build else { return "\(L10n.appVersion) \(version)" }
-        return "\(L10n.appVersion) \(version) (\(build))"
+        guard let build = build else { return "\(L10n.appVersion) \(marketing)" }
+        return "\(L10n.appVersion) \(marketing) (\(build))"
     }
 
     /// Lu par VoiceOver « Version 1.4.2, build 87 » plutôt que « 1.4.2 parenthèse 87 ».
     var accessibilityText: String {
-        guard let build = build else { return "\(L10n.appVersion) \(version)" }
-        return "\(L10n.appVersion) \(version), \(L10n.appVersionBuild) \(build)"
-    }
-}
-
-protocol AppVersionProviding {
-    /// `nil` quand `CFBundleShortVersionString` est absent ou vide.
-    var appVersion: AppVersion? { get }
-}
-
-struct BundleAppVersionProvider: AppVersionProviding {
-    static let versionKey = "CFBundleShortVersionString"
-    static let buildKey = "CFBundleVersion"
-
-    private let infoDictionary: [String: Any]?
-
-    init(infoDictionary: [String: Any]? = Bundle.main.infoDictionary) {
-        self.infoDictionary = infoDictionary
+        guard let build = build else { return "\(L10n.appVersion) \(marketing)" }
+        return "\(L10n.appVersion) \(marketing), \(L10n.appVersionBuild) \(build)"
     }
 
-    var appVersion: AppVersion? {
-        guard let version = value(for: BundleAppVersionProvider.versionKey) else { return nil }
-        return AppVersion(version: version, build: value(for: BundleAppVersionProvider.buildKey))
-    }
-
-    private func value(for key: String) -> String? {
+    private static func value(for key: String, in infoDictionary: [String: Any]?) -> String? {
         guard let value = (infoDictionary?[key] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines),
               !value.isEmpty else { return nil }
         return value

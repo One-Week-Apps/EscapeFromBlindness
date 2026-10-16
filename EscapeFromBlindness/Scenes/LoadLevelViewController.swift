@@ -20,11 +20,11 @@ struct LevelSelectionViewModel {
 
     init(chapters: [Chapter],
          bundle: Bundle = Bundle(for: LoadLevelViewController.self),
-         versionProvider: AppVersionProviding = BundleAppVersionProvider()) {
+         infoDictionary: [String: Any]? = Bundle.main.infoDictionary) {
         self.subtitle = LevelSelectionViewModel.localizedSubtitle(in: bundle)
         self.chapterCount = chapters.count
         self.levelCount = chapters.reduce(0) { $0 + $1.levels.count }
-        let appVersion = versionProvider.appVersion
+        let appVersion = AppVersion.from(infoDictionary: infoDictionary)
         self.versionText = appVersion?.displayText
         self.versionAccessibilityText = appVersion?.accessibilityText
     }
@@ -56,8 +56,8 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private static let chapterTitleIdentifierPrefix = "levelSelection.chapterTitle."
     fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LevelSelection")
 
-    private var versionProvider: AppVersionProviding = BundleAppVersionProvider()
-    private lazy var viewModel = LevelSelectionViewModel(chapters: chapters, versionProvider: versionProvider)
+    private var infoDictionary: [String: Any]? = Bundle.main.infoDictionary
+    private lazy var viewModel = LevelSelectionViewModel(chapters: chapters, infoDictionary: infoDictionary)
 
     var subtitle: String {
         return viewModel.subtitle
@@ -84,12 +84,13 @@ class LoadLevelViewController: UIViewController, Coordinated {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
-        label.textColor = .secondaryLabel
-        // Le fond de l'accueil reste noir quel que soit le mode : on résout `secondaryLabel` dans sa variante sombre pour garder un contraste ≥ 4,5:1.
-        label.overrideUserInterfaceStyle = .dark
+        // Le fond de l'accueil est noir dans les deux modes : clair #9C9CA1 (≈ 7,7:1) et sombre #AEAEB2 (≈ 9:1) sur #000000.
+        label.textColor = UIColor(named: "VersionText")
         label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.isUserInteractionEnabled = false
         label.accessibilityTraits = .staticText
-        label.accessibilityIdentifier = "homeVersionLabel"
+        label.accessibilityIdentifier = "home.versionLabel"
         return label
     }()
 
@@ -107,12 +108,12 @@ class LoadLevelViewController: UIViewController, Coordinated {
     convenience init(chapters: [Chapter],
                      currentChapterIndex: Int,
                      currentLevelIndex: Int,
-                     versionProvider: AppVersionProviding = BundleAppVersionProvider()) {
+                     infoDictionary: [String: Any]? = Bundle.main.infoDictionary) {
         self.init()
         self.chapters = chapters
         self.currentChapterIndex = currentChapterIndex
         self.currentLevelIndex = currentLevelIndex
-        self.versionProvider = versionProvider
+        self.infoDictionary = infoDictionary
     }
     
     override func viewDidLoad() {
@@ -202,7 +203,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
             LoadLevelViewController.logger.debug("Version affichée : \(versionText, privacy: .public)")
         } else {
             self.versionLabel.isHidden = true
-            LoadLevelViewController.logger.error("Version introuvable dans Info.plist (clé \(BundleAppVersionProvider.versionKey, privacy: .public) absente ou vide), libellé masqué")
+            LoadLevelViewController.logger.error("Écran d'accueil : clé \(AppVersion.marketingKey, privacy: .public) absente ou vide dans Info.plist, libellé de version masqué")
         }
 
         self.view.addSubview(self.versionLabel)
