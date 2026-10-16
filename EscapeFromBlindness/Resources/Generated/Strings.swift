@@ -168,6 +168,8 @@ internal enum L10n {
   internal static let hint = L10n.tr("Localizable", "hint", fallback: "hint")
   /// Niveau
   internal static let level = L10n.tr("Localizable", "level", fallback: "Niveau")
+  /// Choose your level
+  internal static let levelSelectionSubtitle = L10n.tr("Localizable", "level_selection_subtitle", fallback: "Choose your level")
   /// locked
   internal static let locked = L10n.tr("Localizable", "locked", fallback: "locked")
   /// Touch to play again !

@@ -4,6 +4,33 @@
 //
 
 import UIKit
+import os
+
+/// Libellés de l'écran de sélection des niveaux. Ne dépend ni de l'appareil ni de la taille de l'écran.
+struct LevelSelectionViewModel {
+    static let subtitleKey = "level_selection_subtitle"
+    static let subtitleFallback = "Choisis ton niveau"
+
+    let subtitle: String
+    let chapterCount: Int
+    let levelCount: Int
+
+    init(chapters: [Chapter], bundle: Bundle = Bundle(for: LoadLevelViewController.self)) {
+        self.subtitle = LevelSelectionViewModel.localizedSubtitle(in: bundle)
+        self.chapterCount = chapters.count
+        self.levelCount = chapters.reduce(0) { $0 + $1.levels.count }
+    }
+
+    private static func localizedSubtitle(in bundle: Bundle) -> String {
+        let key = subtitleKey
+        guard bundle.localizedString(forKey: key, value: nil, table: "Localizable") != key else {
+            let language = bundle.preferredLocalizations.first ?? Locale.current.identifier
+            LoadLevelViewController.logger.error("Missing translation for key \(key, privacy: .public) in language \(language, privacy: .public)")
+            return subtitleFallback
+        }
+        return L10n.levelSelectionSubtitle
+    }
+}
 
 class LoadLevelViewController: UIViewController, Coordinated {
     var coordinator: AppCoordinatorProtocol?
@@ -14,7 +41,30 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private static let columns: CGFloat = 3
     private static let spacing: CGFloat = 20
     private static let maxTileSide: CGFloat = 100
-    private static let sideMargin: CGFloat = 15
+    private static let sideMargin: CGFloat = 16
+    private static let subtitleTopSpacing: CGFloat = 8
+    private static let subtitleBottomSpacing: CGFloat = 16
+    private static let chapterTitleIdentifierPrefix = "levelSelection.chapterTitle."
+    fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LevelSelection")
+
+    private lazy var viewModel = LevelSelectionViewModel(chapters: chapters)
+
+    var subtitle: String {
+        return viewModel.subtitle
+    }
+
+    let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: .custom(style: .lucioleRegular, size: 17))
+        label.adjustsFontForContentSizeCategory = true
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.accessibilityTraits.insert(.header)
+        label.accessibilityIdentifier = "levelSelectionSubtitle"
+        return label
+    }()
 
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -36,6 +86,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSubtitle()
         setupCollectionView()
     }
     
@@ -46,17 +97,54 @@ class LoadLevelViewController: UIViewController, Coordinated {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        LoadLevelViewController.logger.debug("Level selection displayed with \(self.viewModel.chapterCount) chapters and \(self.viewModel.levelCount) levels")
         let indexPath = IndexPath(item: self.currentLevelIndex, section: self.currentChapterIndex - 1)
         if isRunningTest {
             EscapeFromBlindnessAccessibility.shared.post(notification: .layoutChanged, argument: self.collectionView.cellForItem(at: indexPath))
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+                self.scrollToCurrentLevel(at: indexPath)
                 EscapeFromBlindnessAccessibility.shared.post(notification: .layoutChanged, argument: self.collectionView.cellForItem(at: indexPath))
             }
         }
     }
     
+    /// Fait défiler jusqu'au niveau courant en gardant le titre de son chapitre au-dessus, quand les deux tiennent à l'écran.
+    private func scrollToCurrentLevel(at indexPath: IndexPath) {
+        guard self.chapters.indices.contains(indexPath.section),
+              self.chapters[indexPath.section].levels.indices.contains(indexPath.item) else {
+            LoadLevelViewController.logger.error("Cannot scroll to level \(indexPath.item) in section \(indexPath.section): out of range")
+            return
+        }
+        let layout = self.collectionView.collectionViewLayout
+        guard let item = layout.layoutAttributesForItem(at: indexPath) else { return }
+        let header = layout.layoutAttributesForSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: indexPath.section))
+
+        let insets = self.collectionView.adjustedContentInset
+        let visibleHeight = self.collectionView.bounds.height - insets.top - insets.bottom
+        var targetY = item.frame.minY
+        if let header = header, item.frame.maxY - header.frame.minY <= visibleHeight {
+            targetY = header.frame.minY
+        }
+        let minOffsetY = -insets.top
+        let maxOffsetY = max(minOffsetY, self.collectionView.contentSize.height + insets.bottom - self.collectionView.bounds.height)
+        let offsetY = min(max(targetY - insets.top, minOffsetY), maxOffsetY)
+        self.collectionView.setContentOffset(CGPoint(x: self.collectionView.contentOffset.x, y: offsetY), animated: true)
+    }
+
+    private func setupSubtitle() {
+        self.subtitleLabel.text = self.subtitle
+
+        self.view.addSubview(self.subtitleLabel)
+        self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        let safeArea = self.view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            self.subtitleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: LoadLevelViewController.subtitleTopSpacing),
+            self.subtitleLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
+            self.subtitleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
+        ])
+    }
+
     private func setupCollectionView() {
         self.collectionView.register(LoadLevelCollectionViewCellHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LoadLevelViewController.headerReuseId)
         self.collectionView.dataSource = self
@@ -68,7 +156,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         let safeArea = self.view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            self.collectionView.topAnchor.constraint(equalTo: self.subtitleLabel.bottomAnchor, constant: LoadLevelViewController.subtitleBottomSpacing),
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             self.collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
             self.collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
@@ -108,6 +196,7 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
             header.titleLabel.textColor = .white
             header.titleLabel.font = .custom(style: .montserratExtraBold, size: 20.0)
             header.titleLabel.accessibilityTraits = .header
+            header.titleLabel.accessibilityIdentifier = "\(LoadLevelViewController.chapterTitleIdentifierPrefix)\(chapter.index)"
             header.setNeedsLayout()
             return header
         default:

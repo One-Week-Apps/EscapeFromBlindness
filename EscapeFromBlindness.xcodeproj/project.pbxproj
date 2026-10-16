@@ -82,6 +82,8 @@
 		D8F1809923BFE4D3003291D4 /* NSArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1809823BFE4D3003291D4 /* NSArray+Extensions.swift */; };
 		D8F27A7A23FDF2D000C09E1B /* RandomFramesGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F27A7923FDF2D000C09E1B /* RandomFramesGenerator.swift */; };
 		FAC913BD730F4A31B262E1CE /* EscapeFromBlindnessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867CE172D9312794687982A /* EscapeFromBlindnessUITests.swift */; };
+		A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000002 /* AITaskerCapture.swift */; };
+		A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,8 @@
 		9E71855914F0F04FF5B7B179 /* Pods-EscapeFromBlindnessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EscapeFromBlindnessTests.release.xcconfig"; path = "Target Support Files/Pods-EscapeFromBlindnessTests/Pods-EscapeFromBlindnessTests.release.xcconfig"; sourceTree = "<group>"; };
 		A94EA5CAC843321CF23D4471 /* Pods-EscapeFromBlindness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EscapeFromBlindness.release.xcconfig"; path = "Target Support Files/Pods-EscapeFromBlindness/Pods-EscapeFromBlindness.release.xcconfig"; sourceTree = "<group>"; };
 		B867CE172D9312794687982A /* EscapeFromBlindnessUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EscapeFromBlindnessUITests.swift; sourceTree = "<group>"; };
+		A1E5C0DE0000000000000002 /* AITaskerCapture.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AITaskerCapture.swift; sourceTree = "<group>"; };
+		A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LevelSelectionUITests.swift; sourceTree = "<group>"; };
 		C38D3490990697920F57664A /* EscapeFromBlindnessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EscapeFromBlindnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC6B9E3AF32499B14C7AF4DC /* Pods-EscapeFromBlindnessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EscapeFromBlindnessTests.debug.xcconfig"; path = "Target Support Files/Pods-EscapeFromBlindnessTests/Pods-EscapeFromBlindnessTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D80B2A70241C556100616655 /* InstructionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsInteractor.swift; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				B867CE172D9312794687982A /* EscapeFromBlindnessUITests.swift */,
+				A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */,
+				A1E5C0DE0000000000000002 /* AITaskerCapture.swift */,
 			);
 			name = EscapeFromBlindnessUITests;
 			path = EscapeFromBlindnessUITests;
@@ -714,6 +720,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC913BD730F4A31B262E1CE /* EscapeFromBlindnessUITests.swift in Sources */,
+				A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */,
+				A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
