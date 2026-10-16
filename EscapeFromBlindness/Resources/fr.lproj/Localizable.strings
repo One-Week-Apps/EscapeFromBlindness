@@ -42,6 +42,7 @@
 "go" = "Go !";
 "level" = "Niveau";
 "hint" = "indice";
+"level_selection_subtitle" = "Choisis ton niveau";
 "door_script" = "Une porte se situe en face de moi. Elle semble vérouillée par un cadenas circulaire. Je dois trouver le code.";
 
 /* Chapter 1 */

@@ -11,6 +11,9 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var levelLockedImageView: UIImageView!
     
+    private static let completedColor = UIColor(red: 80/255, green: 144/255, blue: 6/255, alpha: 1)
+    private static let lockedColor = UIColor(white: 0.18, alpha: 1)
+
     enum State {
         case completed
         case unlocked
@@ -20,6 +23,15 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.containerView.layer.cornerRadius = 10
+        self.containerView.backgroundColor = .clear
+        self.levelLabel.textColor = .black
+        self.levelLockedImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.levelLockedImageView.centerXAnchor.constraint(equalTo: self.containerView.centerXAnchor),
+            self.levelLockedImageView.centerYAnchor.constraint(equalTo: self.containerView.centerYAnchor),
+            self.levelLockedImageView.widthAnchor.constraint(equalTo: self.containerView.widthAnchor, multiplier: 0.6),
+            self.levelLockedImageView.heightAnchor.constraint(equalTo: self.containerView.heightAnchor, multiplier: 0.6)
+        ])
     }
     
     func configure(chapterIndex: Int, levelIndex: Int, state: State) {
@@ -31,7 +43,7 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
             self.levelLabel.text = "\(displayedLevelIndex)"
             self.levelLabel.accessibilityLabel = "\(L10n.level) \(displayedLevelIndex) (\(L10n.complete))"
             
-            self.containerView.backgroundColor = UIColor.init(red: 80/255, green: 144/255, blue: 6/255, alpha: 1)
+            self.containerView.backgroundColor = LoadLevelCollectionViewCell.completedColor
             self.levelLockedImageView.isHidden = true
         case .unlocked:
             self.levelLabel.text = "\(displayedLevelIndex)"
@@ -43,7 +55,7 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
             self.levelLabel.text = " "
             self.levelLabel.accessibilityLabel = "\(L10n.level) \(displayedLevelIndex) (\(L10n.locked))"
             
-            self.containerView.backgroundColor = .white
+            self.containerView.backgroundColor = LoadLevelCollectionViewCell.lockedColor
             self.levelLockedImageView.isHidden = false
         }
     }
