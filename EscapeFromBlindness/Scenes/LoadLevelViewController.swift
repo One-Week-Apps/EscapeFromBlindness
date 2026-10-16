@@ -14,11 +14,19 @@ struct LevelSelectionViewModel {
     let subtitle: String
     let chapterCount: Int
     let levelCount: Int
+    /// `nil` quand la version est introuvable : le libellé reste alors masqué.
+    let versionText: String?
+    let versionAccessibilityText: String?
 
-    init(chapters: [Chapter], bundle: Bundle = Bundle(for: LoadLevelViewController.self)) {
+    init(chapters: [Chapter],
+         bundle: Bundle = Bundle(for: LoadLevelViewController.self),
+         versionProvider: AppVersionProviding = BundleAppVersionProvider()) {
         self.subtitle = LevelSelectionViewModel.localizedSubtitle(in: bundle)
         self.chapterCount = chapters.count
         self.levelCount = chapters.reduce(0) { $0 + $1.levels.count }
+        let appVersion = versionProvider.appVersion
+        self.versionText = appVersion?.displayText
+        self.versionAccessibilityText = appVersion?.accessibilityText
     }
 
     private static func localizedSubtitle(in bundle: Bundle) -> String {
@@ -44,10 +52,12 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private static let sideMargin: CGFloat = 16
     private static let subtitleTopSpacing: CGFloat = 8
     private static let subtitleBottomSpacing: CGFloat = 16
+    private static let versionSpacing: CGFloat = 8
     private static let chapterTitleIdentifierPrefix = "levelSelection.chapterTitle."
     fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LevelSelection")
 
-    private lazy var viewModel = LevelSelectionViewModel(chapters: chapters)
+    private var versionProvider: AppVersionProviding = BundleAppVersionProvider()
+    private lazy var viewModel = LevelSelectionViewModel(chapters: chapters, versionProvider: versionProvider)
 
     var subtitle: String {
         return viewModel.subtitle
@@ -66,6 +76,23 @@ class LoadLevelViewController: UIViewController, Coordinated {
         return label
     }()
 
+    /// Texte informatif : statique, sans interaction, lu en dernier par VoiceOver.
+    let versionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .footnote)
+        label.adjustsFontForContentSizeCategory = true
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
+        label.textColor = .secondaryLabel
+        // Le fond de l'accueil reste noir quel que soit le mode : on résout `secondaryLabel` dans sa variante sombre pour garder un contraste ≥ 4,5:1.
+        label.overrideUserInterfaceStyle = .dark
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.accessibilityTraits = .staticText
+        label.accessibilityIdentifier = "homeVersionLabel"
+        return label
+    }()
+
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -77,17 +104,22 @@ class LoadLevelViewController: UIViewController, Coordinated {
         return collectionView
     }()
     
-    convenience init(chapters: [Chapter], currentChapterIndex: Int, currentLevelIndex: Int) {
+    convenience init(chapters: [Chapter],
+                     currentChapterIndex: Int,
+                     currentLevelIndex: Int,
+                     versionProvider: AppVersionProviding = BundleAppVersionProvider()) {
         self.init()
         self.chapters = chapters
         self.currentChapterIndex = currentChapterIndex
         self.currentLevelIndex = currentLevelIndex
+        self.versionProvider = versionProvider
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubtitle()
         setupCollectionView()
+        setupVersion()
     }
     
     override func viewWillLayoutSubviews() {
@@ -157,9 +189,31 @@ class LoadLevelViewController: UIViewController, Coordinated {
         let safeArea = self.view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.subtitleLabel.bottomAnchor, constant: LoadLevelViewController.subtitleBottomSpacing),
-            self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             self.collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
             self.collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
+        ])
+    }
+
+    /// Ajouté en dernier pour être lu en dernier par VoiceOver, sous la grille et au-dessus de la barre d'accueil.
+    private func setupVersion() {
+        if let versionText = viewModel.versionText {
+            self.versionLabel.text = versionText
+            self.versionLabel.accessibilityLabel = viewModel.versionAccessibilityText
+            LoadLevelViewController.logger.debug("Version affichée : \(versionText, privacy: .public)")
+        } else {
+            self.versionLabel.isHidden = true
+            LoadLevelViewController.logger.error("Version introuvable dans Info.plist (clé \(BundleAppVersionProvider.versionKey, privacy: .public) absente ou vide), libellé masqué")
+        }
+
+        self.view.addSubview(self.versionLabel)
+        self.versionLabel.translatesAutoresizingMaskIntoConstraints = false
+        let safeArea = self.view.safeAreaLayoutGuide
+        let spacing = LoadLevelViewController.versionSpacing
+        NSLayoutConstraint.activate([
+            self.collectionView.bottomAnchor.constraint(equalTo: self.versionLabel.topAnchor, constant: -spacing),
+            self.versionLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -spacing),
+            self.versionLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
+            self.versionLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
         ])
     }
     
