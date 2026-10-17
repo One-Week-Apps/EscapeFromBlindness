@@ -14,9 +14,9 @@ struct LevelSelectionViewModel {
     let subtitle: String
     let chapterCount: Int
     let levelCount: Int
-    /// `nil` quand la version est introuvable : le libellé reste alors masqué.
-    let versionText: String?
-    let versionAccessibilityText: String?
+    /// « Version – » quand la version est introuvable.
+    let versionText: String
+    let versionAccessibilityText: String
 
     init(chapters: [Chapter],
          bundle: Bundle = Bundle(for: LoadLevelViewController.self),
@@ -25,8 +25,8 @@ struct LevelSelectionViewModel {
         self.chapterCount = chapters.count
         self.levelCount = chapters.reduce(0) { $0 + $1.levels.count }
         let appVersion = AppVersion.from(infoDictionary: infoDictionary)
-        self.versionText = appVersion?.displayText
-        self.versionAccessibilityText = appVersion?.accessibilityText
+        self.versionText = appVersion?.displayText ?? AppVersion.fallbackText
+        self.versionAccessibilityText = appVersion?.accessibilityText ?? AppVersion.fallbackText
     }
 
     private static func localizedSubtitle(in bundle: Bundle) -> String {
@@ -46,13 +46,13 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private var currentChapterIndex: Int = 0
     private var currentLevelIndex: Int = 0
     private static let headerReuseId = "header"
-    private static let footerReuseId = "versionFooter"
     private static let columns: CGFloat = 3
     private static let spacing: CGFloat = 20
     private static let maxTileSide: CGFloat = 100
     private static let sideMargin: CGFloat = 16
     private static let subtitleTopSpacing: CGFloat = 8
     private static let subtitleBottomSpacing: CGFloat = 16
+    private static let versionSpacing: CGFloat = 8
     private static let chapterTitleIdentifierPrefix = "levelSelection.chapterTitle."
     fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LevelSelection")
     private static let homeLogger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Accueil")
@@ -74,6 +74,23 @@ class LoadLevelViewController: UIViewController, Coordinated {
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.accessibilityTraits.insert(.header)
         label.accessibilityIdentifier = "levelSelectionSubtitle"
+        return label
+    }()
+
+    let versionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.adjustsFontForContentSizeCategory = true
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
+        label.textColor = .secondaryLabel
+        // Le fond de l'accueil reste noir quel que soit le mode : on résout `secondaryLabel` dans sa variante sombre pour garder un contraste ≥ 4,5:1.
+        label.overrideUserInterfaceStyle = .dark
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.isUserInteractionEnabled = false
+        label.accessibilityTraits = .staticText
+        label.accessibilityIdentifier = "homeVersionLabel"
         return label
     }()
 
@@ -103,6 +120,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
         super.viewDidLoad()
         setupSubtitle()
         setupCollectionView()
+        setupVersionLabel()
         logVersion()
     }
 
@@ -172,7 +190,6 @@ class LoadLevelViewController: UIViewController, Coordinated {
         self.collectionView.register(LoadLevelCollectionViewCellHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LoadLevelViewController.headerReuseId)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView.register(LoadLevelVersionFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadLevelViewController.footerReuseId)
 
         self.view.backgroundColor = .black
         self.view.addSubview(self.collectionView)
@@ -181,22 +198,33 @@ class LoadLevelViewController: UIViewController, Coordinated {
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.subtitleLabel.bottomAnchor, constant: LoadLevelViewController.subtitleBottomSpacing),
             self.collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
-            self.collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin),
-            // La version vit dans le pied de la grille : elle suit le contenu sans jamais recouvrir une case.
-            self.collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+            self.collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
+        ])
+    }
+
+    /// Ajouté en dernier : VoiceOver lit la version après la grille, sans changer l'ordre existant.
+    private func setupVersionLabel() {
+        self.versionLabel.text = viewModel.versionText
+        self.versionLabel.accessibilityLabel = viewModel.versionAccessibilityText
+
+        self.view.addSubview(self.versionLabel)
+        self.versionLabel.translatesAutoresizingMaskIntoConstraints = false
+        let safeArea = self.view.safeAreaLayoutGuide
+        let spacing = LoadLevelViewController.versionSpacing
+        NSLayoutConstraint.activate([
+            // La grille s'arrête au-dessus de la version : aucune case n'est recouverte.
+            self.collectionView.bottomAnchor.constraint(equalTo: self.versionLabel.topAnchor, constant: -spacing),
+            self.versionLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
+            self.versionLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin),
+            self.versionLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -spacing)
         ])
     }
 
     private func logVersion() {
-        if let versionText = viewModel.versionText {
-            LoadLevelViewController.homeLogger.debug("Version affichée : \(versionText, privacy: .public)")
-        } else {
-            LoadLevelViewController.homeLogger.error("Clé \(AppVersion.marketingKey, privacy: .public) absente ou vide dans Info.plist, libellé de version masqué")
+        for key in AppVersion.missingKeys(in: infoDictionary) {
+            LoadLevelViewController.homeLogger.error("Clé \(key, privacy: .public) absente ou vide dans Info.plist, repli d'affichage appliqué")
         }
-    }
-
-    private func isVersionFooterSection(_ section: Int) -> Bool {
-        return section == self.chapters.count - 1 && viewModel.versionText != nil
+        LoadLevelViewController.homeLogger.debug("Version affichée : \(self.viewModel.versionText, privacy: .public)")
     }
 
 }
@@ -218,13 +246,6 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
         return CGSize(width: side, height: side)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        guard isVersionFooterSection(section), let versionText = viewModel.versionText else { return .zero }
-        let width = collectionView.bounds.width
-        let height = LoadLevelVersionFooter.height(for: versionText, width: width, traitCollection: collectionView.traitCollection)
-        return CGSize(width: width, height: height)
-    }
-
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
@@ -242,15 +263,6 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
             header.titleLabel.accessibilityIdentifier = "\(LoadLevelViewController.chapterTitleIdentifierPrefix)\(chapter.index)"
             header.setNeedsLayout()
             return header
-        case UICollectionView.elementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(
-                ofKind: UICollectionView.elementKindSectionFooter,
-                withReuseIdentifier: LoadLevelViewController.footerReuseId,
-                for: indexPath
-            ) as! LoadLevelVersionFooter
-            footer.configure(text: viewModel.versionText ?? "", accessibilityText: viewModel.versionAccessibilityText)
-            footer.isHidden = !isVersionFooterSection(indexPath.section)
-            return footer
         default:
             return UICollectionReusableView()
         }

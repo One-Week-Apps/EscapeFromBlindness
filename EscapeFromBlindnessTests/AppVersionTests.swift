@@ -90,11 +90,28 @@ final class AppVersionTests: XCTestCase {
         XCTAssertEqual(viewModel.versionAccessibilityText, "Version 1.4.2")
     }
 
-    func test_viewModel_withoutVersion_exposesNoText() {
+    func test_viewModel_withoutVersion_exposesFallback() {
         let viewModel = LevelSelectionViewModel(chapters: [], infoDictionary: [:])
 
-        XCTAssertNil(viewModel.versionText)
-        XCTAssertNil(viewModel.versionAccessibilityText)
+        XCTAssertEqual(viewModel.versionText, "Version –")
+        XCTAssertEqual(viewModel.versionAccessibilityText, "Version –")
+    }
+
+    // MARK: - AppVersion.missingKeys(in:)
+
+    func test_missingKeys_withVersionAndBuild_isEmpty() {
+        XCTAssertEqual(AppVersion.missingKeys(in: [
+            "CFBundleShortVersionString": "1.4.2",
+            "CFBundleVersion": "87"
+        ]), [])
+    }
+
+    func test_missingKeys_withoutBuild_listsBuildKey() {
+        XCTAssertEqual(AppVersion.missingKeys(in: ["CFBundleShortVersionString": "1.4.2"]), ["CFBundleVersion"])
+    }
+
+    func test_missingKeys_withNilDictionary_listsBothKeys() {
+        XCTAssertEqual(AppVersion.missingKeys(in: nil), ["CFBundleShortVersionString", "CFBundleVersion"])
     }
 
 }
@@ -130,7 +147,7 @@ final class HomeVersionLabelTests: XCTestCase {
 
         XCTAssertFalse(sut.versionLabel.isHidden)
         XCTAssertEqual(sut.versionLabel.text, "Version 1.4.2 (87)")
-        XCTAssertEqual(sut.versionLabel.accessibilityIdentifier, "home.versionLabel")
+        XCTAssertEqual(sut.versionLabel.accessibilityIdentifier, "homeVersionLabel")
     }
 
     func test_versionLabel_isReadAsStaticTextAndIgnoresTouches() {
@@ -153,11 +170,12 @@ final class HomeVersionLabelTests: XCTestCase {
         XCTAssertFalse(sut.versionLabel.adjustsFontSizeToFitWidth)
     }
 
-    func test_versionLabel_usesAccessibleNamedColor() {
+    func test_versionLabel_usesSmallDynamicFontAndSystemGray() {
         let sut = makeSUT()
 
-        XCTAssertNotNil(UIColor(named: "VersionText"))
-        XCTAssertEqual(sut.versionLabel.textColor, UIColor(named: "VersionText"))
+        XCTAssertEqual(sut.versionLabel.font.fontDescriptor.object(forKey: .textStyle) as? UIFont.TextStyle, .caption1)
+        XCTAssertEqual(sut.versionLabel.textColor, .secondaryLabel)
+        XCTAssertEqual(sut.versionLabel.overrideUserInterfaceStyle, .dark)
     }
 
     func test_versionLabel_sitsAboveSafeAreaAndBelowGrid() {
@@ -179,11 +197,11 @@ final class HomeVersionLabelTests: XCTestCase {
         XCTAssertTrue(sut.view.subviews.last === sut.versionLabel)
     }
 
-    func test_versionLabel_withoutVersion_isHidden() {
+    func test_versionLabel_withoutVersion_showsFallback() {
         let sut = makeSUT(infoDictionary: [:])
 
-        XCTAssertTrue(sut.versionLabel.isHidden)
-        XCTAssertNil(sut.versionLabel.text)
+        XCTAssertFalse(sut.versionLabel.isHidden)
+        XCTAssertEqual(sut.versionLabel.text, "Version –")
     }
 
 }

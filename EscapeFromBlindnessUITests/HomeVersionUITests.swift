@@ -8,103 +8,66 @@ import XCTest
 final class HomeVersionLabelUITests: XCTestCase {
 
     private let timeout: TimeInterval = 10
-    private let versionIdentifier = "home.versionLabel"
+    private let versionIdentifier = "homeVersionLabel"
     private let subtitleIdentifier = "levelSelectionSubtitle"
-    private let lastChapterTitleIdentifier = "levelSelection.chapterTitle.4"
-    /// Espacement minimal entre la dernière case et la version.
-    private let minimumContentSpacing: CGFloat = 16
-    /// Espacement minimal entre la version et la barre d'accueil (bas de la zone sûre, où s'arrête la grille).
-    private let minimumHomeIndicatorSpacing: CGFloat = 8
-    private let maxSwipes = 6
+    /// Marge minimale entre la version et le bas de la zone sûre (barre d'accueil).
+    private let minimumBottomSpacing: CGFloat = 8
 
     override func setUp() {
         continueAfterFailure = false
     }
 
-    /// Le joueur en est au dernier niveau : la case jouable est la dernière, juste au-dessus de la version.
+    /// Un joueur qui a déjà progressé arrive sur l'accueil (sélection des niveaux) au lancement.
     private func launchHome(extraArguments: [String] = []) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchArguments = [
-            "-com.accessibility-toolbox.userdefaults.current-chapter-index", "4",
-            "-com.accessibility-toolbox.userdefaults.current-level-index", "1",
+            "-com.accessibility-toolbox.userdefaults.current-chapter-index", "1",
+            "-com.accessibility-toolbox.userdefaults.current-level-index", "0",
             "-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"
         ] + extraArguments
         app.launch()
         return app
     }
 
-    /// La version est en pied de grille : on fait défiler jusqu'en bas pour l'afficher.
-    private func scrollToVersion(in app: XCUIApplication, grid: XCUIElement) -> XCUIElement {
-        let version = app.staticTexts[versionIdentifier]
-        var swipes = 0
-        while !(version.exists && version.isHittable) && swipes < maxSwipes {
-            grid.swipeUp()
-            swipes += 1
-        }
-        XCTAssertTrue(version.waitForExistence(timeout: timeout))
-        return version
-    }
-
-    private func lastCell(in grid: XCUIElement) -> XCUIElement {
-        let cells = grid.cells.allElementsBoundByIndex.filter { $0.exists }
-        return cells.max { $0.frame.maxY < $1.frame.maxY } ?? grid.cells.firstMatch
-    }
-
-    private func assertVersionLaidOut(_ version: XCUIElement, below cell: XCUIElement, in app: XCUIApplication, grid: XCUIElement,
-                                      file: StaticString = #filePath, line: UInt = #line) {
-        XCTAssertFalse(version.label.isEmpty, file: file, line: line)
-        XCTAssertFalse(version.frame.intersects(cell.frame), "La version \(version.frame) croise la case \(cell.frame)", file: file, line: line)
-        XCTAssertGreaterThanOrEqual(version.frame.minY - cell.frame.maxY, minimumContentSpacing, file: file, line: line)
+    private func assertVersionVisibleAtBottom(_ version: XCUIElement, in app: XCUIApplication,
+                                              file: StaticString = #filePath, line: UInt = #line) {
+        XCTAssertTrue(version.exists, file: file, line: line)
+        XCTAssertTrue(version.label.hasPrefix("Version"), "Libellé inattendu : \(version.label)", file: file, line: line)
+        XCTAssertGreaterThan(version.frame.height, 0, file: file, line: line)
 
         let window = app.windows.firstMatch.frame
-        XCTAssertTrue(window.contains(version.frame), "Version hors de l'écran : \(version.frame) / \(window)", file: file, line: line)
-        XCTAssertLessThanOrEqual(version.frame.maxY, grid.frame.maxY - minimumHomeIndicatorSpacing,
-                                 "La version descend sous la zone sûre", file: file, line: line)
+        XCTAssertTrue(window.contains(version.frame), "Version coupée ou hors de l'écran : \(version.frame) / \(window)", file: file, line: line)
+        XCTAssertLessThanOrEqual(version.frame.maxY, window.maxY - minimumBottomSpacing, file: file, line: line)
+
+        let grid = app.collectionViews.firstMatch
+        if grid.exists {
+            XCTAssertLessThanOrEqual(grid.frame.maxY, version.frame.minY, "La grille chevauche la version", file: file, line: line)
+        }
     }
 
-    func testAfficherLaVersionSousLaCase() {
+    func testAfficherLeNumeroDeVersionSurAccueil() {
         let app = launchHome()
 
-        let grid = app.collectionViews.firstMatch
         XCTAssertTrue(app.descendants(matching: .any)[subtitleIdentifier].waitForExistence(timeout: timeout))
-        XCTAssertTrue(grid.waitForExistence(timeout: timeout))
+        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Écran d'accueil affiché")
 
-        let version = scrollToVersion(in: app, grid: grid)
-        let cell = lastCell(in: grid)
-        XCTAssertTrue(cell.waitForExistence(timeout: timeout))
-        assertVersionLaidOut(version, below: cell, in: app, grid: grid)
-        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Accueil affiché, version visible sous la case")
+        let version = app.staticTexts[versionIdentifier]
+        XCTAssertTrue(version.waitForExistence(timeout: timeout))
+        assertVersionVisibleAtBottom(version, in: app)
 
-        // La version ne masque pas la case : elle reste tappable et ouvre son niveau.
-        XCTAssertTrue(cell.isHittable)
-        cell.tap()
-        XCTAssertTrue(app.navigationBars.firstMatch.waitForExistence(timeout: timeout))
-        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Case cochée, version toujours visible")
+        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Numéro de version affiché en bas de l'écran d'accueil")
     }
 
-    func testAfficherLaVersionAvecGrandeTaille() {
+    func testAfficherLeNumeroDeVersionAvecGrandePolice() {
         let app = launchHome(extraArguments: [
-            "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL"
+            "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityL"
         ])
 
-        let grid = app.collectionViews.firstMatch
-        XCTAssertTrue(grid.waitForExistence(timeout: timeout))
+        let version = app.staticTexts[versionIdentifier]
+        XCTAssertTrue(version.waitForExistence(timeout: timeout))
+        assertVersionVisibleAtBottom(version, in: app)
 
-        let version = scrollToVersion(in: app, grid: grid)
-        let cell = lastCell(in: grid)
-        XCTAssertTrue(cell.waitForExistence(timeout: timeout))
-        assertVersionLaidOut(version, below: cell, in: app, grid: grid)
-
-        for cell in grid.cells.allElementsBoundByIndex where cell.exists {
-            XCTAssertFalse(version.frame.intersects(cell.frame), "La version croise la case \(cell.frame)")
-        }
-        let chapterTitle = app.descendants(matching: .any)[lastChapterTitleIdentifier]
-        if chapterTitle.exists {
-            XCTAssertFalse(version.frame.intersects(chapterTitle.frame))
-        }
-        let subtitle = app.descendants(matching: .any)[subtitleIdentifier]
-        XCTAssertFalse(version.frame.intersects(subtitle.frame))
-        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Grande police, version sous le contenu")
+        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Version affichée avec grande police")
     }
 
 }

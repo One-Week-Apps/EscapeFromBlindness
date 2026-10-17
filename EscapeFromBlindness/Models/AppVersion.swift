@@ -19,10 +19,20 @@ struct AppVersion: Equatable {
         self.build = build == marketing ? nil : build
     }
 
+    /// Affiché quand `CFBundleShortVersionString` est introuvable.
+    static var fallbackText: String {
+        return "\(L10n.appVersion) –"
+    }
+
     /// `nil` quand `CFBundleShortVersionString` est absent ou vide.
     static func from(infoDictionary: [String: Any]?) -> AppVersion? {
         guard let marketing = value(for: marketingKey, in: infoDictionary) else { return nil }
         return AppVersion(marketing: marketing, build: value(for: buildKey, in: infoDictionary))
+    }
+
+    /// Clés de version absentes ou vides dans l'Info.plist, à journaliser.
+    static func missingKeys(in infoDictionary: [String: Any]?) -> [String] {
+        return [marketingKey, buildKey].filter { value(for: $0, in: infoDictionary) == nil }
     }
 
     var displayText: String {
