@@ -49,25 +49,24 @@ final class HomeVersionLabelUITests: XCTestCase {
         let app = launchHome()
 
         XCTAssertTrue(app.descendants(matching: .any)[subtitleIdentifier].waitForExistence(timeout: timeout))
-        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Écran d'accueil affiché")
 
         let version = app.staticTexts[versionIdentifier]
         XCTAssertTrue(version.waitForExistence(timeout: timeout))
         assertVersionVisibleAtBottom(version, in: app)
 
-        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Numéro de version affiché en bas de l'écran d'accueil")
+        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Numéro de version affiché en bas de l'écran")
     }
 
     func testAfficherLeNumeroDeVersionAvecGrandePolice() {
         let app = launchHome(extraArguments: [
-            "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityL"
+            "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXL"
         ])
 
         let version = app.staticTexts[versionIdentifier]
         XCTAssertTrue(version.waitForExistence(timeout: timeout))
         assertVersionVisibleAtBottom(version, in: app)
 
-        AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Version affichée avec grande police")
+        AITaskerCapture.captureScreen(nodeId: "AccueilGrandePolice", action: "Accueil avec grande police")
     }
 
 }

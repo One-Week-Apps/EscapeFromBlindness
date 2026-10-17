@@ -190,6 +190,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
         self.collectionView.register(LoadLevelCollectionViewCellHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LoadLevelViewController.headerReuseId)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        self.collectionView.register(LoadLevelCollectionViewCell.self)
 
         self.view.backgroundColor = .black
         self.view.addSubview(self.collectionView)
