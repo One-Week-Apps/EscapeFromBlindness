@@ -10,6 +10,8 @@ final class AccessibiliteVersionEtSousTitreUITests: XCTestCase {
     private let timeout: TimeInterval = 10
     private let versionIdentifier = "homeVersionLabel"
     private let subtitleIdentifier = "levelSelectionSubtitle"
+    /// Libellé VoiceOver du bouton qui ramène d'un niveau à l'écran de chargement (`LevelBaseViewController`).
+    private let menuLabel = "Menu"
 
     override func setUp() {
         continueAfterFailure = false
@@ -36,11 +38,14 @@ final class AccessibiliteVersionEtSousTitreUITests: XCTestCase {
         XCTAssertFalse(app.buttons[versionIdentifier].exists, "La version ne doit pas être annoncée comme un bouton")
         AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Version lue comme un texte sur l'accueil")
 
-        // L'écran de chargement est chargé quand sa grille affiche la case du niveau 1.
-        // On ne la touche pas : le toucher ouvre le niveau et quitte cet écran.
+        // Toucher le niveau 1 ouvre le niveau ; son bouton « Menu » ramène à l'écran de chargement de niveau.
         let firstLevel = app.collectionViews.firstMatch.cells.element(boundBy: 0)
         XCTAssertTrue(firstLevel.waitForExistence(timeout: timeout))
-        XCTAssertTrue(firstLevel.isHittable)
+        firstLevel.tap()
+
+        let menuButton = app.navigationBars.buttons[menuLabel]
+        XCTAssertTrue(menuButton.waitForExistence(timeout: timeout))
+        menuButton.tap()
 
         let subtitle = app.descendants(matching: .any)[subtitleIdentifier]
         XCTAssertTrue(subtitle.waitForExistence(timeout: timeout))
