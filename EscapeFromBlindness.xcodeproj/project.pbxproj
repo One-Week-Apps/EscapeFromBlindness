@@ -46,6 +46,7 @@
 		D88B1A7F23B436FB008BB85D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A7923B436F9008BB85D /* Montserrat-Medium.ttf */; };
 		D88B1A8023B436FB008BB85D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A7A23B436FA008BB85D /* Montserrat-Bold.ttf */; };
 		D88B1A8123B436FB008BB85D /* Luciole-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A7B23B436FA008BB85D /* Luciole-Regular.ttf */; };
+		B01D10C10E0000000000000001 /* Luciole-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B01D10C10E0000000000000002 /* Luciole-Bold.ttf */; };
 		D88B1A8223B436FB008BB85D /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A7C23B436FB008BB85D /* Montserrat-SemiBold.ttf */; };
 		D88B1A9323B43D9A008BB85D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A9523B43D9A008BB85D /* Localizable.strings */; };
 		D88B1A9823B43E1D008BB85D /* RotorViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B1A9723B43E1D008BB85D /* RotorViewControllerTests.swift */; };
@@ -154,6 +155,7 @@
 		D88B1A7923B436F9008BB85D /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		D88B1A7A23B436FA008BB85D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D88B1A7B23B436FA008BB85D /* Luciole-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Luciole-Regular.ttf"; sourceTree = "<group>"; };
+		B01D10C10E0000000000000002 /* Luciole-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Luciole-Bold.ttf"; sourceTree = "<group>"; };
 		D88B1A7C23B436FB008BB85D /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		D88B1A9423B43D9A008BB85D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D88B1A9623B43D9D008BB85D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				D88B1A7B23B436FA008BB85D /* Luciole-Regular.ttf */,
+				B01D10C10E0000000000000002 /* Luciole-Bold.ttf */,
 				D88B1A7823B436F9008BB85D /* Montserrat-Black.ttf */,
 				D88B1A7A23B436FA008BB85D /* Montserrat-Bold.ttf */,
 				D88B1A7723B436F9008BB85D /* Montserrat-ExtraBold.ttf */,
@@ -616,6 +619,7 @@
 				D88B1A7D23B436FB008BB85D /* Montserrat-ExtraBold.ttf in Resources */,
 				D88B1A9323B43D9A008BB85D /* Localizable.strings in Resources */,
 				D88B1A8123B436FB008BB85D /* Luciole-Regular.ttf in Resources */,
+				B01D10C10E0000000000000001 /* Luciole-Bold.ttf in Resources */,
 				D8C2C10623C0D52C00F8BE78 /* VoiceOverAlertViewController.xib in Resources */,
 				D88B19E823B42552008BB85D /* Assets.xcassets in Resources */,
 				D8CF561A24314BFC00D9B59F /* wind-sand.mp3 in Resources */,

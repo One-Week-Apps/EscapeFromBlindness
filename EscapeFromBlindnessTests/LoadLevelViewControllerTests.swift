@@ -162,6 +162,15 @@ class LoadLevelViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.subtitleLabel.adjustsFontForContentSizeCategory)
     }
 
+    func test_subtitleLabel_usesRealLucioleBoldWithoutStrokeImitation() {
+        layoutInLightMode()
+
+        XCTAssertNotNil(UIFont(name: "Luciole-Bold", size: 17), "Luciole-Bold.ttf doit être embarquée et déclarée dans UIAppFonts")
+        XCTAssertEqual(sut.subtitleLabel.font.fontName, "Luciole-Bold")
+        let attributes = sut.subtitleLabel.attributedText?.attributes(at: 0, effectiveRange: nil) ?? [:]
+        XCTAssertNil(attributes[.strokeWidth], "Le gras vient de la fonte, pas d'un contour")
+    }
+
     func test_subtitleLabel_isAccessibleHeaderWithStableIdentifier() {
         layoutInLightMode()
 
