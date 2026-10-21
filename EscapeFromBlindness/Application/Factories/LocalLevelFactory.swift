@@ -15,7 +15,7 @@ class LocalLevelFactory: LevelFactory {
     static let chapters = [
         Chapter(
             index: 1,
-            title: "Ice Cave",
+            title: L10n.chapter1Title,
             description: L10n.chapter1Description,
             keywords: ["door", "trap", "bridge", "bats", "lever"],
             levels: [
@@ -32,7 +32,7 @@ class LocalLevelFactory: LevelFactory {
 
         Chapter(
             index: 2,
-            title: "The Lost City",
+            title: L10n.chapter2Title,
             description: L10n.chapter2Description,
             keywords: ["bear", "wolves", "spikes", "water"],
             levels: [
@@ -54,7 +54,7 @@ class LocalLevelFactory: LevelFactory {
 
         Chapter(
             index: 3,
-            title: "Hidden Valley",
+            title: L10n.chapter3Title,
             description: L10n.chapter3Description,
             keywords: ["climbing", "waterfall", "temple", "door mechanism"],
             levels: [
@@ -81,7 +81,7 @@ class LocalLevelFactory: LevelFactory {
 
         Chapter(
             index: 4,
-            title: "The Hidden Tomb",
+            title: L10n.chapter4Title,
             description: L10n.chapter4Description,
             keywords: ["puzzle", "blocks", "walls", "jewels", "tiles"],
             levels: [

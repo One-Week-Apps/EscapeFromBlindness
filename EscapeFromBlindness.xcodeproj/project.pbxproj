@@ -46,6 +46,7 @@
 		D88B1A7F23B436FB008BB85D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A7923B436F9008BB85D /* Montserrat-Medium.ttf */; };
 		D88B1A8023B436FB008BB85D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A7A23B436FA008BB85D /* Montserrat-Bold.ttf */; };
 		D88B1A8123B436FB008BB85D /* Luciole-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A7B23B436FA008BB85D /* Luciole-Regular.ttf */; };
+		B01D10C10E0000000000000001 /* Luciole-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B01D10C10E0000000000000002 /* Luciole-Bold.ttf */; };
 		D88B1A8223B436FB008BB85D /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A7C23B436FB008BB85D /* Montserrat-SemiBold.ttf */; };
 		D88B1A9323B43D9A008BB85D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D88B1A9523B43D9A008BB85D /* Localizable.strings */; };
 		D88B1A9823B43E1D008BB85D /* RotorViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B1A9723B43E1D008BB85D /* RotorViewControllerTests.swift */; };
@@ -56,7 +57,6 @@
 		D88E36FD244EE84000872550 /* LoadLevelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88E36FB244EE84000872550 /* LoadLevelCollectionViewCell.xib */; };
 		D88E36FF244EE9C000872550 /* UICollectionViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E36FE244EE9C000872550 /* UICollectionViewCell+Extensions.swift */; };
 		D88E3701244EF21C00872550 /* LoadLevelCollectionViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E3700244EF21C00872550 /* LoadLevelCollectionViewCellHeader.swift */; };
-		A1E5C0DE0000000000000011 /* LoadLevelVersionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000012 /* LoadLevelVersionFooter.swift */; };
 		D88E3703244F173100872550 /* LevelBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E3702244F173100872550 /* LevelBaseViewController.swift */; };
 		D896208A2425110C00CD81B9 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89620892425110C00CD81B9 /* Strings.swift */; };
 		D8C2C0ED23C0CD8500F8BE78 /* ChapterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2C0EC23C0CD8500F8BE78 /* ChapterViewControllerTests.swift */; };
@@ -85,9 +85,6 @@
 		FAC913BD730F4A31B262E1CE /* EscapeFromBlindnessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867CE172D9312794687982A /* EscapeFromBlindnessUITests.swift */; };
 		A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000002 /* AITaskerCapture.swift */; };
 		A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */; };
-		A1E5C0DE0000000000000005 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000006 /* AppVersion.swift */; };
-		A1E5C0DE0000000000000007 /* AppVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000008 /* AppVersionTests.swift */; };
-		A1E5C0DE0000000000000009 /* HomeVersionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE000000000000000A /* HomeVersionUITests.swift */; };
 		A1E5C0DE000000000000000B /* HomeTitleBoldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */; };
 		A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */; };
 /* End PBXBuildFile section */
@@ -118,9 +115,6 @@
 		B867CE172D9312794687982A /* EscapeFromBlindnessUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EscapeFromBlindnessUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000002 /* AITaskerCapture.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AITaskerCapture.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LevelSelectionUITests.swift; sourceTree = "<group>"; };
-		A1E5C0DE0000000000000006 /* AppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersion.swift; sourceTree = "<group>"; };
-		A1E5C0DE0000000000000008 /* AppVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionTests.swift; sourceTree = "<group>"; };
-		A1E5C0DE000000000000000A /* HomeVersionUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeVersionUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeTitleBoldUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccessibiliteVersionEtSousTitreUITests.swift; sourceTree = "<group>"; };
 		C38D3490990697920F57664A /* EscapeFromBlindnessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EscapeFromBlindnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +157,7 @@
 		D88B1A7923B436F9008BB85D /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		D88B1A7A23B436FA008BB85D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D88B1A7B23B436FA008BB85D /* Luciole-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Luciole-Regular.ttf"; sourceTree = "<group>"; };
+		B01D10C10E0000000000000002 /* Luciole-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Luciole-Bold.ttf"; sourceTree = "<group>"; };
 		D88B1A7C23B436FB008BB85D /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		D88B1A9423B43D9A008BB85D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D88B1A9623B43D9D008BB85D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -174,7 +169,6 @@
 		D88E36FB244EE84000872550 /* LoadLevelCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadLevelCollectionViewCell.xib; sourceTree = "<group>"; };
 		D88E36FE244EE9C000872550 /* UICollectionViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		D88E3700244EF21C00872550 /* LoadLevelCollectionViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadLevelCollectionViewCellHeader.swift; sourceTree = "<group>"; };
-		A1E5C0DE0000000000000012 /* LoadLevelVersionFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadLevelVersionFooter.swift; sourceTree = "<group>"; };
 		D88E3702244F173100872550 /* LevelBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBaseViewController.swift; sourceTree = "<group>"; };
 		D89620892425110C00CD81B9 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		D8C2C0EC23C0CD8500F8BE78 /* ChapterViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewControllerTests.swift; sourceTree = "<group>"; };
@@ -268,7 +262,6 @@
 				B867CE172D9312794687982A /* EscapeFromBlindnessUITests.swift */,
 				A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */,
 				A1E5C0DE0000000000000002 /* AITaskerCapture.swift */,
-				A1E5C0DE000000000000000A /* HomeVersionUITests.swift */,
 				A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */,
 				A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */,
 			);
@@ -297,7 +290,6 @@
 				D847609F23C1499E00DF4825 /* RotorLevel.swift */,
 				D847609D23C1494700DF4825 /* OpenQuestionLevel.swift */,
 				D84760A123C149F300DF4825 /* SearchLevel.swift */,
-				A1E5C0DE0000000000000006 /* AppVersion.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -359,7 +351,6 @@
 				D824CECC2423958500DD52CB /* AppCoordinator+SoundsTests.swift */,
 				D84760AA23C14B5A00DF4825 /* LocalLevelFactoryTests.swift */,
 				D88E36F1244EE20100872550 /* LoadLevelViewControllerTests.swift */,
-				A1E5C0DE0000000000000008 /* AppVersionTests.swift */,
 			);
 			path = EscapeFromBlindnessTests;
 			sourceTree = "<group>";
@@ -420,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				D88B1A7B23B436FA008BB85D /* Luciole-Regular.ttf */,
+				B01D10C10E0000000000000002 /* Luciole-Bold.ttf */,
 				D88B1A7823B436F9008BB85D /* Montserrat-Black.ttf */,
 				D88B1A7A23B436FA008BB85D /* Montserrat-Bold.ttf */,
 				D88B1A7723B436F9008BB85D /* Montserrat-ExtraBold.ttf */,
@@ -447,7 +439,6 @@
 				D88E36FA244EE84000872550 /* LoadLevelCollectionViewCell.swift */,
 				D88E36FB244EE84000872550 /* LoadLevelCollectionViewCell.xib */,
 				D88E3700244EF21C00872550 /* LoadLevelCollectionViewCellHeader.swift */,
-				A1E5C0DE0000000000000012 /* LoadLevelVersionFooter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -631,6 +622,7 @@
 				D88B1A7D23B436FB008BB85D /* Montserrat-ExtraBold.ttf in Resources */,
 				D88B1A9323B43D9A008BB85D /* Localizable.strings in Resources */,
 				D88B1A8123B436FB008BB85D /* Luciole-Regular.ttf in Resources */,
+				B01D10C10E0000000000000001 /* Luciole-Bold.ttf in Resources */,
 				D8C2C10623C0D52C00F8BE78 /* VoiceOverAlertViewController.xib in Resources */,
 				D88B19E823B42552008BB85D /* Assets.xcassets in Resources */,
 				D8CF561A24314BFC00D9B59F /* wind-sand.mp3 in Resources */,
@@ -740,7 +732,6 @@
 				FAC913BD730F4A31B262E1CE /* EscapeFromBlindnessUITests.swift in Sources */,
 				A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */,
 				A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */,
-				A1E5C0DE0000000000000009 /* HomeVersionUITests.swift in Sources */,
 				A1E5C0DE000000000000000B /* HomeTitleBoldUITests.swift in Sources */,
 				A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */,
 			);
@@ -753,7 +744,6 @@
 				D88B1A4923B42DBD008BB85D /* UserDefaultKeys.swift in Sources */,
 				D83B70E923C4933B00516628 /* ClosedQuestionViewController.swift in Sources */,
 				D88E3701244EF21C00872550 /* LoadLevelCollectionViewCellHeader.swift in Sources */,
-				A1E5C0DE0000000000000011 /* LoadLevelVersionFooter.swift in Sources */,
 				D88B1A4523B4291D008BB85D /* AppCoordinator.swift in Sources */,
 				D847609723C146E800DF4825 /* GameFlow.swift in Sources */,
 				D8458EDA23F9FAFF006FA087 /* NavigationController.swift in Sources */,
@@ -792,7 +782,6 @@
 				D88E3703244F173100872550 /* LevelBaseViewController.swift in Sources */,
 				D88E36FF244EE9C000872550 /* UICollectionViewCell+Extensions.swift in Sources */,
 				6CAEFF39AC6A2F9D4852CF54 /* SceneDelegate.swift in Sources */,
-				A1E5C0DE0000000000000005 /* AppVersion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,7 +803,6 @@
 				D84760AB23C14B5A00DF4825 /* LocalLevelFactoryTests.swift in Sources */,
 				D88B1A7323B4337A008BB85D /* ClosedQuestionLevelViewControllerTests.swift in Sources */,
 				D8C2C10823C0DEBD00F8BE78 /* AppCoordinatorSpy.swift in Sources */,
-				A1E5C0DE0000000000000007 /* AppVersionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
