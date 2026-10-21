@@ -24,6 +24,7 @@ final class ChoixNiveauVerrouilleVoiceOverUITests: XCTestCase {
         let lockedLevel = app.descendants(matching: .any)[lockedLevelIdentifier]
         XCTAssertTrue(lockedLevel.waitForExistence(timeout: timeout))
 
+        XCTAssertEqual(lockedLevel.identifier, lockedLevelIdentifier)
         XCTAssertTrue(lockedLevel.label.contains("verrouillé"), lockedLevel.label)
         XCTAssertEqual(lockedLevel.label, "Niveau 3, verrouillé")
         XCTAssertNotEqual(lockedLevel.elementType, .button)
@@ -31,7 +32,7 @@ final class ChoixNiveauVerrouilleVoiceOverUITests: XCTestCase {
 
         XCTAssertTrue(app.buttons[unlockedLevelIdentifier].exists)
 
-        AITaskerCapture.captureScreen(nodeId: "ChoixNiveau", action: "Niveau verrouillé vérifié")
+        AITaskerCapture.captureScreen(nodeId: "ChoixNiveau", action: "Écran des niveaux affiché, niveau verrouillé visible")
     }
 
 }
