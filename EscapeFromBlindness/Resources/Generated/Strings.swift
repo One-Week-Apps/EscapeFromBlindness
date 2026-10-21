@@ -36,6 +36,8 @@ internal enum L10n {
   internal static let chapter = L10n.tr("Localizable", "chapter", fallback: "Chapter")
   /// Chapter 1
   internal static let chapter1Description = L10n.tr("Localizable", "chapter1_description", fallback: "Nepal: year 1976, You approach an ancient ice cave In Nepal. You just reached the summit of the mountain. There is a huge door before of you. When VoiceOver is turned on, you can go from one text to the other by touching it directly or sliding left or right with your finger. Double tap to validate or select something.")
+  /// Ice Cave
+  internal static let chapter1Title = L10n.tr("Localizable", "chapter1_title", fallback: "Ice Cave")
   /// There are bear footprints on the floor
   internal static let chapter2Cq1a1 = L10n.tr("Localizable", "chapter2_cq1a1", fallback: "There are bear footprints on the floor")
   /// Wolves are standing close to you
@@ -62,6 +64,8 @@ internal enum L10n {
   internal static let chapter2Cq2aa4 = L10n.tr("Localizable", "chapter2_cq2aa4", fallback: "A R R O W")
   /// Chapter 2
   internal static let chapter2Description = L10n.tr("Localizable", "chapter2_description", fallback: "After exploring further into the mountain, You reach an old abandonned city which was probably visited by an old Nepalese civilization. There are several doors locked with a lock safe mechanism in front of you. You need to find the code of each of them based on the clues you find in the room. When VoiceOver is turned on, you can use the rotor to access the menu. Draw a circle with two fingers on screen as if you were turning a dial. You can then go from one option to the other. Continue to turn your fingers to hear about answer options, until you hear the option. Drag your finger up or down to validate.")
+  /// The Lost City
+  internal static let chapter2Title = L10n.tr("Localizable", "chapter2_title", fallback: "The Lost City")
   /// bow
   internal static let chapter3A1 = L10n.tr("Localizable", "chapter3_a1", fallback: "bow")
   /// no
@@ -80,6 +84,8 @@ internal enum L10n {
   internal static let chapter3Q3 = L10n.tr("Localizable", "chapter3_q3", fallback: "Well done. Let's see. In which country are we located?")
   /// And the last question. Did you fall into some trap during your journey?
   internal static let chapter3Q4 = L10n.tr("Localizable", "chapter3_q4", fallback: "And the last question. Did you fall into some trap during your journey?")
+  /// Hidden Valley
+  internal static let chapter3Title = L10n.tr("Localizable", "chapter3_title", fallback: "Hidden Valley")
   /// activate it
   internal static let chapter4Cq1a1 = L10n.tr("Localizable", "chapter4_cq1a1", fallback: "activate it")
   /// leave it there
@@ -118,6 +124,12 @@ internal enum L10n {
   internal static let chapter4L1desc = L10n.tr("Localizable", "chapter4_l1desc", fallback: "You approach the first small room with a lot of jewelry on it, it looks like each of them represents an animal.")
   /// You approach the second room with 3 blocks incrusted in the wall. You can probably pull them. A beautiful painting of the mountain is represented on the ceiling.
   internal static let chapter4L2desc = L10n.tr("Localizable", "chapter4_l2desc", fallback: "You approach the second room with 3 blocks incrusted in the wall. You can probably pull them. A beautiful painting of the mountain is represented on the ceiling.")
+  /// The Hidden Tomb
+  internal static let chapter4Title = L10n.tr("Localizable", "chapter4_title", fallback: "The Hidden Tomb")
+  /// Chapter %d: %@
+  internal static func chapterHeading(_ p1: Int, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "chapter_heading", p1, String(describing: p2), fallback: "Chapter %d: %@")
+  }
   /// complete
   internal static let complete = L10n.tr("Localizable", "complete", fallback: "complete")
   /// continue

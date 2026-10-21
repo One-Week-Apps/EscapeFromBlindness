@@ -44,10 +44,15 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private static let sideMargin: CGFloat = 16
     private static let subtitleTopSpacing: CGFloat = 8
     private static let subtitleBottomSpacing: CGFloat = 16
+    private static let titleLineHeightMultiple: CGFloat = 1.2
     private static let chapterTitleIdentifierPrefix = "levelSelection.chapterTitle."
     fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LevelSelection")
 
     private lazy var viewModel = LevelSelectionViewModel(chapters: chapters)
+
+    static func titleFont(compatibleWith traitCollection: UITraitCollection? = nil) -> UIFont {
+        return UIFontMetrics(forTextStyle: .title1).scaledFont(for: .custom(style: .lucioleBold, size: 28), compatibleWith: traitCollection)
+    }
 
     var subtitle: String {
         return viewModel.subtitle
@@ -56,7 +61,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
     let subtitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: .custom(style: .lucioleBold, size: 17))
+        label.font = LoadLevelViewController.titleFont()
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -89,10 +94,14 @@ class LoadLevelViewController: UIViewController, Coordinated {
         setupSubtitle()
         setupCollectionView()
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize(width: collectionView.bounds.width, height: 80)
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+            // Les en-têtes portent des polices calculées pour la taille de texte : on les reconstruit.
+            collectionView.reloadData()
+            collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -133,7 +142,10 @@ class LoadLevelViewController: UIViewController, Coordinated {
     }
 
     private func setupSubtitle() {
-        self.subtitleLabel.text = self.subtitle
+        // Le point des « i » de Luciole Bold dépasse la hauteur de ligne déclarée par la fonte : sans marge, il est coupé.
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineHeightMultiple = LoadLevelViewController.titleLineHeightMultiple
+        self.subtitleLabel.attributedText = NSAttributedString(string: self.subtitle, attributes: [.paragraphStyle: paragraph])
 
         self.view.addSubview(self.subtitleLabel)
         self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -182,6 +194,21 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
         return CGSize(width: side, height: side)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let width = collectionView.bounds.width
+        let chapter = self.chapters[section]
+        let height = LoadLevelCollectionViewCellHeader.height(number: chapterNumber(chapter), name: chapter.title ?? "", width: width, traitCollection: self.traitCollection)
+        return CGSize(width: width, height: height)
+    }
+
+    private func chapterNumber(_ chapter: Chapter) -> String {
+        return "\(L10n.chapter) \(chapter.index)"
+    }
+
+    private func chapterHeading(_ chapter: Chapter) -> String {
+        return L10n.chapterHeading(chapter.index, chapter.title ?? "")
+    }
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
@@ -192,9 +219,7 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
             ) as! LoadLevelCollectionViewCellHeader
             
             let chapter = self.chapters[indexPath.section]
-            header.titleLabel.text = "\(L10n.chapter) \(chapter.index): \(chapter.title ?? "")"
-            header.titleLabel.textColor = .white
-            header.titleLabel.font = .custom(style: .montserratExtraBold, size: 20.0)
+            header.configure(number: chapterNumber(chapter), name: chapter.title ?? "", accessibilityLabel: chapterHeading(chapter))
             header.titleLabel.accessibilityTraits = .header
             header.titleLabel.accessibilityIdentifier = "\(LoadLevelViewController.chapterTitleIdentifierPrefix)\(chapter.index)"
             header.setNeedsLayout()

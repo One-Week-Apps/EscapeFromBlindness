@@ -150,3 +150,8 @@
 
 "chapter4_cq2desc3" = "Le bloc sur ta droite.";
 
+"chapter_heading" = "Chapitre %d : %@";
+"chapter1_title" = "La Grotte de glace";
+"chapter2_title" = "La Cité perdue";
+"chapter3_title" = "La Vallée cachée";
+"chapter4_title" = "Le Tombeau caché";
