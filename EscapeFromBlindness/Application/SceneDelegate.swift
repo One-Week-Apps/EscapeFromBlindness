@@ -41,6 +41,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         #endif
         appCoordinator.start(window: window)
+        #if DEBUG
+        // Tests UI : ouvre l'écran de fin de jeu (instructions + bouton Rejouer) sans finir toute la partie.
+        if ProcessInfo.processInfo.arguments.contains("-UITestGameEnd") {
+            appCoordinator.presentIntroController(.gameEnd)
+        }
+        #endif
         window.rootViewController = appCoordinator.rootViewController
         window.makeKeyAndVisible()
     }

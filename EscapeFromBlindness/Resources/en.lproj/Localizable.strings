@@ -27,6 +27,7 @@
 "F" = "This can be a completely new story based on the game modes you just played!";
 
 "replay" = "Touch to play again !";
+"replay_hint" = "Reads the instructions again from the start";
 
 //======================================================
 /* Voice Over Instructions */

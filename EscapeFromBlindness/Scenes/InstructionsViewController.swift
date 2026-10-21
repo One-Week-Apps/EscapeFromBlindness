@@ -15,6 +15,8 @@ class InstructionsViewController: UIViewController, Coordinated {
         case gameEnd
     }
     var scenario: Scenario!
+
+    static let replayButtonIdentifier = "instructions.replayButton"
     
     var interactor: InstructionsInteractorProtocol? = InstructionsInteractor()
     private var instructions: [String] = []
@@ -30,6 +32,8 @@ class InstructionsViewController: UIViewController, Coordinated {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.replayButton.setTitle(L10n.replay, for: .normal)
+        self.replayButton.accessibilityHint = L10n.replayHint
+        self.replayButton.accessibilityIdentifier = InstructionsViewController.replayButtonIdentifier
         
         guard let instructions = scenario == .intro ? interactor?.fetchIntroInstructions() : interactor?.fetchGameEndInstructions() else {
             return
