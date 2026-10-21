@@ -86,6 +86,8 @@
 		A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000002 /* AITaskerCapture.swift */; };
 		A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */; };
 		A1E5C0DE000000000000000B /* HomeTitleBoldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */; };
+		A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */; };
+		A1E5C0DE0000000000000023 /* InstructionsRejouerHintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */; };
 		A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +118,8 @@
 		A1E5C0DE0000000000000002 /* AITaskerCapture.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AITaskerCapture.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LevelSelectionUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeTitleBoldUITests.swift; sourceTree = "<group>"; };
+		A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintUITests.swift; sourceTree = "<group>"; };
+		A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintTests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccessibiliteVersionEtSousTitreUITests.swift; sourceTree = "<group>"; };
 		C38D3490990697920F57664A /* EscapeFromBlindnessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EscapeFromBlindnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC6B9E3AF32499B14C7AF4DC /* Pods-EscapeFromBlindnessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EscapeFromBlindnessTests.debug.xcconfig"; path = "Target Support Files/Pods-EscapeFromBlindnessTests/Pods-EscapeFromBlindnessTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 				A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */,
 				A1E5C0DE0000000000000002 /* AITaskerCapture.swift */,
 				A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */,
+				A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */,
 				A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */,
 			);
 			name = EscapeFromBlindnessUITests;
@@ -351,6 +356,7 @@
 				D824CECC2423958500DD52CB /* AppCoordinator+SoundsTests.swift */,
 				D84760AA23C14B5A00DF4825 /* LocalLevelFactoryTests.swift */,
 				D88E36F1244EE20100872550 /* LoadLevelViewControllerTests.swift */,
+				A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */,
 			);
 			path = EscapeFromBlindnessTests;
 			sourceTree = "<group>";
@@ -733,6 +739,7 @@
 				A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */,
 				A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */,
 				A1E5C0DE000000000000000B /* HomeTitleBoldUITests.swift in Sources */,
+				A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */,
 				A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -803,6 +810,7 @@
 				D84760AB23C14B5A00DF4825 /* LocalLevelFactoryTests.swift in Sources */,
 				D88B1A7323B4337A008BB85D /* ClosedQuestionLevelViewControllerTests.swift in Sources */,
 				D8C2C10823C0DEBD00F8BE78 /* AppCoordinatorSpy.swift in Sources */,
+				A1E5C0DE0000000000000023 /* InstructionsRejouerHintTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

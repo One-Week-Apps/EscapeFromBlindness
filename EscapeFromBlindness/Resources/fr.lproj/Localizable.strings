@@ -27,6 +27,7 @@
 "F" = "Cela peut être un scénario totalement différent mais qui reste basé sur les modes de jeu auxquels tu as pu jouer !";
 
 "replay" = "Rejouer !";
+"replay_hint" = "Relit les instructions depuis le début";
 
 //======================================================
 /* Voice Over Instructions */
