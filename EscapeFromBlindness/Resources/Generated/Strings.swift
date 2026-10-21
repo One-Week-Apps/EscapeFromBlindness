@@ -28,10 +28,6 @@ internal enum L10n {
   internal static let _8 = L10n.tr("Localizable", "8", fallback: "Good luck explorer!")
   /// Conclusion Instructions
   internal static let a = L10n.tr("Localizable", "A", fallback: "Congratulations!")
-  /// Version
-  internal static let appVersion = L10n.tr("Localizable", "app_version", fallback: "Version")
-  /// build
-  internal static let appVersionBuild = L10n.tr("Localizable", "app_version_build", fallback: "build")
   /// You successfully managed to go through all game levels!
   internal static let b = L10n.tr("Localizable", "B", fallback: "You successfully managed to go through all game levels!")
   /// We hope you enjoyed this game as much as we enjoyed developing it!
