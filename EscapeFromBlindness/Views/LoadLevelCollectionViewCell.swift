@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import os
 
 class LoadLevelCollectionViewCell: UICollectionViewCell {
 
@@ -13,6 +14,8 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
     
     private static let completedColor = UIColor(red: 80/255, green: 144/255, blue: 6/255, alpha: 1)
     private static let lockedColor = UIColor(white: 0.18, alpha: 1)
+    private static let levelIdentifierPrefix = "levelSelection.level."
+    private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "ChoixNiveau")
 
     enum State {
         case completed
@@ -37,7 +40,8 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
     func configure(chapterIndex: Int, levelIndex: Int, state: State) {
         let displayedChapterIndex = chapterIndex + 1
         let displayedLevelIndex = levelIndex + 1
-        
+        self.levelLabel.accessibilityIdentifier = "\(LoadLevelCollectionViewCell.levelIdentifierPrefix)\(displayedChapterIndex).\(displayedLevelIndex)"
+
         switch state {
         case .completed:
             self.levelLabel.text = "\(displayedLevelIndex)"
@@ -53,7 +57,10 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
             self.levelLockedImageView.isHidden = true
         case .locked:
             self.levelLabel.text = " "
-            self.levelLabel.accessibilityLabel = "\(L10n.level) \(displayedLevelIndex) (\(L10n.locked))"
+            // Toucher un niveau verrouillé ne déclenche rien : VoiceOver le lit comme un texte, nom puis état.
+            self.levelLabel.accessibilityLabel = L10n.levelLockedAccessibility(displayedLevelIndex)
+            self.levelLabel.accessibilityTraits = .staticText
+            LoadLevelCollectionViewCell.logger.debug("Locked state applied to level \(displayedLevelIndex) of chapter \(displayedChapterIndex)")
             
             self.containerView.backgroundColor = LoadLevelCollectionViewCell.lockedColor
             self.levelLockedImageView.isHidden = false

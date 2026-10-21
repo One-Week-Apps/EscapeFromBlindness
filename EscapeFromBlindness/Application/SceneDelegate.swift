@@ -20,8 +20,15 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let chapters = LocalLevelFactory.build()
         signposter.endInterval("LoadLevels", loadLevelsState)
         // integer(forKey:) vaut 0 si la clé manque, et lit aussi la progression passée en argument de lancement (tests UI).
-        let currentChapterIndex = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentChapterIndex.rawValue)
-        let currentLevelIndex = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentLevelIndex.rawValue)
+        var currentChapterIndex = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentChapterIndex.rawValue)
+        var currentLevelIndex = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentLevelIndex.rawValue)
+        #if DEBUG
+        // Tests UI : ouvre directement le Choix des niveaux, niveau 1 du chapitre 1 en cours et les suivants verrouillés.
+        if ProcessInfo.processInfo.arguments.contains("-UITestChoixNiveau") {
+            currentChapterIndex = 1
+            currentLevelIndex = 0
+        }
+        #endif
 
         let gameFlow = GameFlow(
             chapters: chapters,
