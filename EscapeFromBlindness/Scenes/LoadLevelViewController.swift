@@ -146,6 +146,9 @@ class LoadLevelViewController: UIViewController, Coordinated {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineHeightMultiple = LoadLevelViewController.titleLineHeightMultiple
         self.subtitleLabel.attributedText = NSAttributedString(string: self.subtitle, attributes: [.paragraphStyle: paragraph])
+        // Texte attribué : VoiceOver lit le sous-titre tel quel, comme un en-tête.
+        self.subtitleLabel.isAccessibilityElement = true
+        self.subtitleLabel.accessibilityLabel = self.subtitle
 
         self.view.addSubview(self.subtitleLabel)
         self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false

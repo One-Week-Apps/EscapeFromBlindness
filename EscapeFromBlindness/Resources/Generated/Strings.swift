@@ -190,6 +190,8 @@ internal enum L10n {
   internal static let locked = L10n.tr("Localizable", "locked", fallback: "locked")
   /// Touch to play again !
   internal static let replay = L10n.tr("Localizable", "replay", fallback: "Touch to play again !")
+  /// Reads the instructions again from the start
+  internal static let replayHint = L10n.tr("Localizable", "replay_hint", fallback: "Reads the instructions again from the start")
   /// Voice Over Instructions
   internal static let vo1 = L10n.tr("Localizable", "vo1", fallback: "You are exploring an old tomb, as you are in the dark and have no torch left you do not see anything !\n\nPlease turn on VoiceOver to continue the game !\n\nFirst configure the accessibility shortcut in to allow you to turn on/off VoiceOver easily.\n\nThen go back to the app and turn on VoiceOver.\nDepending on your device, it will either be by pressing three times the lateral button or the home button.")
   /// Let's continue exploring !
