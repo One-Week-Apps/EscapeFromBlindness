@@ -38,12 +38,13 @@
 //======================================================
 "chapter" = "Chapitre";
 "complete" = "terminé";
-"locked" = "vérouillé";
+"locked" = "verrouillé";
 "continue" = "continuer";
 "go" = "Go !";
 "level" = "Niveau";
 "hint" = "indice";
 "level_selection_subtitle" = "Choisis ton niveau";
+"level_locked_accessibility" = "Niveau %d, verrouillé";
 "door_script" = "Une porte se situe en face de moi. Elle semble vérouillée par un cadenas circulaire. Je dois trouver le code.";
 
 /* Chapter 1 */

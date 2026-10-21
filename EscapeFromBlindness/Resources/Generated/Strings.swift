@@ -180,6 +180,10 @@ internal enum L10n {
   internal static let hint = L10n.tr("Localizable", "hint", fallback: "hint")
   /// Niveau
   internal static let level = L10n.tr("Localizable", "level", fallback: "Niveau")
+  /// Level %d, locked
+  internal static func levelLockedAccessibility(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "level_locked_accessibility", p1, fallback: "Level %d, locked")
+  }
   /// Choose your level
   internal static let levelSelectionSubtitle = L10n.tr("Localizable", "level_selection_subtitle", fallback: "Choose your level")
   /// locked

@@ -43,6 +43,7 @@
 "level" = "Niveau";
 "hint" = "hint";
 "level_selection_subtitle" = "Choose your level";
+"level_locked_accessibility" = "Level %d, locked";
 "door_script" = "A door stands in front of me. It seems to be locked. I need to find the code.";
 
 /* Chapter 1 */

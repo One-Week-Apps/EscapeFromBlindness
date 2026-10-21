@@ -86,6 +86,7 @@
 		A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000002 /* AITaskerCapture.swift */; };
 		A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */; };
 		A1E5C0DE000000000000000B /* HomeTitleBoldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */; };
+		A1E5C0DE0000000000001013 /* ChoixNiveauVerrouilleVoiceOverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */; };
 		A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */; };
 		A1E5C0DE0000000000000023 /* InstructionsRejouerHintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */; };
 		A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */; };
@@ -118,6 +119,7 @@
 		A1E5C0DE0000000000000002 /* AITaskerCapture.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AITaskerCapture.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LevelSelectionUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeTitleBoldUITests.swift; sourceTree = "<group>"; };
+		A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChoixNiveauVerrouilleVoiceOverUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintTests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccessibiliteVersionEtSousTitreUITests.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */,
 				A1E5C0DE0000000000000002 /* AITaskerCapture.swift */,
 				A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */,
+				A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */,
 				A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */,
 				A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */,
 			);
@@ -739,6 +742,7 @@
 				A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */,
 				A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */,
 				A1E5C0DE000000000000000B /* HomeTitleBoldUITests.swift in Sources */,
+				A1E5C0DE0000000000001013 /* ChoixNiveauVerrouilleVoiceOverUITests.swift in Sources */,
 				A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */,
 				A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */,
 			);

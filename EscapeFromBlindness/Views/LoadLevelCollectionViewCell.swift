@@ -13,6 +13,7 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
     
     private static let completedColor = UIColor(red: 80/255, green: 144/255, blue: 6/255, alpha: 1)
     private static let lockedColor = UIColor(white: 0.18, alpha: 1)
+    private static let levelIdentifierPrefix = "levelSelection.level."
 
     enum State {
         case completed
@@ -37,24 +38,29 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
     func configure(chapterIndex: Int, levelIndex: Int, state: State) {
         let displayedChapterIndex = chapterIndex + 1
         let displayedLevelIndex = levelIndex + 1
-        
+        self.levelLabel.accessibilityIdentifier = "\(LoadLevelCollectionViewCell.levelIdentifierPrefix)\(displayedChapterIndex).\(displayedLevelIndex)"
+
         switch state {
         case .completed:
             self.levelLabel.text = "\(displayedLevelIndex)"
             self.levelLabel.accessibilityLabel = "\(L10n.level) \(displayedLevelIndex) (\(L10n.complete))"
-            
+            self.levelLabel.accessibilityTraits = .button
+
             self.containerView.backgroundColor = LoadLevelCollectionViewCell.completedColor
             self.levelLockedImageView.isHidden = true
         case .unlocked:
             self.levelLabel.text = "\(displayedLevelIndex)"
             self.levelLabel.accessibilityLabel = "\(L10n.continue) \(L10n.level) \(displayedLevelIndex) \(L10n.chapter) \(displayedChapterIndex)"
-            
+            self.levelLabel.accessibilityTraits = .button
+
             self.containerView.backgroundColor = .white
             self.levelLockedImageView.isHidden = true
         case .locked:
             self.levelLabel.text = " "
-            self.levelLabel.accessibilityLabel = "\(L10n.level) \(displayedLevelIndex) (\(L10n.locked))"
-            
+            // Toucher un niveau verrouillé ne déclenche rien : VoiceOver le lit comme un texte, nom puis état.
+            self.levelLabel.accessibilityLabel = L10n.levelLockedAccessibility(displayedLevelIndex)
+            self.levelLabel.accessibilityTraits = .staticText
+
             self.containerView.backgroundColor = LoadLevelCollectionViewCell.lockedColor
             self.levelLockedImageView.isHidden = false
         }
