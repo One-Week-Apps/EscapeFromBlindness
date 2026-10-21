@@ -36,6 +36,12 @@ final class AccessibiliteVersionEtSousTitreUITests: XCTestCase {
         XCTAssertFalse(app.buttons[versionIdentifier].exists, "La version ne doit pas être annoncée comme un bouton")
         AITaskerCapture.captureScreen(nodeId: "Accueil", action: "Version lue comme un texte sur l'accueil")
 
+        // L'écran de chargement est chargé quand sa grille affiche la case du niveau 1.
+        // On ne la touche pas : le toucher ouvre le niveau et quitte cet écran.
+        let firstLevel = app.collectionViews.firstMatch.cells.element(boundBy: 0)
+        XCTAssertTrue(firstLevel.waitForExistence(timeout: timeout))
+        XCTAssertTrue(firstLevel.isHittable)
+
         let subtitle = app.descendants(matching: .any)[subtitleIdentifier]
         XCTAssertTrue(subtitle.waitForExistence(timeout: timeout))
         AITaskerCapture.captureScreen(nodeId: "ChargementNiveau", action: "Sous-titre de l'écran de chargement de niveau présent")
