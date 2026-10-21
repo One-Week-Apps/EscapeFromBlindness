@@ -52,6 +52,8 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private static let sideMargin: CGFloat = 16
     private static let subtitleTopSpacing: CGFloat = 8
     private static let subtitleBottomSpacing: CGFloat = 16
+    /// Valeur négative : remplit le glyphe et l'épaissit, équivalent visuel d'un semibold.
+    private static let subtitleBoldStrokeWidth: CGFloat = -4
     private static let versionSpacing: CGFloat = 8
     private static let chapterTitleIdentifierPrefix = "levelSelection.chapterTitle."
     fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LevelSelection")
@@ -174,7 +176,12 @@ class LoadLevelViewController: UIViewController, Coordinated {
     }
 
     private func setupSubtitle() {
-        self.subtitleLabel.text = self.subtitle
+        // Luciole n'existe qu'en Regular dans l'app : le gras est obtenu par un contour plein de la couleur du texte.
+        // Exprimée en % de la taille de police, l'épaisseur suit Dynamic Type ; police, couleur et libellé VoiceOver sont inchangés.
+        self.subtitleLabel.attributedText = NSAttributedString(string: self.subtitle, attributes: [
+            .strokeColor: self.subtitleLabel.textColor ?? UIColor.white,
+            .strokeWidth: LoadLevelViewController.subtitleBoldStrokeWidth
+        ])
 
         self.view.addSubview(self.subtitleLabel)
         self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
