@@ -25,7 +25,7 @@ class InstructionsViewController: UIViewController, Coordinated {
         return self.instructions[safe: self.currentInstructionIndex]
     }
     
-    @IBOutlet weak var instructionsButton: UIButton!
+    @IBOutlet weak var instructionsLabel: UILabel!
     
     var timer: Timer?
     
@@ -41,12 +41,12 @@ class InstructionsViewController: UIViewController, Coordinated {
         
         self.instructions = instructions
         if let firstInstruction = instructions.first {
-            self.instructionsButton.setTitle(firstInstruction, for: .normal)
+            self.instructionsLabel.text = firstInstruction
         }
-        
+
         EscapeFromBlindnessAccessibility.shared.post(
             notification: .layoutChanged,
-            argument: self.instructionsButton
+            argument: self.instructionsLabel
         )
         
         startInstructionsUpdateTimer()
@@ -54,9 +54,9 @@ class InstructionsViewController: UIViewController, Coordinated {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        EscapeFromBlindnessAccessibility.shared.post(notification: .layoutChanged, argument: self.instructionsButton)
+        EscapeFromBlindnessAccessibility.shared.post(notification: .layoutChanged, argument: self.instructionsLabel)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopInstructionsUpdateTimer()
@@ -98,13 +98,13 @@ class InstructionsViewController: UIViewController, Coordinated {
     private func setInstructionsText(_ text: String) {
         let duration = 0.5
         UIView.animate(withDuration: duration, animations: {
-            self.instructionsButton.alpha = 0
+            self.instructionsLabel.alpha = 0
         }, completion: { _ in
-            self.instructionsButton.setTitle(text, for: .normal)
+            self.instructionsLabel.text = text
             UIView.animate(withDuration: duration) {
-                self.instructionsButton.alpha = 1
+                self.instructionsLabel.alpha = 1
             }
-            EscapeFromBlindnessAccessibility.shared.post(notification: .layoutChanged, argument: self.instructionsButton)
+            EscapeFromBlindnessAccessibility.shared.post(notification: .layoutChanged, argument: self.instructionsLabel)
         })
         
     }

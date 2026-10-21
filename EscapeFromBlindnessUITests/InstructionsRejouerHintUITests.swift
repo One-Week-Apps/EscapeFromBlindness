@@ -11,6 +11,7 @@ final class InstructionsRejouerHintUITests: XCTestCase {
     private let timeout: TimeInterval = 45
     private let replayButtonIdentifier = "instructions.replayButton"
     private let expectedLabel = "Rejouer !"
+    private let lastParagraph = "Cela peut être un scénario totalement différent mais qui reste basé sur les modes de jeu auxquels tu as pu jouer !"
 
     override func setUp() {
         continueAfterFailure = false
@@ -29,17 +30,19 @@ final class InstructionsRejouerHintUITests: XCTestCase {
         return app
     }
 
-    func testIndiceVoiceOverDuBoutonRejouer() {
+    func testRejouerAUnIndiceVoiceOver() {
         let app = launchInstructions()
 
         let replayButton = app.buttons[replayButtonIdentifier]
         XCTAssertTrue(replayButton.waitForExistence(timeout: timeout))
-        XCTAssertTrue(replayButton.exists)
         XCTAssertEqual(replayButton.identifier, replayButtonIdentifier)
         XCTAssertEqual(replayButton.label, expectedLabel)
         // XCUITest n'expose pas accessibilityHint : la valeur est couverte par InstructionsRejouerHintTests.
 
-        AITaskerCapture.captureScreen(nodeId: "Instructions", action: "Écran des instructions affiché avec le bouton Rejouer")
+        XCTAssertTrue(app.staticTexts[lastParagraph].exists)
+        XCTAssertFalse(app.buttons[lastParagraph].exists)
+
+        AITaskerCapture.captureScreen(nodeId: "Instructions", action: "Écran des instructions affiché, bouton Rejouer avec indice VoiceOver")
     }
 
 }

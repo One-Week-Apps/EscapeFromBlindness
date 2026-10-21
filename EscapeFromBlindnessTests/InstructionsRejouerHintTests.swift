@@ -56,6 +56,15 @@ final class InstructionsRejouerHintTests: XCTestCase {
         XCTAssertEqual(L10n.replayHint, appBundle.localizedString(forKey: key, value: missing, table: "Localizable"))
     }
 
+    func test_instructionsParagraph_isStaticText_notButton() {
+        let sut = makeSUT()
+
+        XCTAssertTrue(sut.instructionsLabel.isAccessibilityElement)
+        XCTAssertTrue(sut.instructionsLabel.accessibilityTraits.contains(.staticText))
+        XCTAssertFalse(sut.instructionsLabel.accessibilityTraits.contains(.button))
+        XCTAssertFalse(sut.instructionsLabel.isUserInteractionEnabled)
+    }
+
     func test_replayButton_keepsIdentifierAndTitle() {
         let sut = makeSUT()
 
