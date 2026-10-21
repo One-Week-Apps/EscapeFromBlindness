@@ -42,8 +42,6 @@
 "level" = "Niveau";
 "hint" = "hint";
 "level_selection_subtitle" = "Choose your level";
-"app_version" = "Version";
-"app_version_build" = "build";
 "door_script" = "A door stands in front of me. It seems to be locked. I need to find the code.";
 
 /* Chapter 1 */
@@ -150,3 +148,8 @@
 "chapter4_cq2desc2" = "The bloc in the middle.";
 
 "chapter4_cq2desc3" = "The bloc on the right.";
+"chapter_heading" = "Chapter %d: %@";
+"chapter1_title" = "Ice Cave";
+"chapter2_title" = "The Lost City";
+"chapter3_title" = "Hidden Valley";
+"chapter4_title" = "The Hidden Tomb";

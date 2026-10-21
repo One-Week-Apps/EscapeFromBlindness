@@ -162,6 +162,70 @@ class LoadLevelViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.subtitleLabel.adjustsFontForContentSizeCategory)
     }
 
+    func test_subtitleLabel_usesRealLucioleBoldWithoutStrokeImitation() {
+        layoutInLightMode()
+
+        XCTAssertNotNil(UIFont(name: "Luciole-Bold", size: 17), "Luciole-Bold.ttf doit être embarquée et déclarée dans UIAppFonts")
+        XCTAssertEqual(sut.subtitleLabel.font.fontName, "Luciole-Bold")
+        let attributes = sut.subtitleLabel.attributedText?.attributes(at: 0, effectiveRange: nil) ?? [:]
+        XCTAssertNil(attributes[.strokeWidth], "Le gras vient de la fonte, pas d'un contour")
+    }
+
+    func test_screenTitle_reservesLineHeightSoDotsAndAccentsAreNotClipped() {
+        layoutInLightMode()
+
+        let paragraph = sut.subtitleLabel.attributedText?.attribute(.paragraphStyle, at: 0, effectiveRange: nil) as? NSParagraphStyle
+        XCTAssertGreaterThanOrEqual(paragraph?.lineHeightMultiple ?? 0, 1.2)
+    }
+
+    func test_screenTitle_staysLargerThanChapterNames_atEveryTextSize() {
+        for category in [UIContentSizeCategory.large, .accessibilityExtraLarge, .accessibilityExtraExtraExtraLarge] {
+            let traits = UITraitCollection(preferredContentSizeCategory: category)
+            XCTAssertGreaterThan(LoadLevelViewController.titleFont(compatibleWith: traits).pointSize,
+                                 LoadLevelCollectionViewCellHeader.nameFont(compatibleWith: traits).pointSize, "\(category.rawValue)")
+        }
+    }
+
+    func test_chapterHeader_showsNumberThenNameAndReadsBothToVoiceOver() {
+        layoutInLightMode()
+
+        let label = chapterHeader(section: 0)?.titleLabel
+        let lines = label?.attributedText?.string.components(separatedBy: "\n")
+        XCTAssertEqual(lines, ["\(L10n.chapter) 1", L10n.chapter1Title])
+        XCTAssertEqual(label?.accessibilityLabel, L10n.chapterHeading(1, L10n.chapter1Title))
+        XCTAssertEqual(label?.numberOfLines, 0)
+        XCTAssertEqual(label?.adjustsFontSizeToFitWidth, false)
+    }
+
+    func test_chapterHeaderHeight_growsWithLargerTextSize() {
+        let standard = LoadLevelCollectionViewCellHeader.height(number: "Chapitre 3", name: "La Vallée cachée", width: 358,
+                                                                traitCollection: UITraitCollection(preferredContentSizeCategory: .large))
+        let large = LoadLevelCollectionViewCellHeader.height(number: "Chapitre 3", name: "La Vallée cachée", width: 358,
+                                                             traitCollection: UITraitCollection(preferredContentSizeCategory: .accessibilityExtraLarge))
+
+        XCTAssertGreaterThan(large, standard)
+    }
+
+    func test_chapterHeading_isTranslatedWithFrenchTypography() {
+        XCTAssertEqual(localized("chapter_heading", "fr").map { String(format: $0, 1, localized("chapter1_title", "fr") ?? "") },
+                       "Chapitre 1 : La Grotte de glace")
+        XCTAssertEqual(localized("chapter_heading", "en").map { String(format: $0, 1, localized("chapter1_title", "en") ?? "") },
+                       "Chapter 1: Ice Cave")
+    }
+
+    private func chapterHeader(section: Int) -> LoadLevelCollectionViewCellHeader? {
+        sut.collectionView.layoutIfNeeded()
+        return sut.collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader,
+                                                    at: IndexPath(item: 0, section: section)) as? LoadLevelCollectionViewCellHeader
+    }
+
+    private func localized(_ key: String, _ language: String) -> String? {
+        let bundle = Bundle(for: LoadLevelViewController.self)
+        guard let path = bundle.path(forResource: language, ofType: "lproj") else { return nil }
+        let value = Bundle(path: path)?.localizedString(forKey: key, value: nil, table: "Localizable")
+        return value == key ? nil : value
+    }
+
     func test_subtitleLabel_isAccessibleHeaderWithStableIdentifier() {
         layoutInLightMode()
 
