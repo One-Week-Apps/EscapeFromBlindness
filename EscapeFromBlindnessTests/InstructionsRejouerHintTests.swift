@@ -45,6 +45,17 @@ final class InstructionsRejouerHintTests: XCTestCase {
         XCTAssertEqual(sut.replayButton.accessibilityHint, L10n.replayHint)
     }
 
+    func test_replayButton_hint_isFrenchL10nEntryDeclaredInLocalizableStrings() {
+        let sut = makeSUT()
+        let appBundle = Bundle(for: InstructionsViewController.self)
+        let frStrings = appBundle.path(forResource: "Localizable", ofType: "strings", inDirectory: nil, forLocalization: "fr")
+            .flatMap { NSDictionary(contentsOfFile: $0) as? [String: String] }
+
+        XCTAssertEqual(frStrings?[key], "Relit les instructions depuis le début")
+        XCTAssertEqual(sut.replayButton.accessibilityHint, L10n.replayHint)
+        XCTAssertEqual(L10n.replayHint, appBundle.localizedString(forKey: key, value: missing, table: "Localizable"))
+    }
+
     func test_replayButton_keepsIdentifierAndTitle() {
         let sut = makeSUT()
 

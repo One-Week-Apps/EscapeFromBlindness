@@ -74,7 +74,6 @@ class LoadLevelViewController: UIViewController, Coordinated {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.isAccessibilityElement = true
         label.accessibilityTraits.insert(.header)
         label.accessibilityIdentifier = "levelSelectionSubtitle"
         return label
@@ -92,7 +91,6 @@ class LoadLevelViewController: UIViewController, Coordinated {
         label.overrideUserInterfaceStyle = .dark
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.isUserInteractionEnabled = false
-        label.isAccessibilityElement = true
         label.accessibilityTraits = .staticText
         label.accessibilityIdentifier = "homeVersionLabel"
         return label
