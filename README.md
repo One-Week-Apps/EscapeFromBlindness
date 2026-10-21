@@ -19,3 +19,7 @@ Help Jack the explorer to reach the exit of the cavern he is trapped in.
 
 [![Présentation du projet](https://img.youtube.com/vi/hMfEAhLY-z8/hqdefault.jpg)](https://www.youtube.com/watch?v=hMfEAhLY-z8)
 
+
+# Credits
+
+Luciole typeface © Laurent Bourcellier & Jonathan Perez, CTRDV — https://www.luciole-vision.com — licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (see `EscapeFromBlindness/Resources/Fonts/Luciole-LICENSE.txt`).

@@ -44,8 +44,6 @@
 "hint" = "indice";
 "level_selection_subtitle" = "Choisis ton niveau";
 "level_locked_accessibility" = "Niveau %d, verrouillé";
-"app_version" = "Version";
-"app_version_build" = "build";
 "door_script" = "Une porte se situe en face de moi. Elle semble vérouillée par un cadenas circulaire. Je dois trouver le code.";
 
 /* Chapter 1 */
@@ -153,3 +151,8 @@
 
 "chapter4_cq2desc3" = "Le bloc sur ta droite.";
 
+"chapter_heading" = "Chapitre %d : %@";
+"chapter1_title" = "La Grotte de glace";
+"chapter2_title" = "La Cité perdue";
+"chapter3_title" = "La Vallée cachée";
+"chapter4_title" = "Le Tombeau caché";

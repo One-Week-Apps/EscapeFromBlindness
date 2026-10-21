@@ -25,6 +25,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Luciole-Regular.ttf</string>
+		<string>Luciole-Bold.ttf</string>
 		<string>Montserrat-Black.ttf</string>
 		<string>Montserrat-Bold.ttf</string>
 		<string>Montserrat-Medium.ttf</string>

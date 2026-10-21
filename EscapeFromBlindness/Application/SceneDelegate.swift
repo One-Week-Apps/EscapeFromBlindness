@@ -41,12 +41,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-        #if DEBUG
-        // Tests UI : force le mode sombre sans toucher aux réglages du simulateur.
-        if ProcessInfo.processInfo.arguments.contains("-UITestDarkMode") {
-            window.overrideUserInterfaceStyle = .dark
-        }
-        #endif
         appCoordinator.start(window: window)
         window.rootViewController = appCoordinator.rootViewController
         window.makeKeyAndVisible()
