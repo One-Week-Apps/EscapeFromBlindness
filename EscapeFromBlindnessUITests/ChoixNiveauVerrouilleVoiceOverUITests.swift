@@ -32,7 +32,7 @@ final class ChoixNiveauVerrouilleVoiceOverUITests: XCTestCase {
 
         XCTAssertTrue(app.buttons[unlockedLevelIdentifier].exists)
 
-        AITaskerCapture.captureScreen(nodeId: "ChoixNiveau", action: "Écran des niveaux affiché, niveau verrouillé visible")
+        AITaskerCapture.captureScreen(nodeId: "ChoixNiveau", action: "Écran des niveaux affiché avec un niveau verrouillé")
     }
 
 }
