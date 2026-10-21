@@ -30,7 +30,10 @@ final class ChoixNiveauVerrouilleVoiceOverUITests: XCTestCase {
         XCTAssertNotEqual(lockedLevel.elementType, .button)
         XCTAssertFalse(app.buttons[lockedLevelIdentifier].exists)
 
-        XCTAssertTrue(app.buttons[unlockedLevelIdentifier].exists)
+        let unlockedLevel = app.buttons[unlockedLevelIdentifier]
+        XCTAssertTrue(unlockedLevel.exists)
+        XCTAssertEqual(unlockedLevel.label, "continuer Niveau 1 Chapitre 1")
+        XCTAssertFalse(unlockedLevel.label.contains("verrouillé"))
 
         AITaskerCapture.captureScreen(nodeId: "ChoixNiveau", action: "Écran des niveaux affiché avec un niveau verrouillé")
     }
