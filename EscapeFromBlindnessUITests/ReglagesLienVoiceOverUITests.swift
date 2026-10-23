@@ -9,7 +9,7 @@ final class ReglagesLienVoiceOverUITests: XCTestCase {
 
     private let timeout: TimeInterval = 10
     private let lienVoiceOverIdentifier = "reglagesLienVoiceOver"
-    private let aideVoiceOver = "Dans l'app Réglages, va dans Accessibilité puis VoiceOver pour activer le lecteur d'écran."
+    private let aideVoiceOver = "Dans l’app Réglages, va dans Accessibilité puis VoiceOver pour activer le lecteur d’écran."
 
     override func setUp() {
         continueAfterFailure = false
