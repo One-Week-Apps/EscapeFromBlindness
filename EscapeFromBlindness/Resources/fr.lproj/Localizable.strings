@@ -51,8 +51,8 @@
 /* Réglages */
 "settings" = "Réglages";
 "settings_voiceover" = "VoiceOver";
-"settings_voiceover_hint" = "Ouvre l'app Réglages.";
-"settings_voiceover_footer" = "Dans l'app Réglages, va dans Accessibilité puis VoiceOver pour activer le lecteur d'écran.";
+"settings_voiceover_hint" = "Ouvre l’app Réglages.";
+"settings_voiceover_footer" = "Dans l’app Réglages, va dans Accessibilité puis VoiceOver pour activer le lecteur d’écran.";
 "settings_open_error" = "Impossible d'ouvrir l'app Réglages. Ouvre-la toi-même, puis va dans Accessibilité et VoiceOver.";
 
 /* Chapter 1 */
