@@ -14,6 +14,12 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
     private static let completedColor = UIColor(red: 80/255, green: 144/255, blue: 6/255, alpha: 1)
     private static let lockedColor = UIColor(white: 0.18, alpha: 1)
     private static let levelIdentifierPrefix = "levelSelection.level."
+    private static let tileIdentifierPrefix = "tuileNiveau_"
+
+    /// Le numéro suit Dynamic Type sans jamais rétrécir : c'est la grille qui agrandit les tuiles pour qu'il tienne.
+    static func levelFont(compatibleWith traitCollection: UITraitCollection? = nil) -> UIFont {
+        return UIFontMetrics(forTextStyle: .title1).scaledFont(for: .custom(style: .montserratExtraBold, size: 35), compatibleWith: traitCollection)
+    }
 
     enum State {
         case completed
@@ -26,6 +32,11 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
         self.containerView.layer.cornerRadius = 10
         self.containerView.backgroundColor = .clear
         self.levelLabel.textColor = .black
+        self.levelLabel.font = LoadLevelCollectionViewCell.levelFont()
+        self.levelLabel.adjustsFontForContentSizeCategory = true
+        self.levelLabel.adjustsFontSizeToFitWidth = false
+        self.levelLabel.numberOfLines = 0
+        self.levelLabel.lineBreakMode = .byWordWrapping
         self.levelLockedImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.levelLockedImageView.centerXAnchor.constraint(equalTo: self.containerView.centerXAnchor),
@@ -39,6 +50,8 @@ class LoadLevelCollectionViewCell: UICollectionViewCell {
         let displayedChapterIndex = chapterIndex + 1
         let displayedLevelIndex = levelIndex + 1
         self.levelLabel.accessibilityIdentifier = "\(LoadLevelCollectionViewCell.levelIdentifierPrefix)\(displayedChapterIndex).\(displayedLevelIndex)"
+        // La tuile entière (cellule) : le numéro de niveau seul se répète d'un chapitre à l'autre, d'où le chapitre en tête.
+        self.accessibilityIdentifier = "\(LoadLevelCollectionViewCell.tileIdentifierPrefix)\(displayedChapterIndex)_\(displayedLevelIndex)"
 
         switch state {
         case .completed:

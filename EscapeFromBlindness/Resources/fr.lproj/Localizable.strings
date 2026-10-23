@@ -46,6 +46,14 @@
 "level_selection_subtitle" = "Choisis ton niveau";
 "level_locked_accessibility" = "Niveau %d, verrouillé";
 "door_script" = "Une porte se situe en face de moi. Elle semble vérouillée par un cadenas circulaire. Je dois trouver le code.";
+"ok" = "OK";
+
+/* Réglages */
+"settings" = "Réglages";
+"settings_voiceover" = "VoiceOver";
+"settings_voiceover_hint" = "Ouvre l'app Réglages.";
+"settings_voiceover_footer" = "Dans l'app Réglages, va dans Accessibilité puis VoiceOver pour activer le lecteur d'écran.";
+"settings_open_error" = "Impossible d'ouvrir l'app Réglages. Ouvre-la toi-même, puis va dans Accessibilité et VoiceOver.";
 
 /* Chapter 1 */
 "chapter1_description" = "Népal: année 1976, Vous approchez d'une ancienne caverne de glace au Népal. Vous venez d'atteindre le sommet de la montagne. Une énorme porte vous fait face. Lorsque VoiceOver est activé, tu peux aller d'un élément à l'autre en le touchant sur l'écran directement ou en faisant glisser ton doigt vers la gauche ou vers la droite. Touches deux fois l'écran pour valider.";

@@ -188,10 +188,22 @@ internal enum L10n {
   internal static let levelSelectionSubtitle = L10n.tr("Localizable", "level_selection_subtitle", fallback: "Choose your level")
   /// locked
   internal static let locked = L10n.tr("Localizable", "locked", fallback: "locked")
+  /// OK
+  internal static let ok = L10n.tr("Localizable", "ok", fallback: "OK")
   /// Touch to play again !
   internal static let replay = L10n.tr("Localizable", "replay", fallback: "Touch to play again !")
   /// Reads the instructions again from the start
   internal static let replayHint = L10n.tr("Localizable", "replay_hint", fallback: "Reads the instructions again from the start")
+  /// Settings
+  internal static let settings = L10n.tr("Localizable", "settings", fallback: "Settings")
+  /// The Settings app could not be opened. Open it yourself, then go to Accessibility and VoiceOver.
+  internal static let settingsOpenError = L10n.tr("Localizable", "settings_open_error", fallback: "The Settings app could not be opened. Open it yourself, then go to Accessibility and VoiceOver.")
+  /// VoiceOver
+  internal static let settingsVoiceover = L10n.tr("Localizable", "settings_voiceover", fallback: "VoiceOver")
+  /// In the Settings app, go to Accessibility then VoiceOver to turn on the screen reader.
+  internal static let settingsVoiceoverFooter = L10n.tr("Localizable", "settings_voiceover_footer", fallback: "In the Settings app, go to Accessibility then VoiceOver to turn on the screen reader.")
+  /// Opens the Settings app.
+  internal static let settingsVoiceoverHint = L10n.tr("Localizable", "settings_voiceover_hint", fallback: "Opens the Settings app.")
   /// Voice Over Instructions
   internal static let vo1 = L10n.tr("Localizable", "vo1", fallback: "You are exploring an old tomb, as you are in the dark and have no torch left you do not see anything !\n\nPlease turn on VoiceOver to continue the game !\n\nFirst configure the accessibility shortcut in to allow you to turn on/off VoiceOver easily.\n\nThen go back to the app and turn on VoiceOver.\nDepending on your device, it will either be by pressing three times the lateral button or the home button.")
   /// Let's continue exploring !

@@ -24,7 +24,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         var currentLevelIndex = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentLevelIndex.rawValue)
         #if DEBUG
         // Tests UI : ouvre directement le Choix des niveaux, niveau 1 du chapitre 1 en cours et les suivants verrouillés.
-        if ProcessInfo.processInfo.arguments.contains("-UITestChoixNiveau") {
+        // `-UITestReglages` part du même écran pour ouvrir ensuite les Réglages par-dessus.
+        if ProcessInfo.processInfo.arguments.contains("-UITestChoixNiveau") || ProcessInfo.processInfo.arguments.contains("-UITestReglages") {
             currentChapterIndex = 1
             currentLevelIndex = 0
         }
@@ -46,6 +47,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Tests UI : ouvre l'écran de fin de jeu (instructions + bouton Rejouer) sans finir toute la partie.
         if ProcessInfo.processInfo.arguments.contains("-UITestGameEnd") {
             appCoordinator.presentIntroController(.gameEnd)
+        }
+        // Tests UI : ouvre directement les Réglages, au-dessus de la sélection des niveaux.
+        if ProcessInfo.processInfo.arguments.contains("-UITestReglages") {
+            appCoordinator.presentSettingsController()
         }
         #endif
         window.rootViewController = appCoordinator.rootViewController

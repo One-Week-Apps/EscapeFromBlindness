@@ -1,15 +1,15 @@
 //
 //  AITaskerCapture.swift
-//  Provided and kept up to date by One Week Apps Runner: do not edit, it will be replaced.
+//  Fourni et tenu à jour par One Week Apps Runner : ne pas modifier, il sera remplacé.
 //
 
 import XCTest
 
 enum AITaskerCapture {
 
-    /// Attaches a screenshot to the running test, named `nodeId` and kept even when the test passes,
-    /// along with the screen's VoiceOver reading order (attachment `<nodeId>-voiceover`).
-    /// Callable from any test: UI tests run on the main thread.
+    /// Joint une capture de l'écran au test en cours, nommée `nodeId` et conservée même si le test réussit,
+    /// avec l'ordre de lecture VoiceOver de l'écran (pièce jointe `<nodeId>-voiceover`).
+    /// Appelable depuis n'importe quel test : les tests UI tournent sur le thread principal.
     static func captureScreen(nodeId: String, action: String) {
         MainActor.assumeIsolated { capture(nodeId: nodeId, action: action) }
     }
@@ -36,8 +36,7 @@ enum AITaskerCapture {
         .searchField: "recherche", .tab: "onglet", .segmentedControl: "sélecteur",
     ]
 
-    /// VoiceOver's order, approximated like Accessibility Inspector: each read element, top to bottom then left to right.
-    /// Roles are in French, as VoiceOver reads them to French-speaking developers.
+    /// L'ordre de VoiceOver, approché comme l'Accessibility Inspector : chaque élément lu, de haut en bas puis de gauche à droite.
     @MainActor
     static func voiceOverOrder(of app: XCUIApplication) -> [String] {
         guard let root = try? app.snapshot() else { return [] }
