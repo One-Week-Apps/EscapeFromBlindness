@@ -21,9 +21,9 @@ class VoiceOverAlertViewController: UIViewController, Coordinated {
     
     private static let openSettingsButtonIdentifier = "activationVoiceOver.ouvrirReglages"
     private static let sideMargin: CGFloat = 32
-    private static let verticalMargin: CGFloat = 24
-    private static let buttonTopSpacing: CGFloat = 16
-    private static let iconTopSpacing: CGFloat = 24
+    private static let topMargin: CGFloat = 16
+    private static let bottomMargin: CGFloat = 16
+    private static let blockSpacing: CGFloat = 16
     private static let minimumTouchTarget: CGFloat = 44
     private static let instructionsMaximumPointSize: CGFloat = 34
     private static let buttonMaximumPointSize: CGFloat = 28
@@ -70,8 +70,7 @@ class VoiceOverAlertViewController: UIViewController, Coordinated {
 
         let stackView = self.voiceOverActivationInstructionsView!
         stackView.insertArrangedSubview(self.openSettingsButton, at: stackView.arrangedSubviews.firstIndex(of: instructionsLabel)! + 1)
-        stackView.setCustomSpacing(VoiceOverAlertViewController.buttonTopSpacing, after: instructionsLabel)
-        stackView.setCustomSpacing(VoiceOverAlertViewController.iconTopSpacing, after: self.openSettingsButton)
+        stackView.spacing = VoiceOverAlertViewController.blockSpacing
         self.openSettingsButton.addTarget(self, action: #selector(onOpenSettingsButtonTouched), for: .touchUpInside)
 
         // Retirer la pile de la vue efface ses contraintes du xib : texte, bouton et icône défilent, alignés en haut.
@@ -92,12 +91,12 @@ class VoiceOverAlertViewController: UIViewController, Coordinated {
             content.widthAnchor.constraint(equalTo: frame.widthAnchor),
             stackView.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: VoiceOverAlertViewController.sideMargin),
             stackView.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -VoiceOverAlertViewController.sideMargin),
-            stackView.topAnchor.constraint(equalTo: content.topAnchor, constant: VoiceOverAlertViewController.verticalMargin),
-            stackView.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: -VoiceOverAlertViewController.verticalMargin),
+            stackView.topAnchor.constraint(equalTo: content.topAnchor, constant: VoiceOverAlertViewController.topMargin),
+            stackView.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: -VoiceOverAlertViewController.bottomMargin),
             // La pile centre ses éléments : sans cette largeur, le texte s'élargit au-delà des marges et se fait couper.
             instructionsLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            self.openSettingsButton.widthAnchor.constraint(lessThanOrEqualTo: stackView.widthAnchor),
-            self.openSettingsButton.widthAnchor.constraint(greaterThanOrEqualToConstant: VoiceOverAlertViewController.minimumTouchTarget),
+            // Pleine largeur : le libellé passe à la ligne entre les marges au lieu d'être coupé.
+            self.openSettingsButton.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             self.openSettingsButton.heightAnchor.constraint(greaterThanOrEqualToConstant: VoiceOverAlertViewController.minimumTouchTarget)
         ])
     }
