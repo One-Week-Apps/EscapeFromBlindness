@@ -33,6 +33,8 @@
 /* Voice Over Instructions */
 "vo1" = "You are exploring an old tomb, as you are in the dark and have no torch left you do not see anything !\n\nPlease turn on VoiceOver to continue the game !\n\nFirst configure the accessibility shortcut in to allow you to turn on/off VoiceOver easily.\n\nThen go back to the app and turn on VoiceOver.\nDepending on your device, it will either be by pressing three times the lateral button or the home button.";
 "vo2" = "Let's continue exploring !\n\nEnjoy your play !";
+"vo_open_settings" = "Open Settings";
+"vo_open_settings_error" = "The Settings app could not be opened. Open it yourself, then go to Accessibility and VoiceOver.";
 
 //======================================================
 "chapter" = "Chapter";
@@ -46,13 +48,6 @@
 "level_locked_accessibility" = "Level %d, locked";
 "door_script" = "A door stands in front of me. It seems to be locked. I need to find the code.";
 "ok" = "OK";
-
-/* Settings */
-"settings" = "Settings";
-"settings_voiceover" = "VoiceOver";
-"settings_voiceover_hint" = "Opens the Settings app.";
-"settings_voiceover_footer" = "In the Settings app, go to Accessibility then VoiceOver to turn on the screen reader.";
-"settings_open_error" = "The Settings app could not be opened. Open it yourself, then go to Accessibility and VoiceOver.";
 
 /* Chapter 1 */
 "chapter1_description" = "Nepal: year 1976, You approach an ancient ice cave In Nepal. You just reached the summit of the mountain. There is a huge door before of you. When VoiceOver is turned on, you can go from one text to the other by touching it directly or sliding left or right with your finger. Double tap to validate or select something.";

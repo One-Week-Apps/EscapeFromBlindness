@@ -24,8 +24,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         var currentLevelIndex = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentLevelIndex.rawValue)
         #if DEBUG
         // Tests UI : ouvre directement le Choix des niveaux, niveau 1 du chapitre 1 en cours et les suivants verrouillés.
-        // `-UITestReglages` part du même écran pour ouvrir ensuite les Réglages par-dessus.
-        if ProcessInfo.processInfo.arguments.contains("-UITestChoixNiveau") || ProcessInfo.processInfo.arguments.contains("-UITestReglages") {
+        // `-UITestActivationVoiceOver` part du même écran pour ouvrir ensuite l'activation de VoiceOver par-dessus.
+        if ProcessInfo.processInfo.arguments.contains("-UITestChoixNiveau") || ProcessInfo.processInfo.arguments.contains("-UITestActivationVoiceOver") {
             currentChapterIndex = 1
             currentLevelIndex = 0
         }
@@ -48,13 +48,18 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if ProcessInfo.processInfo.arguments.contains("-UITestGameEnd") {
             appCoordinator.presentIntroController(.gameEnd)
         }
-        // Tests UI : ouvre directement les Réglages, au-dessus de la sélection des niveaux.
-        if ProcessInfo.processInfo.arguments.contains("-UITestReglages") {
-            appCoordinator.presentSettingsController()
-        }
         #endif
         window.rootViewController = appCoordinator.rootViewController
         window.makeKeyAndVisible()
+        #if DEBUG
+        // Tests UI : ouvre directement l'activation de VoiceOver, au-dessus de la sélection des niveaux,
+        // une fois la fenêtre affichée pour que la présentation aboutisse.
+        if ProcessInfo.processInfo.arguments.contains("-UITestActivationVoiceOver") {
+            DispatchQueue.main.async {
+                appCoordinator.showActivateVoiceOverAlert()
+            }
+        }
+        #endif
     }
 
 }

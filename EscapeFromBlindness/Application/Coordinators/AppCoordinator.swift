@@ -19,19 +19,13 @@ protocol AppCoordinatorProtocol: class {
     func presentSearchQuestionController(_ level: Level)
     
     func presentLoadLevelController()
-    func presentSettingsController()
 
     func validateChapter()
     func validate(_ answers: [Level.Answer])
-    
-    func loadLevel(_ chapterIndex: Int, levelIndex: Int)
-    
-    func replay()
-}
 
-extension AppCoordinatorProtocol {
-    /// Vide par défaut : seul `AppCoordinator` ouvre les Réglages.
-    func presentSettingsController() {}
+    func loadLevel(_ chapterIndex: Int, levelIndex: Int)
+
+    func replay()
 }
 
 class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
@@ -102,13 +96,6 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
         navigationController.viewControllers = [viewController]
     }
     
-    // MARK: - Settings
-    func presentSettingsController() {
-        let viewController = SettingsViewController(style: .insetGrouped)
-        viewController.coordinator = self
-        navigationController.pushViewController(viewController, animated: true)
-    }
-
     private var SELECTED: (Int, Int)? = nil
     func loadLevel(_ chapterIndex: Int, levelIndex: Int) {
         self.SELECTED = (chapterIndex, levelIndex)

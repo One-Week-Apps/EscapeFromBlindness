@@ -90,11 +90,8 @@
 		A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */; };
 		A1E5C0DE0000000000000023 /* InstructionsRejouerHintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */; };
 		A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */; };
-		7F3B9C2E4A61D8F05B7E2C19 /* NiveauxTuilesAlignementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E81A6D2F95B03E7A4C6D82 /* NiveauxTuilesAlignementUITests.swift */; };
-		9A2D5F7B1E3C846A0D9F2B57 /* ReglagesLienVoiceOverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B4073C9D1A5F28C3E7B964 /* ReglagesLienVoiceOverUITests.swift */; };
-		3D8F1C6A7E2B490D5A1F8E36 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17E5D29C4A08F63E2D1A7C5 /* SettingsViewController.swift */; };
+		4B7E19C2D85A36F0E1C92D7A /* NiveauxReglagesVoiceOverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F60A1B9C47E25F0A6B318 /* NiveauxReglagesVoiceOverUITests.swift */; };
 		5C9A3E7F0B2D614C8E5B9A2D /* LoadLevelGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4D7B1F6C93A25E7D0C4B8F /* LoadLevelGridLayout.swift */; };
-		A8F2C5E19D7B3064F1A8D2E7 /* LoadLevelSettingsFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1C9E4D2A7F85B3C0E6A1D9 /* LoadLevelSettingsFooter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,11 +125,8 @@
 		A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintTests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccessibiliteVersionEtSousTitreUITests.swift; sourceTree = "<group>"; };
-		C4E81A6D2F95B03E7A4C6D82 /* NiveauxTuilesAlignementUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NiveauxTuilesAlignementUITests.swift; sourceTree = "<group>"; };
-		E6B4073C9D1A5F28C3E7B964 /* ReglagesLienVoiceOverUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReglagesLienVoiceOverUITests.swift; sourceTree = "<group>"; };
-		B17E5D29C4A08F63E2D1A7C5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8D3F60A1B9C47E25F0A6B318 /* NiveauxReglagesVoiceOverUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NiveauxReglagesVoiceOverUITests.swift; sourceTree = "<group>"; };
 		0E4D7B1F6C93A25E7D0C4B8F /* LoadLevelGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadLevelGridLayout.swift; sourceTree = "<group>"; };
-		6B1C9E4D2A7F85B3C0E6A1D9 /* LoadLevelSettingsFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadLevelSettingsFooter.swift; sourceTree = "<group>"; };
 		C38D3490990697920F57664A /* EscapeFromBlindnessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EscapeFromBlindnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC6B9E3AF32499B14C7AF4DC /* Pods-EscapeFromBlindnessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EscapeFromBlindnessTests.debug.xcconfig"; path = "Target Support Files/Pods-EscapeFromBlindnessTests/Pods-EscapeFromBlindnessTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D80B2A70241C556100616655 /* InstructionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsInteractor.swift; sourceTree = "<group>"; };
@@ -282,8 +276,7 @@
 				A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */,
 				A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */,
 				A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */,
-				C4E81A6D2F95B03E7A4C6D82 /* NiveauxTuilesAlignementUITests.swift */,
-				E6B4073C9D1A5F28C3E7B964 /* ReglagesLienVoiceOverUITests.swift */,
+				8D3F60A1B9C47E25F0A6B318 /* NiveauxReglagesVoiceOverUITests.swift */,
 			);
 			name = EscapeFromBlindnessUITests;
 			path = EscapeFromBlindnessUITests;
@@ -461,7 +454,6 @@
 				D88E36FB244EE84000872550 /* LoadLevelCollectionViewCell.xib */,
 				D88E3700244EF21C00872550 /* LoadLevelCollectionViewCellHeader.swift */,
 				0E4D7B1F6C93A25E7D0C4B8F /* LoadLevelGridLayout.swift */,
-				6B1C9E4D2A7F85B3C0E6A1D9 /* LoadLevelSettingsFooter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -497,7 +489,6 @@
 				D8C2C10423C0D52C00F8BE78 /* VoiceOverAlertViewController.xib */,
 				D8C2C11123C0EB8A00F8BE78 /* ChapterViewController.swift */,
 				D88E36F3244EE26200872550 /* LoadLevelViewController.swift */,
-				B17E5D29C4A08F63E2D1A7C5 /* SettingsViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -760,8 +751,7 @@
 				A1E5C0DE0000000000001013 /* ChoixNiveauVerrouilleVoiceOverUITests.swift in Sources */,
 				A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */,
 				A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */,
-				7F3B9C2E4A61D8F05B7E2C19 /* NiveauxTuilesAlignementUITests.swift in Sources */,
-				9A2D5F7B1E3C846A0D9F2B57 /* ReglagesLienVoiceOverUITests.swift in Sources */,
+				4B7E19C2D85A36F0E1C92D7A /* NiveauxReglagesVoiceOverUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,9 +762,7 @@
 				D88B1A4923B42DBD008BB85D /* UserDefaultKeys.swift in Sources */,
 				D83B70E923C4933B00516628 /* ClosedQuestionViewController.swift in Sources */,
 				D88E3701244EF21C00872550 /* LoadLevelCollectionViewCellHeader.swift in Sources */,
-				3D8F1C6A7E2B490D5A1F8E36 /* SettingsViewController.swift in Sources */,
 				5C9A3E7F0B2D614C8E5B9A2D /* LoadLevelGridLayout.swift in Sources */,
-				A8F2C5E19D7B3064F1A8D2E7 /* LoadLevelSettingsFooter.swift in Sources */,
 				D88B1A4523B4291D008BB85D /* AppCoordinator.swift in Sources */,
 				D847609723C146E800DF4825 /* GameFlow.swift in Sources */,
 				D8458EDA23F9FAFF006FA087 /* NavigationController.swift in Sources */,

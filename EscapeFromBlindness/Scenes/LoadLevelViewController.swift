@@ -38,9 +38,9 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private var currentChapterIndex: Int = 0
     private var currentLevelIndex: Int = 0
     private static let headerReuseId = "header"
-    private static let footerReuseId = "footer"
     private static let minimumColumns: CGFloat = 3
-    /// Grille de 8 pt : écart entre tuiles, marge intérieure autour du numéro.
+    /// Grille de 8 pt : côté des tuiles, écart entre tuiles, marge intérieure autour du numéro.
+    private static let gridUnit: CGFloat = 8
     private static let spacing: CGFloat = 16
     private static let tilePadding: CGFloat = 8
     private static let preferredTileSide: CGFloat = 96
@@ -166,7 +166,6 @@ class LoadLevelViewController: UIViewController, Coordinated {
 
     private func setupCollectionView() {
         self.collectionView.register(LoadLevelCollectionViewCellHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LoadLevelViewController.headerReuseId)
-        self.collectionView.register(LoadLevelSettingsFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadLevelViewController.footerReuseId)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.register(LoadLevelCollectionViewCell.self)
@@ -208,7 +207,7 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
         let widestNumber = String(repeating: "0", count: String(max(maxLevelCount, 1)).count) as NSString
         let text = widestNumber.size(withAttributes: [.font: font])
         let side = max(text.width, font.lineHeight) + 2 * tilePadding
-        return max(minimumTouchTarget, ceil(side))
+        return ceil(max(minimumTouchTarget, side) / gridUnit) * gridUnit
     }
 
     /// Côté commun à toutes les tuiles : autant de colonnes que la largeur en permet (au moins trois),
@@ -216,7 +215,7 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
     static func tileSide(forWidth width: CGFloat, minimumSide: CGFloat) -> CGFloat {
         guard width > 0 else { return minimumSide }
         func side(_ columns: CGFloat) -> CGFloat {
-            return floor((width - spacing * (columns - 1)) / columns)
+            return floor((width - spacing * (columns - 1)) / columns / gridUnit) * gridUnit
         }
         var columns = max(minimumColumns, floor((width + spacing) / (preferredTileSide + spacing)))
         while columns > 1 && side(columns) < minimumSide {
@@ -225,12 +224,6 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
         return min(width, max(side(columns), minimumSide))
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        guard section == self.chapters.count - 1 else { return .zero }
-        let width = collectionView.bounds.width
-        return CGSize(width: width, height: LoadLevelSettingsFooter.height(width: width, traitCollection: self.traitCollection))
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.bounds.width
         let chapter = self.chapters[section]
@@ -261,16 +254,6 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
             header.titleLabel.accessibilityIdentifier = "\(LoadLevelViewController.chapterTitleIdentifierPrefix)\(chapter.index)"
             header.setNeedsLayout()
             return header
-        case UICollectionView.elementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(
-                ofKind: UICollectionView.elementKindSectionFooter,
-                withReuseIdentifier: LoadLevelViewController.footerReuseId,
-                for: indexPath
-            ) as! LoadLevelSettingsFooter
-            footer.onTap = { [weak self] in
-                self?.coordinator?.presentSettingsController()
-            }
-            return footer
         default:
             return UICollectionReusableView()
         }
