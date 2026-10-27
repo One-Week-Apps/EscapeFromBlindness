@@ -188,6 +188,8 @@ internal enum L10n {
   internal static let levelSelectionSubtitle = L10n.tr("Localizable", "level_selection_subtitle", fallback: "Choose your level")
   /// locked
   internal static let locked = L10n.tr("Localizable", "locked", fallback: "locked")
+  /// OK
+  internal static let ok = L10n.tr("Localizable", "ok", fallback: "OK")
   /// Touch to play again !
   internal static let replay = L10n.tr("Localizable", "replay", fallback: "Touch to play again !")
   /// Reads the instructions again from the start
@@ -198,6 +200,10 @@ internal enum L10n {
   /// 
   /// Enjoy your play !
   internal static let vo2 = L10n.tr("Localizable", "vo2", fallback: "Let's continue exploring !\n\nEnjoy your play !")
+  /// Open Settings
+  internal static let voOpenSettings = L10n.tr("Localizable", "vo_open_settings", fallback: "Open Settings")
+  /// The Settings app could not be opened. Open it yourself, then go to Accessibility and VoiceOver.
+  internal static let voOpenSettingsError = L10n.tr("Localizable", "vo_open_settings_error", fallback: "The Settings app could not be opened. Open it yourself, then go to Accessibility and VoiceOver.")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

@@ -19,12 +19,12 @@ protocol AppCoordinatorProtocol: class {
     func presentSearchQuestionController(_ level: Level)
     
     func presentLoadLevelController()
-    
+
     func validateChapter()
     func validate(_ answers: [Level.Answer])
-    
+
     func loadLevel(_ chapterIndex: Int, levelIndex: Int)
-    
+
     func replay()
 }
 

@@ -33,6 +33,8 @@
 /* Voice Over Instructions */
 "vo1" = "Tu explore un ancien tombeau, l'espace est plongé dans la pénombre et tu ne n'as que très peu de visibilité !\n\nMerci d'activer VoiceOver pour continuer à jouer !\n\nCommence par activer le raccourci d'accessibilité de ton smartphone pour activer/désactiver VoiceOver plus facilement.\n\nEnsuite reviens dans l'application et active VoiceOver.\nEn fonction de ton smartphone, cela sera en appuyant 3 fois soit sur le bouton latéral ou soit sur le bouton home.";
 "vo2" = "Reprenons l'exploration !\n\nBonne chance !";
+"vo_open_settings" = "Ouvrir les Réglages";
+"vo_open_settings_error" = "Impossible d'ouvrir l'app Réglages. Ouvre-la toi-même, puis va dans Accessibilité et VoiceOver.";
 
 
 //======================================================
@@ -46,6 +48,7 @@
 "level_selection_subtitle" = "Choisis ton niveau";
 "level_locked_accessibility" = "Niveau %d, verrouillé";
 "door_script" = "Une porte se situe en face de moi. Elle semble vérouillée par un cadenas circulaire. Je dois trouver le code.";
+"ok" = "OK";
 
 /* Chapter 1 */
 "chapter1_description" = "Népal: année 1976, Vous approchez d'une ancienne caverne de glace au Népal. Vous venez d'atteindre le sommet de la montagne. Une énorme porte vous fait face. Lorsque VoiceOver est activé, tu peux aller d'un élément à l'autre en le touchant sur l'écran directement ou en faisant glisser ton doigt vers la gauche ou vers la droite. Touches deux fois l'écran pour valider.";

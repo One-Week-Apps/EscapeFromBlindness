@@ -38,9 +38,13 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private var currentChapterIndex: Int = 0
     private var currentLevelIndex: Int = 0
     private static let headerReuseId = "header"
-    private static let columns: CGFloat = 3
-    private static let spacing: CGFloat = 20
-    private static let maxTileSide: CGFloat = 100
+    private static let minimumColumns: CGFloat = 3
+    /// Grille de 8 pt : côté des tuiles, écart entre tuiles, marge intérieure autour du numéro.
+    private static let gridUnit: CGFloat = 8
+    private static let spacing: CGFloat = 16
+    private static let tilePadding: CGFloat = 8
+    private static let preferredTileSide: CGFloat = 96
+    private static let minimumTouchTarget: CGFloat = 44
     private static let sideMargin: CGFloat = 16
     private static let subtitleTopSpacing: CGFloat = 8
     private static let subtitleBottomSpacing: CGFloat = 16
@@ -72,7 +76,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
     }()
 
     var collectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout = LoadLevelGridLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.minimumInteritemSpacing = spacing
         flowLayout.minimumLineSpacing = spacing
@@ -191,12 +195,36 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let columns = LoadLevelViewController.columns
-        let available = collectionView.bounds.width - LoadLevelViewController.spacing * (columns - 1)
-        let side = min(LoadLevelViewController.maxTileSide, floor(available / columns))
+        let maxLevelCount = self.chapters.map(\.levels.count).max() ?? 1
+        let minimumSide = LoadLevelViewController.minimumTileSide(maxLevelCount: maxLevelCount, traitCollection: self.traitCollection)
+        let side = LoadLevelViewController.tileSide(forWidth: collectionView.bounds.width, minimumSide: minimumSide)
         return CGSize(width: side, height: side)
     }
-    
+
+    /// Plus petit côté où le numéro le plus long tient sur une ligne, à la taille de texte choisie, sans passer sous 44 pt.
+    static func minimumTileSide(maxLevelCount: Int, traitCollection: UITraitCollection) -> CGFloat {
+        let font = LoadLevelCollectionViewCell.levelFont(compatibleWith: traitCollection)
+        let widestNumber = String(repeating: "0", count: String(max(maxLevelCount, 1)).count) as NSString
+        let text = widestNumber.size(withAttributes: [.font: font])
+        let side = max(text.width, font.lineHeight) + 2 * tilePadding
+        return ceil(max(minimumTouchTarget, side) / gridUnit) * gridUnit
+    }
+
+    /// Côté commun à toutes les tuiles : autant de colonnes que la largeur en permet (au moins trois),
+    /// moins si le texte agrandi ne tiendrait plus. Les colonnes remplissent la largeur : marges gauche et droite identiques.
+    static func tileSide(forWidth width: CGFloat, minimumSide: CGFloat) -> CGFloat {
+        guard width > 0 else { return minimumSide }
+        func side(_ columns: CGFloat) -> CGFloat {
+            // Arrondi au demi-point inférieur : le rang tient toujours, sans reste visible à droite.
+            return floor((width - spacing * (columns - 1)) / columns * 2) / 2
+        }
+        var columns = max(minimumColumns, floor((width + spacing) / (preferredTileSide + spacing)))
+        while columns > 1 && side(columns) < minimumSide {
+            columns -= 1
+        }
+        return min(width, max(side(columns), minimumSide))
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.bounds.width
         let chapter = self.chapters[section]
