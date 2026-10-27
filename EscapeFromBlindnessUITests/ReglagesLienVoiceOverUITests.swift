@@ -8,32 +8,32 @@ import XCTest
 final class ReglagesLienVoiceOverUITests: XCTestCase {
 
     private let timeout: TimeInterval = 10
-    private let lienVoiceOverIdentifier = "reglagesLienVoiceOver"
-    private let aideVoiceOver = "Dans l’app Réglages, va dans Accessibilité puis VoiceOver pour activer le lecteur d’écran."
+    private let boutonReglagesIdentifier = "activationVoiceOver.ouvrirReglages"
+    private let consignesIdentifier = "activationVoiceOver.consignes"
 
     override func setUp() {
         continueAfterFailure = false
     }
 
-    func testOuvrirLeLienVoiceOverDesReglages() {
+    func testOuvrirLesReglagesDepuisVoiceOver() {
         let app = XCUIApplication()
-        // `-UITestReglages` ouvre directement les Réglages, au-dessus de la sélection des niveaux.
-        app.launchArguments = ["-UITestReglages", "-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
+        // `-UITestActivationVoiceOver` ouvre directement l'écran qui explique l'activation de VoiceOver.
+        app.launchArguments = ["-UITestActivationVoiceOver", "-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
         app.launch()
 
-        let lien = app.descendants(matching: .any)[lienVoiceOverIdentifier]
-        XCTAssertTrue(lien.waitForExistence(timeout: timeout))
+        let bouton = app.buttons[boutonReglagesIdentifier]
+        XCTAssertTrue(bouton.waitForExistence(timeout: timeout))
+        XCTAssertEqual(bouton.label, "Ouvrir les Réglages")
+        XCTAssertGreaterThanOrEqual(bouton.frame.width, 44)
+        XCTAssertGreaterThanOrEqual(bouton.frame.height, 44)
 
-        XCTAssertEqual(lien.label, "VoiceOver")
-        XCTAssertEqual(lien.elementType, .button)
-        XCTAssertTrue(app.buttons[lienVoiceOverIdentifier].isHittable)
-        XCTAssertGreaterThanOrEqual(lien.frame.height, 44)
+        // Le texte explicatif se lit comme un texte, jamais comme un bouton, et le bouton vient dessous.
+        let consignes = app.staticTexts[consignesIdentifier]
+        XCTAssertTrue(consignes.exists)
+        XCTAssertFalse(app.buttons[consignesIdentifier].exists)
+        XCTAssertGreaterThan(bouton.frame.minY, consignes.frame.minY)
 
-        // Le texte d'aide se lit comme un texte, jamais comme un bouton.
-        XCTAssertTrue(app.staticTexts[aideVoiceOver].exists)
-        XCTAssertFalse(app.buttons[aideVoiceOver].exists)
-
-        AITaskerCapture.captureScreen(nodeId: "Reglages", action: "Lien VoiceOver affiché")
+        AITaskerCapture.captureScreen(nodeId: "Reglages", action: "lien VoiceOver visible")
     }
 
 }

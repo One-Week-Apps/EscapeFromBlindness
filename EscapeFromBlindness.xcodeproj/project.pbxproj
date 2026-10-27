@@ -90,7 +90,8 @@
 		A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */; };
 		A1E5C0DE0000000000000023 /* InstructionsRejouerHintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */; };
 		A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */; };
-		4B7E19C2D85A36F0E1C92D7A /* NiveauxReglagesVoiceOverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F60A1B9C47E25F0A6B318 /* NiveauxReglagesVoiceOverUITests.swift */; };
+		F3A91C6E27B04D58A1E6C2B9 /* NiveauxTuilesAlignementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2E8B40C9F71A35E0B4D7C1 /* NiveauxTuilesAlignementUITests.swift */; };
+		B85C0E3A41D69F27C3A8E516 /* ReglagesLienVoiceOverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F94D1E6A03B85F9D2C40E /* ReglagesLienVoiceOverUITests.swift */; };
 		5C9A3E7F0B2D614C8E5B9A2D /* LoadLevelGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4D7B1F6C93A25E7D0C4B8F /* LoadLevelGridLayout.swift */; };
 /* End PBXBuildFile section */
 
@@ -125,7 +126,8 @@
 		A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintTests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccessibiliteVersionEtSousTitreUITests.swift; sourceTree = "<group>"; };
-		8D3F60A1B9C47E25F0A6B318 /* NiveauxReglagesVoiceOverUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NiveauxReglagesVoiceOverUITests.swift; sourceTree = "<group>"; };
+		6D2E8B40C9F71A35E0B4D7C1 /* NiveauxTuilesAlignementUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NiveauxTuilesAlignementUITests.swift; sourceTree = "<group>"; };
+		2C7F94D1E6A03B85F9D2C40E /* ReglagesLienVoiceOverUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReglagesLienVoiceOverUITests.swift; sourceTree = "<group>"; };
 		0E4D7B1F6C93A25E7D0C4B8F /* LoadLevelGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadLevelGridLayout.swift; sourceTree = "<group>"; };
 		C38D3490990697920F57664A /* EscapeFromBlindnessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EscapeFromBlindnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC6B9E3AF32499B14C7AF4DC /* Pods-EscapeFromBlindnessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EscapeFromBlindnessTests.debug.xcconfig"; path = "Target Support Files/Pods-EscapeFromBlindnessTests/Pods-EscapeFromBlindnessTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -276,7 +278,8 @@
 				A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */,
 				A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */,
 				A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */,
-				8D3F60A1B9C47E25F0A6B318 /* NiveauxReglagesVoiceOverUITests.swift */,
+				6D2E8B40C9F71A35E0B4D7C1 /* NiveauxTuilesAlignementUITests.swift */,
+				2C7F94D1E6A03B85F9D2C40E /* ReglagesLienVoiceOverUITests.swift */,
 			);
 			name = EscapeFromBlindnessUITests;
 			path = EscapeFromBlindnessUITests;
@@ -751,7 +754,8 @@
 				A1E5C0DE0000000000001013 /* ChoixNiveauVerrouilleVoiceOverUITests.swift in Sources */,
 				A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */,
 				A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */,
-				4B7E19C2D85A36F0E1C92D7A /* NiveauxReglagesVoiceOverUITests.swift in Sources */,
+				F3A91C6E27B04D58A1E6C2B9 /* NiveauxTuilesAlignementUITests.swift in Sources */,
+				B85C0E3A41D69F27C3A8E516 /* ReglagesLienVoiceOverUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

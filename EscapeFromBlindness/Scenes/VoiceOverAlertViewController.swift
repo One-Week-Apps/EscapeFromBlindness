@@ -28,7 +28,7 @@ class VoiceOverAlertViewController: UIViewController, Coordinated {
     private static let instructionsMaximumPointSize: CGFloat = 34
     private static let buttonMaximumPointSize: CGFloat = 28
     private static let instructionsIdentifier = "activationVoiceOver.consignes"
-    private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "ActivationVoiceOver")
+    private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Reglages")
 
     /// Seul bouton de l'écran d'activation : ouvre l'app Réglages, où l'utilisateur active VoiceOver.
     let openSettingsButton: UIButton = {
