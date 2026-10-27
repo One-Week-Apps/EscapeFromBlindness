@@ -24,6 +24,7 @@ class VoiceOverAlertViewController: UIViewController, Coordinated {
     private static let topMargin: CGFloat = 16
     private static let bottomMargin: CGFloat = 16
     private static let blockSpacing: CGFloat = 16
+    private static let iconTopSpacing: CGFloat = 24
     private static let minimumTouchTarget: CGFloat = 44
     private static let instructionsMaximumPointSize: CGFloat = 34
     private static let buttonMaximumPointSize: CGFloat = 28
@@ -71,6 +72,7 @@ class VoiceOverAlertViewController: UIViewController, Coordinated {
         let stackView = self.voiceOverActivationInstructionsView!
         stackView.insertArrangedSubview(self.openSettingsButton, at: stackView.arrangedSubviews.firstIndex(of: instructionsLabel)! + 1)
         stackView.spacing = VoiceOverAlertViewController.blockSpacing
+        stackView.setCustomSpacing(VoiceOverAlertViewController.iconTopSpacing, after: self.openSettingsButton)
         self.openSettingsButton.addTarget(self, action: #selector(onOpenSettingsButtonTouched), for: .touchUpInside)
 
         // Retirer la pile de la vue efface ses contraintes du xib : texte, bouton et icône défilent, alignés en haut.

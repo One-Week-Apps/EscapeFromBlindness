@@ -211,11 +211,12 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
     }
 
     /// Côté commun à toutes les tuiles : autant de colonnes que la largeur en permet (au moins trois),
-    /// moins si le texte agrandi ne tiendrait plus. Les bords de la grille restent ceux de l'écran.
+    /// moins si le texte agrandi ne tiendrait plus. Les colonnes remplissent la largeur : marges gauche et droite identiques.
     static func tileSide(forWidth width: CGFloat, minimumSide: CGFloat) -> CGFloat {
         guard width > 0 else { return minimumSide }
         func side(_ columns: CGFloat) -> CGFloat {
-            return floor((width - spacing * (columns - 1)) / columns / gridUnit) * gridUnit
+            // Arrondi au demi-point inférieur : le rang tient toujours, sans reste visible à droite.
+            return floor((width - spacing * (columns - 1)) / columns * 2) / 2
         }
         var columns = max(minimumColumns, floor((width + spacing) / (preferredTileSide + spacing)))
         while columns > 1 && side(columns) < minimumSide {
