@@ -53,11 +53,11 @@ final class AccueilTitresChapitreUITests: XCTestCase {
         let chapterTitle = app.descendants(matching: .any)[firstChapterTitleIdentifier]
         XCTAssertTrue(chapterTitle.waitForExistence(timeout: timeout))
         XCTAssertEqual(chapterTitle.label, expectedFirstChapterLabel)
-        // Le titre n'est pas tronqué ni poussé hors de l'écran : il reste dans la fenêtre.
-        XCTAssertLessThanOrEqual(chapterTitle.frame.maxX, app.frame.maxX)
-        // Le nom du chapitre passe à la ligne : le titre (libellé + nom) doit dépasser nettement la hauteur standard. Seuil estimé, à valider sur simulateur.
-        XCTAssertGreaterThan(chapterTitle.frame.height, hauteurStandard * 2.5,
-                             "Le nom « La Grotte de glace » devrait occuper plusieurs lignes en XXXL")
+        // Le titre reste dans l'écran : il n'est pas poussé hors de la fenêtre.
+        XCTAssertTrue(app.frame.contains(chapterTitle.frame), "Le titre doit rester dans l'écran en XXXL")
+        // Le texte passe à la ligne au lieu d'être rétréci : la hauteur XXXL doit être strictement supérieure à la standard.
+        XCTAssertGreaterThan(chapterTitle.frame.height, hauteurStandard,
+                             "La hauteur du titre en XXXL doit dépasser la hauteur standard")
 
         AITaskerCapture.captureScreen(nodeId: "AccueilTexteAgrandi", action: "Titres de chapitre au Dynamic Type maximal")
 

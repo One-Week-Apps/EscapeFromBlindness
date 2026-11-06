@@ -13,7 +13,8 @@ class LoadLevelCollectionViewCellHeader: UICollectionReusableView {
     static let numberMaximumPointSize: CGFloat = 28
     static let numberColor = UIColor(white: 1, alpha: 0.75)
     /// Comme le titre de l'écran : le point des « i » et les accents dépassent la hauteur de ligne par défaut de la fonte.
-    static let lineHeightMultiple: CGFloat = 1.2
+    /// Appliqué au seul nom du chapitre ; la marge au-dessus de la première ligne reste celle de `insets`.
+    static let nameLineHeightMultiple: CGFloat = 1.2
 
     let titleLabel = UILabel()
 
@@ -34,13 +35,13 @@ class LoadLevelCollectionViewCellHeader: UICollectionReusableView {
             .font: numberFont(compatibleWith: traitCollection),
             .foregroundColor: numberColor
         ])
+        let nameParagraph = NSMutableParagraphStyle()
+        nameParagraph.lineHeightMultiple = nameLineHeightMultiple
         title.append(NSAttributedString(string: name, attributes: [
             .font: nameFont(compatibleWith: traitCollection),
-            .foregroundColor: UIColor.white
+            .foregroundColor: UIColor.white,
+            .paragraphStyle: nameParagraph
         ]))
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineHeightMultiple = lineHeightMultiple
-        title.addAttribute(.paragraphStyle, value: paragraph, range: NSRange(location: 0, length: title.length))
         return title
     }
 

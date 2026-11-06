@@ -50,7 +50,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private static let subtitleBottomSpacing: CGFloat = 16
     private static let titleLineHeightMultiple: CGFloat = 1.2
     private static let chapterTitleIdentifierPrefix = "levelSelection.chapterTitle."
-    fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Accueil")
+    fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LevelSelection")
 
     private lazy var viewModel = LevelSelectionViewModel(chapters: chapters)
 
