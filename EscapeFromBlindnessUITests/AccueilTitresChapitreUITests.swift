@@ -39,8 +39,15 @@ final class AccueilTitresChapitreUITests: XCTestCase {
     }
 
     func testAfficherLesTitresDeChapitreTexteAgrandi() {
+        // Référence en taille standard : hauteur du titre quand le nom tient sur une ligne.
+        let standardApp = launchAccueil()
+        let standardTitle = standardApp.descendants(matching: .any)[firstChapterTitleIdentifier]
+        XCTAssertTrue(standardTitle.waitForExistence(timeout: timeout))
+        let hauteurStandard = standardTitle.frame.height
+        standardApp.terminate()
+
         let app = launchAccueil(extraArguments: [
-            "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityExtraExtraExtraLarge"
+            "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL"
         ])
 
         let chapterTitle = app.descendants(matching: .any)[firstChapterTitleIdentifier]
@@ -48,6 +55,9 @@ final class AccueilTitresChapitreUITests: XCTestCase {
         XCTAssertEqual(chapterTitle.label, expectedFirstChapterLabel)
         // Le titre n'est pas tronqué ni poussé hors de l'écran : il reste dans la fenêtre.
         XCTAssertLessThanOrEqual(chapterTitle.frame.maxX, app.frame.maxX)
+        // Le nom du chapitre passe à la ligne : le titre (libellé + nom) doit dépasser nettement la hauteur standard. Seuil estimé, à valider sur simulateur.
+        XCTAssertGreaterThan(chapterTitle.frame.height, hauteurStandard * 2.5,
+                             "Le nom « La Grotte de glace » devrait occuper plusieurs lignes en XXXL")
 
         AITaskerCapture.captureScreen(nodeId: "AccueilTexteAgrandi", action: "Titres de chapitre au Dynamic Type maximal")
 

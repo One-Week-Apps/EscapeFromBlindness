@@ -86,7 +86,7 @@
 		A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000002 /* AITaskerCapture.swift */; };
 		A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */; };
 		A1E5C0DE000000000000000B /* HomeTitleBoldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */; };
-		A1E5C0DE00000000000000A3 /* AccueilTitresChapitreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE00000000000000A4 /* AccueilTitresChapitreUITests.swift */; };
+		3F9A07C2D18E46B5A0E2C9D4 /* AccueilTitresChapitreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2E5D1C94A08F36E1D7B0C8 /* AccueilTitresChapitreUITests.swift */; };
 		A1E5C0DE0000000000001013 /* ChoixNiveauVerrouilleVoiceOverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */; };
 		A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */; };
 		A1E5C0DE0000000000000023 /* InstructionsRejouerHintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */; };
@@ -123,7 +123,7 @@
 		A1E5C0DE0000000000000002 /* AITaskerCapture.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AITaskerCapture.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LevelSelectionUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeTitleBoldUITests.swift; sourceTree = "<group>"; };
-		A1E5C0DE00000000000000A4 /* AccueilTitresChapitreUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccueilTitresChapitreUITests.swift; sourceTree = "<group>"; };
+		7B2E5D1C94A08F36E1D7B0C8 /* AccueilTitresChapitreUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccueilTitresChapitreUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChoixNiveauVerrouilleVoiceOverUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintTests.swift; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 				A1E5C0DE0000000000000004 /* LevelSelectionUITests.swift */,
 				A1E5C0DE0000000000000002 /* AITaskerCapture.swift */,
 				A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */,
-				A1E5C0DE00000000000000A4 /* AccueilTitresChapitreUITests.swift */,
+				7B2E5D1C94A08F36E1D7B0C8 /* AccueilTitresChapitreUITests.swift */,
 				A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */,
 				A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */,
 				A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */,
@@ -754,7 +754,7 @@
 				A1E5C0DE0000000000000003 /* LevelSelectionUITests.swift in Sources */,
 				A1E5C0DE0000000000000001 /* AITaskerCapture.swift in Sources */,
 				A1E5C0DE000000000000000B /* HomeTitleBoldUITests.swift in Sources */,
-				A1E5C0DE00000000000000A3 /* AccueilTitresChapitreUITests.swift in Sources */,
+				3F9A07C2D18E46B5A0E2C9D4 /* AccueilTitresChapitreUITests.swift in Sources */,
 				A1E5C0DE0000000000001013 /* ChoixNiveauVerrouilleVoiceOverUITests.swift in Sources */,
 				A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */,
 				A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */,
