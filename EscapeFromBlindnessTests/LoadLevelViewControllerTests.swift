@@ -191,7 +191,7 @@ class LoadLevelViewControllerTests: XCTestCase {
 
         let label = chapterHeader(section: 0)?.titleLabel
         let lines = label?.attributedText?.string.components(separatedBy: "\n")
-        XCTAssertEqual(lines, ["\(L10n.chapter) 1", L10n.chapter1Title])
+        XCTAssertEqual(lines, [L10n.chapterNumber(1), L10n.chapter1Title])
         XCTAssertEqual(label?.accessibilityLabel, L10n.chapterHeading(1, L10n.chapter1Title))
         XCTAssertEqual(label?.numberOfLines, 0)
         XCTAssertEqual(label?.adjustsFontSizeToFitWidth, false)
@@ -206,11 +206,16 @@ class LoadLevelViewControllerTests: XCTestCase {
         XCTAssertGreaterThan(large, standard)
     }
 
-    func test_chapterHeading_isTranslatedWithFrenchTypography() {
+    func test_chapterHeading_isTranslatedForVoiceOverAsNumberThenName() {
         XCTAssertEqual(localized("chapter_heading", "fr").map { String(format: $0, 1, localized("chapter1_title", "fr") ?? "") },
-                       "Chapitre 1 : La Grotte de glace")
+                       "Chapitre 1, La Grotte de glace")
         XCTAssertEqual(localized("chapter_heading", "en").map { String(format: $0, 1, localized("chapter1_title", "en") ?? "") },
-                       "Chapter 1: Ice Cave")
+                       "Chapter 1, Ice Cave")
+    }
+
+    func test_chapterNumber_keepsWordAndNumberTogetherWithNonBreakingSpace() {
+        XCTAssertEqual(localized("chapter_number", "fr").map { String(format: $0, 1) }, "Chapitre\u{00A0}1")
+        XCTAssertEqual(localized("chapter_number", "en").map { String(format: $0, 1) }, "Chapter\u{00A0}1")
     }
 
     private func chapterHeader(section: Int) -> LoadLevelCollectionViewCellHeader? {

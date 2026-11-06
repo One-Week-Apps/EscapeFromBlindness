@@ -50,7 +50,7 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private static let subtitleBottomSpacing: CGFloat = 16
     private static let titleLineHeightMultiple: CGFloat = 1.2
     private static let chapterTitleIdentifierPrefix = "levelSelection.chapterTitle."
-    fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LevelSelection")
+    fileprivate static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Accueil")
 
     private lazy var viewModel = LevelSelectionViewModel(chapters: chapters)
 
@@ -232,10 +232,12 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
         return CGSize(width: width, height: height)
     }
 
+    /// « Chapitre 1 », espace insécable : le numéro ne se détache jamais du mot.
     private func chapterNumber(_ chapter: Chapter) -> String {
-        return "\(L10n.chapter) \(chapter.index)"
+        return L10n.chapterNumber(chapter.index)
     }
 
+    /// Libellé lu par VoiceOver en un seul élément : « Chapitre 1, Nom ».
     private func chapterHeading(_ chapter: Chapter) -> String {
         return L10n.chapterHeading(chapter.index, chapter.title ?? "")
     }
@@ -250,6 +252,9 @@ extension LoadLevelViewController: UICollectionViewDataSource, UICollectionViewD
             ) as! LoadLevelCollectionViewCellHeader
             
             let chapter = self.chapters[indexPath.section]
+            if chapter.title == nil {
+                LoadLevelViewController.logger.error("Chapter \(chapter.index) has no title: its header shows the number only")
+            }
             header.configure(number: chapterNumber(chapter), name: chapter.title ?? "", accessibilityLabel: chapterHeading(chapter))
             header.titleLabel.accessibilityTraits = .header
             header.titleLabel.accessibilityIdentifier = "\(LoadLevelViewController.chapterTitleIdentifierPrefix)\(chapter.index)"

@@ -126,9 +126,13 @@ internal enum L10n {
   internal static let chapter4L2desc = L10n.tr("Localizable", "chapter4_l2desc", fallback: "You approach the second room with 3 blocks incrusted in the wall. You can probably pull them. A beautiful painting of the mountain is represented on the ceiling.")
   /// The Hidden Tomb
   internal static let chapter4Title = L10n.tr("Localizable", "chapter4_title", fallback: "The Hidden Tomb")
-  /// Chapter %d: %@
+  /// Chapter %d, %@
   internal static func chapterHeading(_ p1: Int, _ p2: Any) -> String {
-    return L10n.tr("Localizable", "chapter_heading", p1, String(describing: p2), fallback: "Chapter %d: %@")
+    return L10n.tr("Localizable", "chapter_heading", p1, String(describing: p2), fallback: "Chapter %d, %@")
+  }
+  /// Chapter %d
+  internal static func chapterNumber(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "chapter_number", p1, fallback: "Chapter %d")
   }
   /// complete
   internal static let complete = L10n.tr("Localizable", "complete", fallback: "complete")

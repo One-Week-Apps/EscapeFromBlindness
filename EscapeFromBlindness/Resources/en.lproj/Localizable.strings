@@ -153,7 +153,8 @@
 "chapter4_cq2desc2" = "The bloc in the middle.";
 
 "chapter4_cq2desc3" = "The bloc on the right.";
-"chapter_heading" = "Chapter %d: %@";
+"chapter_number" = "Chapter\U00a0%d";
+"chapter_heading" = "Chapter %d, %@";
 "chapter1_title" = "Ice Cave";
 "chapter2_title" = "The Lost City";
 "chapter3_title" = "Hidden Valley";
