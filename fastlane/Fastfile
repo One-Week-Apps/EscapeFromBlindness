@@ -1,0 +1,66 @@
+# App Store Connect API key, kept outside the repo.
+# Override with APP_STORE_CONNECT_API_KEY_PATH if needed.
+API_KEY_PATH = ENV.fetch("APP_STORE_CONNECT_API_KEY_PATH", File.expand_path("~/.appstoreconnect/api_key.json"))
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Pull the live App Store listing (texts, keywords, URLs, screenshots) into fastlane/"
+  lane :pull_listing do
+    sh("cd .. && fastlane deliver download_metadata --api_key_path #{API_KEY_PATH} --force")
+    sh("cd .. && fastlane deliver download_screenshots --api_key_path #{API_KEY_PATH} --force")
+  end
+
+  desc "Push texts (and screenshots with screenshots:true) to the version being prepared, without submitting"
+  lane :prepare_release do |options|
+    with_screenshots = options[:screenshots] == true || options[:screenshots] == "true"
+    deliver(
+      api_key_path: API_KEY_PATH,
+      app_version: options[:version] || get_version_number(target: "EscapeFromBlindness"),
+      build_number: options[:build],
+      skip_binary_upload: true,
+      skip_screenshots: !with_screenshots,
+      overwrite_screenshots: with_screenshots,
+      submit_for_review: false,
+      force: true,
+      precheck_include_in_app_purchases: false,
+      run_precheck_before_submit: false
+    )
+  end
+
+  desc "Submit the prepared version for App Review"
+  lane :submit do |options|
+    deliver(
+      api_key_path: API_KEY_PATH,
+      app_version: options[:version] || get_version_number(target: "EscapeFromBlindness"),
+      build_number: options[:build],
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      skip_metadata: true,
+      submit_for_review: true,
+      automatic_release: true,
+      force: true,
+      precheck_include_in_app_purchases: false,
+      submission_information: { add_id_info_uses_idfa: false, export_compliance_uses_encryption: false }
+    )
+  end
+  desc "Upload app previews from fastlane/app_previews/<locale>/iphone_69.mp4 (deliver does not handle videos)"
+  lane :upload_previews do |options|
+    require "spaceship"
+    Spaceship::ConnectAPI.token = Spaceship::ConnectAPI::Token.from(filepath: API_KEY_PATH)
+    app = Spaceship::ConnectAPI::App.find(CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier))
+    version_string = options[:version] || get_version_number(target: "EscapeFromBlindness")
+    version = app.get_edit_app_store_version(platform: Spaceship::ConnectAPI::Platform::IOS)
+    UI.user_error!("No editable version #{version_string}") unless version && version.version_string == version_string
+    Dir.glob(File.expand_path("app_previews/*/iphone_69.mp4", __dir__)).each do |path|
+      locale = File.basename(File.dirname(path))
+      localization = version.get_app_store_version_localizations.find { |l| l.locale == locale }
+      next UI.important("No #{locale} localization, skipped") unless localization
+      set = localization.get_app_preview_sets.find { |s| s.preview_type == "IPHONE_67" } ||
+            localization.create_app_preview_set(attributes: { previewType: "IPHONE_67" })
+      (set.app_previews || []).each(&:delete!)
+      Spaceship::ConnectAPI::AppPreview.create(app_preview_set_id: set.id, path: path, wait_for_processing: false)
+      UI.success("Uploaded #{locale} preview")
+    end
+  end
+end

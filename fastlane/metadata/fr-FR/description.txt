@@ -1,0 +1,19 @@
+Escape From Blindness est un escape game qui se joue entièrement à l'oreille, avec VoiceOver, le lecteur d'écran de l'iPhone.
+
+Jack l'explorateur est enfermé au fond d'une caverne, sans torche. L'écran reste noir : ce sont tes oreilles qui te guident. Écoute les descriptions, explore chaque zone du doigt, trouve les codes et résous les énigmes pour l'aider à sortir.
+
+POUR QUI ?
+• Les joueurs déficients visuels, qui utilisent VoiceOver au quotidien.
+• Les voyants curieux de découvrir comment on utilise un iPhone sans le voir. Un vrai défi !
+
+LE JEU
+• 4 chapitres et 12 niveaux : la Grotte de glace, la Cité perdue, la Vallée cachée et le Tombeau caché.
+• Des choix à faire, des codes de porte à trouver, des mots de passe à retenir et des salles à fouiller.
+• Des indices quand tu bloques : le premier est immédiat, et le jeu annonce quand vient le suivant.
+• Ta progression est sauvegardée, et tu peux rejouer depuis le chapitre 1 sans la perdre.
+• Ambiance sonore et musique, même en mode silencieux.
+• En français et en anglais.
+
+VoiceOver est obligatoire pour jouer : impossible de tricher ! Le jeu t'explique comment l'activer en un triple clic.
+
+Une question ou une idée ? Écris-nous à michael@one-week-apps.com.

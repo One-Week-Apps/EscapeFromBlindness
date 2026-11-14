@@ -1,0 +1,7 @@
+• A wrong answer is now announced: "No, that's not it."
+• Door codes can be tried with a double tap, with a VoiceOver hint.
+• The first hint is available right away, and the game tells you when the next one comes.
+• VoiceOver starts on the question when each level opens.
+• Replay keeps your progress and skips the tutorial.
+• Music now plays in silent mode too.
+• Fixes: replayed levels, chapter 4 areas, answer typing, translations.
