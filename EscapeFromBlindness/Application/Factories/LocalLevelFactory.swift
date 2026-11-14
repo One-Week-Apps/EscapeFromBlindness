@@ -15,7 +15,7 @@ class LocalLevelFactory: LevelFactory {
     static let chapters = [
         Chapter(
             index: 1,
-            title: "Ice Cave",
+            title: L10n.chapter1Title,
             description: L10n.chapter1Description,
             keywords: ["door", "trap", "bridge", "bats", "lever"],
             levels: [
@@ -32,29 +32,29 @@ class LocalLevelFactory: LevelFactory {
 
         Chapter(
             index: 2,
-            title: "The Lost City",
+            title: L10n.chapter2Title,
             description: L10n.chapter2Description,
             keywords: ["bear", "wolves", "spikes", "water"],
             levels: [
                 // Rotor Levels
                 RotorLevel(
                     clues: [L10n.chapter2Cq1a1, L10n.chapter2Cq1a2, L10n.chapter2Cq1a3, L10n.chapter2Cq1a4],
-                    answers: ["4402", String(randomDigits(4)), String(randomDigits(4))].shuffled(),
+                    answers: (["4402"] + randomCodes(2, length: 4, excluding: "4402")).shuffled(),
                     validAnswers: ["4402"],
-                    hints: [L10n.chapter2Cq1h1, "How many legs does a bear have? and a wolf?", "A bear has 4 legs, a wolf has 1"]
+                    hints: [L10n.chapter2Cq1h1, L10n.chapter2Cq1h2, L10n.chapter2Cq1h3]
                 ),
                 RotorLevel(
                     clues: [L10n.chapter2Cq2a1, L10n.chapter2Cq2a2, L10n.chapter2Cq2a3],
                     answers: [L10n.chapter2Cq2aa1, L10n.chapter2Cq2aa2, L10n.chapter2Cq2aa3, L10n.chapter2Cq2aa4].shuffled(),
                     validAnswers: [L10n.chapter2Cq2aa1],
-                    hints: ["This should be related to the key elements I can see.", "Take the initial letter of each key element", "What are the first letters of water, bird, owl"]
+                    hints: [L10n.chapter2Cq2h1, L10n.chapter2Cq2h2, L10n.chapter2Cq2h3]
                 )
             ]
         ),
 
         Chapter(
             index: 3,
-            title: "Hidden Valley",
+            title: L10n.chapter3Title,
             description: L10n.chapter3Description,
             keywords: ["climbing", "waterfall", "temple", "door mechanism"],
             levels: [
@@ -62,7 +62,7 @@ class LocalLevelFactory: LevelFactory {
                 OpenQuestionLevel(
                     question: L10n.chapter3Q1,
                     validAnswers: [L10n.chapter3A1],
-                    hints: ["You can always come back to the last level if you don't remember the answer."]
+                    hints: [L10n.chapter3Q1h1]
                 ),
                 OpenQuestionLevel(
                     question: L10n.chapter3Q2,
@@ -81,7 +81,7 @@ class LocalLevelFactory: LevelFactory {
 
         Chapter(
             index: 4,
-            title: "The Hidden Tomb",
+            title: L10n.chapter4Title,
             description: L10n.chapter4Description,
             keywords: ["puzzle", "blocks", "walls", "jewels", "tiles"],
             levels: [
@@ -96,7 +96,7 @@ class LocalLevelFactory: LevelFactory {
                         (description: L10n.chapter4Cq3desc, [L10n.chapter4Cq1a1, L10n.chapter4Cq1a2], results: [L10n.chapter4Cq1r1, L10n.chapter4Cq1r2])
                     ],
                     validActions: [L10n.chapter4Cq1a2, L10n.chapter4Cq1a1, L10n.chapter4Cq1a2],
-                    hints: ["what kind of animals you did saw before?", "You can always come back to the last level if you don't remember the answer.", "activate the lever only for the eagle as it is the only one you saw"]
+                    hints: [L10n.chapter4L1h1, L10n.chapter4L1h2, L10n.chapter4L1h3]
                 )!,
                 
                 SearchLevel(
@@ -109,7 +109,7 @@ class LocalLevelFactory: LevelFactory {
                        (description: L10n.chapter4Cq2desc3, actions: [L10n.chapter4Cq2a1, L10n.chapter4Cq2a2, L10n.chapter4Cq2a3, L10n.chapter4Cq2a4], results: [L10n.chapter4Cq2r1, L10n.chapter4Cq2r2, L10n.chapter4Cq2r1, L10n.chapter4Cq2r1])
                    ],
                    validActions: [L10n.chapter4Cq2a2, L10n.chapter4Cq2a3, L10n.chapter4Cq2a2],
-                   hints: ["what shape does a mountain have?", "pull each bloc to represent a mountain", "a mountain represents a triangle so the first bloc should be pulled once, the second twice ..."]
+                   hints: [L10n.chapter4L2h1, L10n.chapter4L2h2, L10n.chapter4L2h3]
                )!
             ]
         )

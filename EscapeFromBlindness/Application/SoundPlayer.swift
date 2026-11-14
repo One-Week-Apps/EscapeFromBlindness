@@ -25,7 +25,11 @@ class SoundPlayer: SoundPlayerProtocol {
         if audioPlayer != nil {
             stop()
         }
-        
+
+        // The game is played with VoiceOver, which speaks even in silent mode:
+        // the ambient music must play too, without interrupting other apps' audio.
+        try? AVAudioSession.sharedInstance().setCategory(.playback, options: .mixWithOthers)
+
         audioPlayer = try? AVAudioPlayer(contentsOf: Bundle.customSoundURL(type: type))
         audioPlayer?.volume = 0.3
         audioPlayer?.numberOfLoops = -1

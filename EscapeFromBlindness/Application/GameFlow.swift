@@ -2,6 +2,7 @@ protocol Router {
     func routeToChapter(_ chapter: Chapter, isNewChapter: Bool)
     func routeToLevel(_ level: Level)
     func routeToResults()
+    func routeToWrongAnswer()
 }
 
 protocol GameFlowProtocol {
@@ -11,7 +12,7 @@ protocol GameFlowProtocol {
     func getCurrentLevelIndex(levelIndex: Int?) -> Int
     func start()
     func loadLevel(_ chapterIndex: Int, _ levelIndex: Int)
-    func restart()
+    func replayFromStart()
     func validate(_ answers: [Level.Answer])
     func validateChapter()
 }
@@ -40,6 +41,15 @@ class GameFlow: GameFlowProtocol {
     }
     private var currentLevel: Level? {
         return self.currentChapter?.levels[safe: self.currentLevelIndex]
+    }
+
+    /// Already solved level the player replays from the menu, without changing their progress.
+    /// The chapter index follows the same convention as `currentChapterIndex` (starts at 1).
+    private var replayPosition: (chapterIndex: Int, levelIndex: Int)?
+
+    private var playedLevel: Level? {
+        guard let replayPosition = self.replayPosition else { return self.currentLevel }
+        return self.chapters[safe: replayPosition.chapterIndex - 1]?.levels[safe: replayPosition.levelIndex]
     }
     
     var router: Router?
@@ -70,40 +80,73 @@ class GameFlow: GameFlowProtocol {
     
     func loadLevel(_ chapterIndex: Int, _ levelIndex: Int) {
         if let chapter = self.chapters[safe: chapterIndex], let level = chapter.levels[safe: levelIndex] {
-            //router?.routeToChapter(chapter, isNewChapter: false)
+            replay(chapterIndex: chapterIndex + 1, levelIndex: levelIndex)
             router?.routeToLevel(level)
         }
     }
     
-    func restart() {
-        self.currentChapterIndex = 0
-        self.currentLevelIndex = 0
+    /// Plays the game again from chapter 1 without losing the progress: every level stays completed.
+    func replayFromStart() {
+        guard let firstChapter = self.chapters.first else { return }
+        replay(chapterIndex: 1, levelIndex: 0)
+        router?.routeToChapter(firstChapter, isNewChapter: false)
+    }
+
+    private func replay(chapterIndex: Int, levelIndex: Int) {
+        let isCurrentProgress = chapterIndex == self.currentChapterIndex && levelIndex == self.currentLevelIndex
+        self.replayPosition = isCurrentProgress ? nil : (chapterIndex, levelIndex)
     }
     
     func validate(_ answers: [Level.Answer]) {
-        if validateAnswers(answers) {
-            self.currentLevelIndex += 1
-            
-            if hasReachedNewChapter() {
-                self.currentChapterIndex += 1
-                let levelIndexSwap = self.currentLevelIndex
-                self.currentLevelIndex = 0
-                
-                if let chapter = self.currentChapter {
-                    router?.routeToChapter(chapter, isNewChapter: true)
-                } else {
-                    self.currentChapterIndex -= 1
-                    self.currentLevelIndex = levelIndexSwap
-                    router?.routeToResults()
-                }
-            } else {
-                if let level = self.currentLevel {
-                    router?.routeToLevel(level)
-                }
-            }
+        guard let level = self.playedLevel, level.isSolved(by: answers) else {
+            router?.routeToWrongAnswer()
+            return
+        }
+
+        if let replayPosition = self.replayPosition {
+            advanceReplay(from: replayPosition)
+        } else {
+            advanceProgress()
         }
     }
-    
+
+    private func advanceReplay(from position: (chapterIndex: Int, levelIndex: Int)) {
+        let levelsCount = self.chapters[safe: position.chapterIndex - 1]?.levels.count ?? 0
+
+        if position.levelIndex + 1 < levelsCount {
+            replay(chapterIndex: position.chapterIndex, levelIndex: position.levelIndex + 1)
+            if let level = self.playedLevel {
+                router?.routeToLevel(level)
+            }
+        } else if let nextChapter = self.chapters[safe: position.chapterIndex] {
+            replay(chapterIndex: position.chapterIndex + 1, levelIndex: 0)
+            router?.routeToChapter(nextChapter, isNewChapter: false)
+        } else {
+            self.replayPosition = nil
+            router?.routeToResults()
+        }
+    }
+
+    private func advanceProgress() {
+        self.currentLevelIndex += 1
+
+        if hasReachedNewChapter() {
+            self.currentChapterIndex += 1
+            let levelIndexSwap = self.currentLevelIndex
+            self.currentLevelIndex = 0
+
+            if let chapter = self.currentChapter {
+                router?.routeToChapter(chapter, isNewChapter: true)
+            } else {
+                self.currentChapterIndex -= 1
+                self.currentLevelIndex = levelIndexSwap
+                router?.routeToResults()
+            }
+        } else if let level = self.currentLevel {
+            router?.routeToLevel(level)
+        }
+    }
+
     private func hasReachedNewChapter() -> Bool {
         if let currentChapter = self.currentChapter {
             return self.currentLevelIndex >= currentChapter.levels.count
@@ -120,16 +163,8 @@ class GameFlow: GameFlowProtocol {
             return
         }
         
-        if let level = self.currentLevel {
+        if let level = self.playedLevel {
             router?.routeToLevel(level)
-        }
-    }
-    
-    private func validateAnswers(_ answers: [Level.Answer]) -> Bool {
-        if let currentLevel = self.currentLevel {
-            return currentLevel.validAnswers == answers
-        } else {
-            return false
         }
     }
     

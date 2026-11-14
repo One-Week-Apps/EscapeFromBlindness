@@ -19,12 +19,12 @@ protocol AppCoordinatorProtocol: class {
     func presentSearchQuestionController(_ level: Level)
     
     func presentLoadLevelController()
-    
+
     func validateChapter()
     func validate(_ answers: [Level.Answer])
-    
+
     func loadLevel(_ chapterIndex: Int, levelIndex: Int)
-    
+
     func replay()
 }
 
@@ -45,6 +45,8 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
     }
     
     private let userDefaults: UserDefaults
+    /// VoiceOver drops an announcement posted while it still handles the gesture (rotor swipe, action double tap).
+    internal var wrongAnswerAnnouncementDelay: TimeInterval = 0.5
     private let gameFlow: GameFlowProtocol
     private let soundPlayer: SoundPlayerProtocol
     
@@ -186,13 +188,9 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
     }
     
     // MARK: - Replay
+    /// Replays the game from chapter 1, without the tutorial and without erasing the progress.
     func replay() {
-        guard let window = window else { return }
-        
-        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.currentChapterIndex.rawValue)
-        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.currentLevelIndex.rawValue)
-        self.gameFlow.restart()
-        self.start(window: window)
+        self.gameFlow.replayFromStart()
     }
     
     // MARK: - Private Methods
@@ -259,6 +257,20 @@ extension AppCoordinator: Router {
     
     func routeToResults() {
         self.presentIntroController(.gameEnd)
+    }
+
+    func routeToWrongAnswer() {
+        let announcement = NSAttributedString(
+            string: L10n.wrongAnswer,
+            attributes: [.accessibilitySpeechQueueAnnouncement: true]
+        )
+        guard wrongAnswerAnnouncementDelay > 0 else {
+            EscapeFromBlindnessAccessibility.shared.post(notification: .announcement, argument: announcement)
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + wrongAnswerAnnouncementDelay) {
+            EscapeFromBlindnessAccessibility.shared.post(notification: .announcement, argument: announcement)
+        }
     }
     
     private func playAmbiantSound(for chapter: Chapter) {
