@@ -1,7 +1,1 @@
-• Une mauvaise réponse est maintenant annoncée : « Non, ce n'est pas ça. »
-• Les codes de la porte s'essaient d'une touche double, avec une aide VoiceOver.
-• Le premier indice est immédiat, et le jeu annonce quand vient le suivant.
-• VoiceOver se place sur la question à l'ouverture de chaque niveau.
-• Rejouer garde ta progression et ne relance plus le tutoriel.
-• La musique joue aussi en mode silencieux.
-• Corrections : niveaux rejoués, zones du chapitre 4, saisie des réponses, traductions.
+Affichage amélioré sur iPad, textes qui suivent la taille de police choisie, corrections de l'écran de sélection des niveaux et de l'alerte VoiceOver.
