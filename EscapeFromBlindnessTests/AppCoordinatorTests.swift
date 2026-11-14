@@ -87,6 +87,14 @@ class AppCoordinatorTests: XCTestCase {
         XCTAssertTrue(sut.isVoiceOverAlertActive)
     }
 
+    func test_voiceOverAlert_shouldBePresentedFullScreen() {
+        sut.start(window: UIWindow())
+
+        let alert = sut.makeVoiceOverAlert()
+
+        XCTAssertEqual(alert.modalPresentationStyle, .fullScreen)
+    }
+
     func test_IntroVCIsPresented_VoiceOverEnabled_shouldNotPresentVoiceOverAlert() {
         sut.presentIntroController(.intro)
         

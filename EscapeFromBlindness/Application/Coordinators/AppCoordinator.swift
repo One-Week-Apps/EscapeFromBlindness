@@ -120,12 +120,17 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
     // MARK: - Activate VoiceOver Alert
     internal var isVoiceOverAlertActive = false
     
-    func showActivateVoiceOverAlert() {
-        self.isVoiceOverAlertActive = true
+    /// Full screen on iPad too (the default page sheet would show the level selection behind it).
+    func makeVoiceOverAlert() -> VoiceOverAlertViewController {
         let viewController = VoiceOverAlertViewController.fromXib()
         viewController.coordinator = self
-        // Full screen on iPad too (the default page sheet would show the level selection behind it).
         viewController.modalPresentationStyle = .fullScreen
+        return viewController
+    }
+
+    func showActivateVoiceOverAlert() {
+        self.isVoiceOverAlertActive = true
+        let viewController = makeVoiceOverAlert()
         self.lastNavigationControllerViewController?.present(
             viewController,
             animated: false,
