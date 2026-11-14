@@ -66,7 +66,11 @@ class VoiceOverAlertViewController: UIViewController, Coordinated {
     /// the button stays reachable instead of going off screen.
     private func setupOpenSettingsButton() {
         let instructionsLabel = self.voiceOverActivationInstructionsLabel!
-        instructionsLabel.font = UIFontMetrics(forTextStyle: .title2).scaledFont(for: instructionsLabel.font, maximumPointSize: VoiceOverAlertViewController.instructionsMaximumPointSize)
+        // On iPad the explanation is set larger, with its cap raised by the same factor.
+        instructionsLabel.font = UIFontMetrics(forTextStyle: .title2).scaledFont(
+            for: instructionsLabel.font.withSize(instructionsLabel.font.pointSize * UIFont.iPadSizeFactor),
+            maximumPointSize: VoiceOverAlertViewController.instructionsMaximumPointSize * UIFont.iPadSizeFactor
+        )
         instructionsLabel.adjustsFontForContentSizeCategory = true
         instructionsLabel.accessibilityIdentifier = VoiceOverAlertViewController.instructionsIdentifier
 
@@ -86,16 +90,26 @@ class VoiceOverAlertViewController: UIViewController, Coordinated {
         let safeArea = self.view.safeAreaLayoutGuide
         let content = scrollView.contentLayoutGuide
         let frame = scrollView.frameLayoutGuide
+        // Preferred, not required: on a tall screen the column is centred; when the text needs more room, it stretches to the content.
+        let stackWidth = stackView.widthAnchor.constraint(equalTo: content.widthAnchor, constant: -2 * VoiceOverAlertViewController.sideMargin)
+        stackWidth.priority = .defaultHigh
+        let stackCentering = stackView.centerYAnchor.constraint(equalTo: content.centerYAnchor)
+        stackCentering.priority = .defaultHigh
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             content.widthAnchor.constraint(equalTo: frame.widthAnchor),
-            stackView.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: VoiceOverAlertViewController.sideMargin),
-            stackView.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -VoiceOverAlertViewController.sideMargin),
-            stackView.topAnchor.constraint(equalTo: content.topAnchor, constant: VoiceOverAlertViewController.topMargin),
-            stackView.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: -VoiceOverAlertViewController.bottomMargin),
+            // The content is at least as tall as the screen, so that the column can be centred in it.
+            content.heightAnchor.constraint(greaterThanOrEqualTo: frame.heightAnchor),
+            // Centred in the screen, in a column no wider than the readable width (iPad), between the margins (iPhone).
+            stackView.centerXAnchor.constraint(equalTo: content.centerXAnchor),
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: self.view.readableContentGuide.widthAnchor),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: content.topAnchor, constant: VoiceOverAlertViewController.topMargin),
+            stackView.bottomAnchor.constraint(lessThanOrEqualTo: content.bottomAnchor, constant: -VoiceOverAlertViewController.bottomMargin),
+            stackWidth,
+            stackCentering,
             // The stack centers its items: without this width, the text grows past the margins and gets clipped.
             instructionsLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             // Full width: the label wraps between the margins instead of being clipped.
@@ -104,6 +118,18 @@ class VoiceOverAlertViewController: UIViewController, Coordinated {
         ])
     }
     
+    /// The logo is decoration: it is hidden when the text and the button need the whole screen (small iPhones, large text sizes).
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let scrollView = view.subviews.compactMap({ $0 as? UIScrollView }).first,
+              let stackView = voiceOverActivationInstructionsView,
+              let logo = stackView.arrangedSubviews.last as? UIImageView else { return }
+        // Measured on the laid-out content, once the logo is shown: hide it only when the content overflows the screen.
+        if !logo.isHidden && scrollView.contentSize.height > scrollView.bounds.height {
+            logo.isHidden = true
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(

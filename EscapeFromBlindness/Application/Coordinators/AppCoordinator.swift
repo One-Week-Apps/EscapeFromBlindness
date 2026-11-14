@@ -124,6 +124,8 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
         self.isVoiceOverAlertActive = true
         let viewController = VoiceOverAlertViewController.fromXib()
         viewController.coordinator = self
+        // Full screen on iPad too (the default page sheet would show the level selection behind it).
+        viewController.modalPresentationStyle = .fullScreen
         self.lastNavigationControllerViewController?.present(
             viewController,
             animated: false,
@@ -210,7 +212,14 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
         let isNonIntroViewController = !(self.lastNavigationControllerViewController is InstructionsViewController)
         let isVoiceOverRunning = EscapeFromBlindnessAccessibility.shared.isVoiceOverRunning
         
-        if isNonIntroViewController && !isVoiceOverRunning {
+        #if DEBUG
+        // UI tests: the simulator runs without VoiceOver; keep the end-of-chapter screen visible for its capture.
+        let isChapterCapture = ProcessInfo.processInfo.arguments.contains("-UITestChapter")
+        #else
+        let isChapterCapture = false
+        #endif
+
+        if isNonIntroViewController && !isVoiceOverRunning && !isChapterCapture {
             self.showActivateVoiceOverAlert()
         }
     }
