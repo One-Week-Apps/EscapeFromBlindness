@@ -10,6 +10,7 @@ extension UIFont {
     /// Usage: textLabel.font = UIFont.custom(style: .montserratSemiBold, size: 30)
     enum CustomFont: String {
         case lucioleRegular  = "Luciole-Regular"
+        case lucioleBold     = "Luciole-Bold"
         case montserratBlack = "Montserrat-Black"
         case montserratBold  = "Montserrat-Bold"
         case montserratExtraBold  = "Montserrat-ExtraBold"
