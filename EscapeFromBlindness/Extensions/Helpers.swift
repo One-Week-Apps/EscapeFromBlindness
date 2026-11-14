@@ -5,12 +5,19 @@
 
 import Foundation
 
-func randomDigits(_ count: Int) -> Int {
-    let digits = 0...9
-    let shuffledDigits = digits.shuffled()
-    let fourDigits = shuffledDigits.prefix(4)
-    let value = fourDigits.reduce(0) {
-        $0*10 + $1
+/// A code made of distinct digits, leading zero included ("0385", not "385").
+func randomCode(length: Int) -> String {
+    return (0...9).shuffled().prefix(length).map(String.init).joined()
+}
+
+/// `count` codes different from each other and from `excluded`.
+func randomCodes(_ count: Int, length: Int, excluding excluded: String) -> [String] {
+    var codes: Set<String> = []
+    while codes.count < count {
+        let code = randomCode(length: length)
+        if code != excluded {
+            codes.insert(code)
+        }
     }
-    return value
+    return Array(codes)
 }

@@ -17,6 +17,10 @@ class Level: CustomStringConvertible {
         self.hints = hints
     }
     
+    func isSolved(by answers: [Answer]) -> Bool {
+        return self.validAnswers == answers
+    }
+
     var description: String {
         return "\(String(describing: self)) Level"
     }
