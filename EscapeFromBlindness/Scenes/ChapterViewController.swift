@@ -18,14 +18,16 @@ class ChapterViewController: UIViewController, Coordinated {
         label.accessibilityTraits = .header
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont.custom(style: .montserratSemiBold, size: 16)
+        label.font = UIFontMetrics.default.scaledFont(for: UIFont.custom(style: .montserratSemiBold, size: 16))
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
-    
+
     var continueButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setTitle(L10n.go, for: .normal)
-        button.titleLabel?.font = .custom(style: .montserratExtraBold, size: 40)
+        button.titleLabel?.font = UIFontMetrics.default.scaledFont(for: .custom(style: .montserratExtraBold, size: 40))
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
         return button
     }()
     
@@ -69,9 +71,10 @@ class ChapterViewController: UIViewController, Coordinated {
         
         self.continueButton.translatesAutoresizingMaskIntoConstraints = false
         self.continueButton.topAnchor.constraint(equalTo: self.chapterLabel.bottomAnchor, constant: 50).isActive = true
-        let continueButtonWidth: CGFloat = 100.0
-        self.continueButton.widthAnchor.constraint(equalToConstant: continueButtonWidth).isActive = true
-        self.continueButton.heightAnchor.constraint(equalToConstant: continueButtonWidth).isActive = true
+        // At least 100 pt, and grows with the text at large Dynamic Type sizes.
+        let continueButtonMinimumSide: CGFloat = 100.0
+        self.continueButton.widthAnchor.constraint(greaterThanOrEqualToConstant: continueButtonMinimumSide).isActive = true
+        self.continueButton.heightAnchor.constraint(greaterThanOrEqualToConstant: continueButtonMinimumSide).isActive = true
         self.continueButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
         self.continueButton.addTarget(self, action: #selector(onContinueButtonTouched), for: .touchUpInside)
@@ -100,7 +103,14 @@ class ChapterViewController: UIViewController, Coordinated {
     private func showVoiceOvertAlertIfNeeded() {
         let isVoiceOverRunning = EscapeFromBlindnessAccessibility.shared.isVoiceOverRunning
         
-        if !isVoiceOverRunning {
+        #if DEBUG
+        // UI tests: the simulator runs without VoiceOver; keep the end-of-chapter screen visible for its capture.
+        let isChapterCapture = ProcessInfo.processInfo.arguments.contains("-UITestChapter")
+        #else
+        let isChapterCapture = false
+        #endif
+
+        if !isVoiceOverRunning && !isChapterCapture {
             coordinator?.showActivateVoiceOverAlert()
         }
     }

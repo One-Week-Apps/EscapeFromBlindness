@@ -29,6 +29,10 @@ class InstructionsViewController: UIViewController, Coordinated {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.enlargeTextForIPad()
+        // The text grows with Dynamic Type: its height comes from its content, and its width from the readable area.
+        instructionsLabel.constraints.filter { $0.firstAttribute == .height }.forEach { $0.isActive = false }
+        instructionsLabel.widthAnchor.constraint(greaterThanOrEqualTo: view.readableContentGuide.widthAnchor).isActive = true
         self.replayButton.setTitle(L10n.replay, for: .normal)
         self.replayButton.accessibilityHint = L10n.replayHint
         self.replayButton.accessibilityIdentifier = "instructions.replayButton"

@@ -29,7 +29,8 @@ class InstructionsViewController: UIViewController, Coordinated {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.enlargeTextForIPad()
+
         guard let instructions = scenario == .intro ? interactor?.fetchIntroInstructions() : interactor?.fetchGameEndInstructions() else {
             return
         }
