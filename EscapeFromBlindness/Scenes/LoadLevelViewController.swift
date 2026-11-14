@@ -43,9 +43,12 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private static let gridUnit: CGFloat = 8
     private static let spacing: CGFloat = 16
     private static let tilePadding: CGFloat = 8
-    private static let preferredTileSide: CGFloat = 96
+    private static let preferredTileSide: CGFloat = 96 * UIFont.iPadSizeFactor
     private static let minimumTouchTarget: CGFloat = 44
     private static let sideMargin: CGFloat = 16
+    private static let maximumContentWidth: CGFloat = 720
+    static let titlePointSize: CGFloat = 28
+    static let titleMaximumPointSize: CGFloat = 44
     private static let subtitleTopSpacing: CGFloat = 8
     private static let subtitleBottomSpacing: CGFloat = 16
     private static let titleLineHeightMultiple: CGFloat = 1.2
@@ -55,7 +58,8 @@ class LoadLevelViewController: UIViewController, Coordinated {
     private lazy var viewModel = LevelSelectionViewModel(chapters: chapters)
 
     static func titleFont(compatibleWith traitCollection: UITraitCollection? = nil) -> UIFont {
-        return UIFontMetrics(forTextStyle: .title1).scaledFont(for: .custom(style: .lucioleBold, size: 28), compatibleWith: traitCollection)
+        // Le titre reste le plus grand texte de l'écran, à toutes les tailles (grille UX : plafonner les titres).
+        return UIFontMetrics(forTextStyle: .title1).scaledFont(for: .custom(style: .lucioleBold, size: LoadLevelViewController.titlePointSize), maximumPointSize: LoadLevelViewController.titleMaximumPointSize, compatibleWith: traitCollection)
     }
 
     var subtitle: String {
@@ -155,10 +159,23 @@ class LoadLevelViewController: UIViewController, Coordinated {
         self.view.addSubview(self.subtitleLabel)
         self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         let safeArea = self.view.safeAreaLayoutGuide
+        let leading = self.subtitleLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin)
+        let trailing = self.subtitleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
+        leading.priority = .defaultHigh
+        trailing.priority = .defaultHigh
         NSLayoutConstraint.activate([
             self.subtitleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: LoadLevelViewController.subtitleTopSpacing),
-            self.subtitleLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
-            self.subtitleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
+            leading,
+            trailing
+        ])
+        self.constrainToReadableWidth(self.subtitleLabel)
+    }
+
+    /// On iPad the content stays at a readable width, centred; on iPhone the side margins apply as before.
+    private func constrainToReadableWidth(_ view: UIView) {
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(lessThanOrEqualToConstant: LoadLevelViewController.maximumContentWidth),
+            view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
     }
 
@@ -172,12 +189,17 @@ class LoadLevelViewController: UIViewController, Coordinated {
         self.view.addSubview(self.collectionView)
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         let safeArea = self.view.safeAreaLayoutGuide
+        let leading = self.collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin)
+        let trailing = self.collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
+        leading.priority = .defaultHigh
+        trailing.priority = .defaultHigh
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.subtitleLabel.bottomAnchor, constant: LoadLevelViewController.subtitleBottomSpacing),
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            self.collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: LoadLevelViewController.sideMargin),
-            self.collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -LoadLevelViewController.sideMargin)
+            leading,
+            trailing
         ])
+        self.constrainToReadableWidth(self.collectionView)
     }
     
 }

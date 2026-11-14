@@ -264,4 +264,14 @@ class LoadLevelViewControllerTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(sizes.map(\.height).min()!, 44)
     }
 
+    func test_wideScreen_shouldCentreTheLevelGridInAReadableColumn() {
+        window.frame = CGRect(x: 0, y: 0, width: 1024, height: 768)
+        loadView()
+        sut.view.frame = window.bounds
+        sut.view.layoutIfNeeded()
+
+        XCTAssertLessThanOrEqual(sut.collectionView.frame.width, 720)
+        XCTAssertEqual(sut.collectionView.center.x, window.bounds.midX, accuracy: 1)
+    }
+
 }
