@@ -198,4 +198,43 @@ class SearchLevelViewControllerTests: XCTestCase {
     
     @objc private func stubSelector() {}
     
+    func test_levelOpens_shouldPutVoiceOverOnTheLevelDescription() {
+        let spy = AccessibilityNotificationCenterSpy()
+        EscapeFromBlindnessAccessibility.shared = spy
+        let level = SearchLevel(
+            levelDescription: "D1",
+            levelActions: [(description: "", actions: ["A1"], results: ["R1"])],
+            validActions: ["A1"]
+        )!
+        sut = SearchViewController(level: level)
+
+        loadView()
+        sut.viewDidAppear(false)
+
+        XCTAssertEqual(spy.notification, .screenChanged)
+        XCTAssertTrue(spy.argument as? UILabel === sut.mainLabel)
+    }
+
+    func test_severalLayoutPasses_shouldKeepOneVoiceOverZonePerArea() {
+        let level = SearchLevel(
+            levelDescription: "D1",
+            levelActions: [
+                (description: "Z1", actions: ["A1"], results: ["R1"]),
+                (description: "Z2", actions: ["A1"], results: ["R1"]),
+                (description: "Z3", actions: ["A1"], results: ["R1"])
+            ],
+            validActions: ["A1", "A1", "A1"]
+        )!
+        sut = SearchViewController(level: level)
+        loadView()
+
+        sut.view.setNeedsLayout()
+        sut.view.layoutIfNeeded()
+        sut.viewDidLayoutSubviews()
+
+        let zones = sut.view.subviews.filter { $0.isAccessibilityElement && $0 !== sut.mainLabel }
+        XCTAssertEqual(zones.map { $0.accessibilityLabel }, ["Z1", "Z2", "Z3"])
+        XCTAssertEqual(sut.actionViews.count, 3)
+    }
+
 }

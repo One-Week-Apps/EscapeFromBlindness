@@ -31,7 +31,10 @@ class GameFlowMock: GameFlowProtocol {
     func start() {
         startCalled = true
     }
-    func restart() {}
+    var replayFromStartCalled = false
+    func replayFromStart() {
+        replayFromStartCalled = true
+    }
     func validate(_ answers: [Level.Answer]) {}
     func validateChapter() {}
 }

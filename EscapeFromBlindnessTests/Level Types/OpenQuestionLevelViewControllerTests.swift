@@ -39,6 +39,11 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
     private func unloadView() {
         sut.view.removeFromSuperview()
     }
+
+    @discardableResult
+    private func pressReturn() -> Bool? {
+        return sut.textField.delegate?.textFieldShouldReturn?(sut.textField)
+    }
     
     // MARK: - Tests
     func test_viewDidLoad_withOneQuestion_shouldDisplayQuestion() {
@@ -65,7 +70,7 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
         loadView()
         sut.textField.becomeFirstResponder()
         sut.textField.text = "A2é"
-        sut.textField.endEditing(false)
+        pressReturn()
         
         XCTAssertEqual(coordinator?.validateAnswers, ["a2e"])
     }
@@ -81,7 +86,7 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
         loadView()
         sut.textField.becomeFirstResponder()
         sut.textField.text = "A2e "
-        sut.textField.endEditing(false)
+        pressReturn()
         
         XCTAssertEqual(coordinator?.validateAnswers, ["a2e"])
     }
@@ -97,9 +102,54 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
         loadView()
         sut.textField.becomeFirstResponder()
         sut.textField.text = "A2e\n"
-        sut.textField.endEditing(false)
+        pressReturn()
         
         XCTAssertEqual(coordinator?.validateAnswers, ["a2e"])
     }
     
+    func test_pressingReturn_shouldKeepTheKeyboardSoAWrongAnswerCanBeCorrected() {
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]))
+        sut.coordinator = coordinator
+        loadView()
+        sut.textField.text = "wrong"
+
+        let shouldReturn = pressReturn()
+
+        XCTAssertEqual(shouldReturn, false)
+        XCTAssertEqual(coordinator.validateAnswers, ["wrong"])
+        XCTAssertEqual(sut.textField.text, "wrong")
+    }
+
+    func test_leavingTheFieldWithoutReturn_shouldNotTryTheAnswer() {
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]))
+        sut.coordinator = coordinator
+        loadView()
+
+        sut.textField.text = "half typ"
+        sut.textField.delegate?.textFieldDidEndEditing?(sut.textField)
+
+        XCTAssertNil(coordinator.validateAnswers)
+    }
+
+    func test_answerField_shouldNotAutocorrectAPassword() {
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]))
+        loadView()
+
+        XCTAssertEqual(sut.textField.autocorrectionType, .no)
+        XCTAssertEqual(sut.textField.autocapitalizationType, .none)
+        XCTAssertEqual(sut.textField.spellCheckingType, .no)
+    }
+
+    func test_levelOpens_shouldPutVoiceOverOnTheQuestion() {
+        let spy = AccessibilityNotificationCenterSpy()
+        EscapeFromBlindnessAccessibility.shared = spy
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]))
+
+        loadView()
+        sut.viewDidAppear(false)
+
+        XCTAssertEqual(spy.notification, .screenChanged)
+        XCTAssertTrue(spy.argument as? UILabel === sut.mainLabel)
+    }
+
 }

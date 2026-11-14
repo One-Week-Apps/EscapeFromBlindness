@@ -3,6 +3,7 @@
 //  Copyright © 2020 michael-martinez. All rights reserved.
 //
 
+import AVFoundation
 import Foundation
 import XCTest
 @testable import EscapeFromBlindness
@@ -52,4 +53,14 @@ class AppCoordinatorSoundsTests: XCTestCase {
         XCTAssertEqual(soundPlayerSpy.startedSoundType, CustomSoundTypes.allCases[chapterIndex - 1])
     }
     
+    // MARK: Silent Mode
+    func test_whenChapterMusicStarts_shouldPlayEvenInSilentMode() {
+        let audioSession = AVAudioSession.sharedInstance()
+        try? audioSession.setCategory(.soloAmbient)
+
+        SoundPlayer().start(type: .jungle)
+
+        XCTAssertEqual(audioSession.category, .playback)
+        XCTAssertTrue(audioSession.categoryOptions.contains(.mixWithOthers))
+    }
 }

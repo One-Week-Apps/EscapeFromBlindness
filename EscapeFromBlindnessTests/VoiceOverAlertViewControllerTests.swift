@@ -80,4 +80,10 @@ class VoiceOverAlertViewControllerTests: XCTestCase {
         XCTAssertTrue(coordinator.dismissActivateVoiceOverAlertCalled)
     }
     
+    func test_continueButton_shouldBeLocalized() {
+        loadView()
+
+        XCTAssertEqual(sut.continueButton.title(for: .normal), L10n.go)
+    }
+
 }

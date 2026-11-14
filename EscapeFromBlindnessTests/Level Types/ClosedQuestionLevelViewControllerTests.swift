@@ -89,4 +89,16 @@ class ClosedQuestionLevelViewControllerTests: XCTestCase {
         XCTAssertEqual(coordinator?.validateAnswers, ["A2"])
     }
     
+    func test_levelOpens_shouldPutVoiceOverOnTheQuestion() {
+        let spy = AccessibilityNotificationCenterSpy()
+        EscapeFromBlindnessAccessibility.shared = spy
+        sut = ClosedQuestionViewController(level: ClosedQuestionLevel(question: "Q1", answers: ["A1", "A2"], validAnswers: ["A1"]))
+
+        loadView()
+        sut.viewDidAppear(false)
+
+        XCTAssertEqual(spy.notification, .screenChanged)
+        XCTAssertTrue(spy.argument as? UILabel === sut.mainLabel)
+    }
+
 }
