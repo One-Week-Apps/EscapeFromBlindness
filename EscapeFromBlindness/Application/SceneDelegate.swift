@@ -59,6 +59,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 appCoordinator.showActivateVoiceOverAlert()
             }
         }
+        // UI tests: open the end-of-chapter screen (chapter 1) without playing it.
+        if ProcessInfo.processInfo.arguments.contains("-UITestChapter"), let firstChapter = chapters.first {
+            DispatchQueue.main.async {
+                appCoordinator.presentChapterController(firstChapter)
+            }
+        }
         #endif
     }
 
