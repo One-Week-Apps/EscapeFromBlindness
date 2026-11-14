@@ -49,10 +49,10 @@ Depending on your device, it will either be by pressing three times the lateral 
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice-over-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Uox-Qy-Xhy">
-                            <rect key="frame" x="127" y="517" width="100" height="100"/>
+                            <rect key="frame" x="117" y="517" width="120" height="120"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Uox-Qy-Xhy" secondAttribute="height" multiplier="1:1" id="F2t-gS-qlZ"/>
-                                <constraint firstAttribute="width" constant="100" id="amL-MJ-eeG"/>
+                                <constraint firstAttribute="width" constant="120" id="amL-MJ-eeG"/>
                             </constraints>
                         </imageView>
                     </subviews>
