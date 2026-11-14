@@ -12,7 +12,7 @@
 "2" = "You are an explorer of an old tomb!";
 "3" = "Your torch just turned off!";
 "4" = "This game is 100% based on VoiceOver usage!";
-"5" = "VoiceOver is an assistive technology that allows blind users to use their smartphones.";
+"5" = "VoiceOver is an assistive technology that lets visually impaired people use their smartphone.";
 "6" = "In this adventure, you will have to activate VoiceOver to progress!";
 "7" = "You will be faced tens of unique levels to will use the assistive technology's features!";
 "8" = "Good luck explorer!";
@@ -22,25 +22,32 @@
 "A" = "Congratulations!";
 "B" = "You successfully managed to go through all game levels!";
 "C" = "We hope you enjoyed this game as much as we enjoyed developing it!";
-"D" = "We also hope that this game helped you to understand better some of the challenges encoutered by blind people while using smartphones.";
+"D" = "We also hope this game gave you a better idea of how visually impaired people use their smartphone.";
 "E" = "If you enjoyed the game and feel like you would like to build your own levels, feel free to submit your ideas in the contact section of our website: ";
 "F" = "This can be a completely new story based on the game modes you just played!";
 
 "replay" = "Touch to play again !";
+"replay_hint" = "Reads the instructions again from the start";
 
 //======================================================
 /* Voice Over Instructions */
-"vo1" = "You are exploring an old tomb, as you are in the dark and have no torch left you do not see anything !\n\nPlease turn on VoiceOver to continue the game !\n\nFirst configure the accessibility shortcut in to allow you to turn on/off VoiceOver easily.\n\nThen go back to the app and turn on VoiceOver.\nDepending on your device, it will either be by pressing three times the lateral button or the home button.";
+"vo1" = "You are exploring an old tomb. It is dark and you have no torch left: you cannot see anything!\n\nPlease turn on VoiceOver to continue the game!\n\nFirst set up the Accessibility Shortcut, so you can turn VoiceOver on and off easily.\n\nThen go back to the app and turn on VoiceOver.\nDepending on your device, press the side button or the Home button three times.";
 "vo2" = "Let's continue exploring !\n\nEnjoy your play !";
+"vo_open_settings" = "Open Settings";
+"vo_open_settings_error" = "The Settings app could not be opened. Open it yourself, then go to Accessibility and VoiceOver.";
 
 //======================================================
 "chapter" = "Chapter";
 "complete" = "complete";
 "locked" = "locked";
 "continue" = "continue";
-"level" = "Niveau";
+"go" = "Go !";
+"level" = "Level";
 "hint" = "hint";
+"level_selection_subtitle" = "Choose your level";
+"level_locked_accessibility" = "Level %d, locked";
 "door_script" = "A door stands in front of me. It seems to be locked. I need to find the code.";
+"ok" = "OK";
 
 /* Chapter 1 */
 "chapter1_description" = "Nepal: year 1976, You approach an ancient ice cave In Nepal. You just reached the summit of the mountain. There is a huge door before of you. When VoiceOver is turned on, you can go from one text to the other by touching it directly or sliding left or right with your finger. Double tap to validate or select something.";
@@ -146,3 +153,29 @@
 "chapter4_cq2desc2" = "The bloc in the middle.";
 
 "chapter4_cq2desc3" = "The bloc on the right.";
+"chapter_number" = "Chapter\U00a0%d";
+"chapter_heading" = "Chapter %d, %@";
+"chapter1_title" = "Ice Cave";
+"chapter2_title" = "The Lost City";
+"chapter3_title" = "Hidden Valley";
+"chapter4_title" = "The Hidden Tomb";
+
+"wrong_answer" = "No, that's not it.";
+
+/* Hints */
+"menu" = "Menu";
+"hint_none" = "No hint is available for this level!";
+"hint_next_in" = "Next hint in %d seconds.";
+"chapter2_cq1h2" = "How many legs does a bear have? And a wolf?";
+"chapter2_cq1h3" = "A bear has 4 legs, a wolf has 4 too.";
+"chapter2_cq2h1" = "This should be related to the key elements I can see.";
+"chapter2_cq2h2" = "Take the first letter of each key element.";
+"chapter2_cq2h3" = "What are the first letters of water, bird and owl?";
+"chapter3_q1h1" = "You can always go back to the previous level if you don't remember the answer.";
+"chapter4_l1h1" = "What animals did you see before?";
+"chapter4_l1h2" = "You can always go back to the previous level if you don't remember the answer.";
+"chapter4_l1h3" = "Only press the button for the eagle: it is the only one you saw.";
+"chapter4_l2h1" = "What shape does a mountain have?";
+"chapter4_l2h2" = "Pull each block to draw a mountain.";
+"chapter4_l2h3" = "A mountain is a triangle: pull the first block once, the second twice, the third once.";
+"door_hint" = "Swipe up or down to choose a code, then double tap to try it.";

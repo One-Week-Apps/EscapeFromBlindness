@@ -12,7 +12,7 @@
 "2" = "Tu es un explorateur d'un tombeau abandonné !";
 "3" = "Ta lampe torche vient de s'éteindre !";
 "4" = "Ce jeu est basé intégralement sur l'utilisation de VoiceOver !";
-"5" = "VoiceOver est une technologie de lecteur d'écran par synthèse vocale permettant à un utilisateur malvoyant d'utiliser son smartphone.";
+"5" = "VoiceOver est une technologie de lecteur d'écran par synthèse vocale permettant à une personne déficiente visuelle d'utiliser son smartphone.";
 "6" = "Dans cette aventure, tu vas devoir utiliser VoiceOver pour progresser !";
 "7" = "Tu devras faire face à plusieurs dizaines de niveaux uniques grâce à l'utilisation des fonctionnalités de VoiceOver !";
 "8" = "Bonne chance explorateur !";
@@ -22,26 +22,33 @@
 "A" = "Félicitations !";
 "B" = "Tu as réussi à surmonter toutes les épreuves du jeu avec succès !";
 "C" = "Nous espérons que tu as apprécié ce jeu autant que nous avons aimé le développer !";
-"D" = "Nous espérons également que ce jeu aura pu te donner une idée te sensibiliser à la manière dont une personne non-voyante utilise son smartphone.";
+"D" = "Nous espérons aussi que ce jeu t'aura sensibilisé à la façon dont une personne déficiente visuelle utilise son smartphone.";
 "E" = "Si tu as apprécié ce jeu et que tu souhaites proposer tes propres niveaux, donne-nous tes idées dans la section contact de notre site: ";
 "F" = "Cela peut être un scénario totalement différent mais qui reste basé sur les modes de jeu auxquels tu as pu jouer !";
 
 "replay" = "Rejouer !";
+"replay_hint" = "Relit les instructions depuis le début";
 
 //======================================================
 /* Voice Over Instructions */
-"vo1" = "Tu explore un ancien tombeau, l'espace est plongé dans la pénombre et tu ne n'as que très peu de visibilité !\n\nMerci d'activer VoiceOver pour continuer à jouer !\n\nCommence par activer le raccourci d'accessibilité de ton smartphone pour activer/désactiver VoiceOver plus facilement.\n\nEnsuite reviens dans l'application et active VoiceOver.\nEn fonction de ton smartphone, cela sera en appuyant 3 fois soit sur le bouton latéral ou soit sur le bouton home.";
+"vo1" = "Tu explores un ancien tombeau, l'espace est plongé dans la pénombre et tu n'as que très peu de visibilité !\n\nMerci d'activer VoiceOver pour continuer à jouer !\n\nCommence par activer le raccourci d'accessibilité de ton smartphone pour activer/désactiver VoiceOver plus facilement.\n\nEnsuite reviens dans l'application et active VoiceOver.\nEn fonction de ton smartphone, il suffira d'appuyer 3 fois sur le bouton latéral ou sur le bouton principal.";
 "vo2" = "Reprenons l'exploration !\n\nBonne chance !";
+"vo_open_settings" = "Ouvrir les Réglages";
+"vo_open_settings_error" = "Impossible d'ouvrir l'app Réglages. Ouvre-la toi-même, puis va dans Accessibilité et VoiceOver.";
 
 
 //======================================================
 "chapter" = "Chapitre";
 "complete" = "terminé";
-"locked" = "vérouillé";
+"locked" = "verrouillé";
 "continue" = "continuer";
+"go" = "Go !";
 "level" = "Niveau";
 "hint" = "indice";
+"level_selection_subtitle" = "Choisis ton niveau";
+"level_locked_accessibility" = "Niveau %d, verrouillé";
 "door_script" = "Une porte se situe en face de moi. Elle semble vérouillée par un cadenas circulaire. Je dois trouver le code.";
+"ok" = "OK";
 
 /* Chapter 1 */
 "chapter1_description" = "Népal: année 1976, Vous approchez d'une ancienne caverne de glace au Népal. Vous venez d'atteindre le sommet de la montagne. Une énorme porte vous fait face. Lorsque VoiceOver est activé, tu peux aller d'un élément à l'autre en le touchant sur l'écran directement ou en faisant glisser ton doigt vers la gauche ou vers la droite. Touches deux fois l'écran pour valider.";
@@ -148,3 +155,29 @@
 
 "chapter4_cq2desc3" = "Le bloc sur ta droite.";
 
+"chapter_number" = "Chapitre\U00a0%d";
+"chapter_heading" = "Chapitre %d, %@";
+"chapter1_title" = "La Grotte de glace";
+"chapter2_title" = "La Cité perdue";
+"chapter3_title" = "La Vallée cachée";
+"chapter4_title" = "Le Tombeau caché";
+
+"wrong_answer" = "Non, ce n'est pas ça.";
+
+/* Hints */
+"menu" = "Menu";
+"hint_none" = "Aucun indice n'est disponible pour ce niveau !";
+"hint_next_in" = "Indice suivant dans %d secondes.";
+"chapter2_cq1h2" = "Combien de pattes a un ours ? Et un loup ?";
+"chapter2_cq1h3" = "Un ours a 4 pattes, un loup aussi.";
+"chapter2_cq2h1" = "Cela doit avoir un rapport avec les éléments que je remarque.";
+"chapter2_cq2h2" = "Prends la première lettre de chaque élément.";
+"chapter2_cq2h3" = "Quelles sont les premières lettres de eau, oiseaux et hibou ?";
+"chapter3_q1h1" = "Tu peux toujours revenir au niveau précédent si tu ne te souviens plus de la réponse.";
+"chapter4_l1h1" = "Quels animaux as-tu vus auparavant ?";
+"chapter4_l1h2" = "Tu peux toujours revenir au niveau précédent si tu ne te souviens plus de la réponse.";
+"chapter4_l1h3" = "N'active le bouton que pour l'aigle : c'est le seul que tu as vu.";
+"chapter4_l2h1" = "Quelle forme a une montagne ?";
+"chapter4_l2h2" = "Tire chaque bloc pour dessiner une montagne.";
+"chapter4_l2h3" = "Une montagne est un triangle : tire le premier bloc une fois, le deuxième deux fois, le troisième une fois.";
+"door_hint" = "Balaie vers le haut ou le bas pour choisir un code, puis touche deux fois pour l'essayer.";
