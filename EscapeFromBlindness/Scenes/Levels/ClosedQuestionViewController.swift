@@ -29,6 +29,10 @@ class ClosedQuestionViewController: LevelBaseViewController {
         self.level = level
     }
     
+    override var initialAccessibilityFocus: Any? {
+        return self.mainLabel
+    }
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         setupHints()

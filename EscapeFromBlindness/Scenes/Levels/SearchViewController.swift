@@ -35,6 +35,10 @@ class SearchViewController: LevelBaseViewController {
         self.performedActions = [String?].init(repeating: nil, count: self.level.levelActions.count)
     }
     
+    override var initialAccessibilityFocus: Any? {
+        return self.mainLabel
+    }
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         setupHints()
@@ -46,9 +50,21 @@ class SearchViewController: LevelBaseViewController {
         self.hints = level.hints
     }
     
+    /// UIKit lays out several times: the zones are created once, then only moved below the description.
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setupActionsViews()
+        if self.actionViews.isEmpty {
+            setupActionsViews()
+        } else {
+            layoutActionViews()
+        }
+    }
+
+    private func layoutActionViews() {
+        let frames = RandomFramesGenerator.generateFrames(startY: Int(self.mainLabel.frame.maxY) + 5, count: self.actionViews.count)
+        for (actionView, frame) in zip(self.actionViews, frames) {
+            actionView.frame = frame
+        }
     }
     
     // MARK: - Private Methods
@@ -58,7 +74,8 @@ class SearchViewController: LevelBaseViewController {
         self.mainLabel.translatesAutoresizingMaskIntoConstraints = false
         self.mainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         self.mainLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 30).isActive = true
-        self.mainLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
+        // Below the navigation bar: the room description must not sit under the Menu and hint buttons.
+        self.mainLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
         
         self.mainLabel.text = level.levelDescription
     }

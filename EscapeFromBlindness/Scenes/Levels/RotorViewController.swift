@@ -19,6 +19,10 @@ class RotorViewController: LevelBaseViewController {
         self.level = level
     }
     
+    override var initialAccessibilityFocus: Any? {
+        return self.lockedDoorView
+    }
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         setupHints()
@@ -59,10 +63,23 @@ class RotorViewController: LevelBaseViewController {
         self.lockedDoorView.frame = frame
         self.lockedDoorView.isAccessibilityElement = true
         self.lockedDoorView.accessibilityLabel = L10n.doorScript
+        self.lockedDoorView.accessibilityHint = L10n.doorHint
         self.lockedDoorView.accessibilityCustomRotors = customRotors
+        self.lockedDoorView.accessibilityCustomActions = makeAccessibilityCustomActions(for: level.answers)
         self.view.addSubview(self.lockedDoorView)
     }
     
+    /// Swipe up or down to hear a code, double tap to try it: the usual VoiceOver gesture.
+    /// iOS does not tell the app which rotor option is selected, so a double tap on a rotor option cannot be read.
+    private func makeAccessibilityCustomActions(for answers: [String]) -> [UIAccessibilityCustomAction] {
+        return answers.map { answer in
+            UIAccessibilityCustomAction(name: answer) { [weak self] _ in
+                self?.coordinator?.validate([answer])
+                return true
+            }
+        }
+    }
+
     private func makeAccessibilityCustomRotors(for answers: [String]) -> [UIAccessibilityCustomRotor] {
         var customRotors: [UIAccessibilityCustomRotor] = []
         

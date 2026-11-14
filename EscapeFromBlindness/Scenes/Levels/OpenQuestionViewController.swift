@@ -19,6 +19,10 @@ class OpenQuestionViewController: LevelBaseViewController {
         textField.borderStyle = .none
         textField.textColor = .white
         textField.returnKeyType = .done
+        // Answers are passwords such as "heo", not words: no autocorrection, capital or spell check.
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+        textField.spellCheckingType = .no
         return textField
     }()
     
@@ -30,6 +34,10 @@ class OpenQuestionViewController: LevelBaseViewController {
         self.level = level
     }
     
+    override var initialAccessibilityFocus: Any? {
+        return self.mainLabel
+    }
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         setupHints()
@@ -69,18 +77,13 @@ extension OpenQuestionViewController: UITextFieldDelegate {
         return true
     }
     
+    /// Tries the answer and keeps the keyboard: after a wrong answer the player stays in the field to correct it,
+    /// and VoiceOver does not jump to the top of the screen. A right answer opens the next level.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.textField.resignFirstResponder()
-        return true
+        coordinator?.validate([sanitizeAnswer(textField.text ?? "")])
+        return false
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            let sanitizedAnswer = sanitizeAnswer(text)
-            coordinator?.validate([sanitizedAnswer])
-        }
-    }
-    
+
     private func sanitizeAnswer(_ answer: String) -> String {
         return answer.folding(options: .diacriticInsensitive, locale: .current).lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
     }
