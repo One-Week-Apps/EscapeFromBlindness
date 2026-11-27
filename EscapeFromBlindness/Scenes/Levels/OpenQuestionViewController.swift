@@ -38,15 +38,19 @@ class OpenQuestionViewController: LevelBaseViewController {
         return label
     }()
     /// Time left to read (or hear) the verdict before the next level replaces this screen.
-    private var acceptedVerdictDuration: TimeInterval = 1.5
+    private let acceptedVerdictDuration: TimeInterval
 
     // MARK: - Initialization
-    private var level: OpenQuestionLevel!
+    private let level: OpenQuestionLevel
 
-    convenience init(level: OpenQuestionLevel, acceptedVerdictDuration: TimeInterval = 1.5) {
-        self.init()
+    init(level: OpenQuestionLevel, acceptedVerdictDuration: TimeInterval) {
         self.level = level
         self.acceptedVerdictDuration = acceptedVerdictDuration
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override var initialAccessibilityFocus: Any? {

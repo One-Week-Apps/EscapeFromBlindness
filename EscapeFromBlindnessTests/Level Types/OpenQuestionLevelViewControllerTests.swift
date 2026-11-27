@@ -51,7 +51,7 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
             question: "Q1",
             validAnswers: ["A1"]
         )
-        sut = OpenQuestionViewController(level: level)
+        sut = OpenQuestionViewController(level: level, acceptedVerdictDuration: 0.01)
         sut.coordinator = coordinator
         
         loadView()
@@ -64,7 +64,7 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
             question: "Q1",
             validAnswers: ["a1"]
         )
-        sut = OpenQuestionViewController(level: level)
+        sut = OpenQuestionViewController(level: level, acceptedVerdictDuration: 0.01)
         sut.coordinator = coordinator
         
         loadView()
@@ -80,7 +80,7 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
             question: "Q1",
             validAnswers: ["a1"]
         )
-        sut = OpenQuestionViewController(level: level)
+        sut = OpenQuestionViewController(level: level, acceptedVerdictDuration: 0.01)
         sut.coordinator = coordinator
         
         loadView()
@@ -96,7 +96,7 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
             question: "Q1",
             validAnswers: ["a1"]
         )
-        sut = OpenQuestionViewController(level: level)
+        sut = OpenQuestionViewController(level: level, acceptedVerdictDuration: 0.01)
         sut.coordinator = coordinator
         
         loadView()
@@ -108,7 +108,7 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
     }
     
     func test_pressingReturn_shouldKeepTheKeyboardSoAWrongAnswerCanBeCorrected() {
-        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]))
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]), acceptedVerdictDuration: 0.01)
         sut.coordinator = coordinator
         loadView()
         sut.textField.text = "wrong"
@@ -121,7 +121,7 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
     }
 
     func test_leavingTheFieldWithoutReturn_shouldNotTryTheAnswer() {
-        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]))
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]), acceptedVerdictDuration: 0.01)
         sut.coordinator = coordinator
         loadView()
 
@@ -132,7 +132,7 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
     }
 
     func test_answerField_shouldNotAutocorrectAPassword() {
-        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]))
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]), acceptedVerdictDuration: 0.01)
         loadView()
 
         XCTAssertEqual(sut.textField.autocorrectionType, .no)
@@ -157,13 +157,27 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
     func test_levelOpens_shouldPutVoiceOverOnTheQuestion() {
         let spy = AccessibilityNotificationCenterSpy()
         EscapeFromBlindnessAccessibility.shared = spy
-        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]))
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]), acceptedVerdictDuration: 0.01)
 
         loadView()
         sut.viewDidAppear(false)
 
         XCTAssertEqual(spy.notification, .screenChanged)
         XCTAssertTrue(spy.argument as? UILabel === sut.mainLabel)
+    }
+
+    func test_returnWithAnAnswerSurroundedBySpaces_shouldAnnounceAcceptedToVoiceOver() {
+        let spy = AccessibilityNotificationCenterSpy()
+        EscapeFromBlindnessAccessibility.shared = spy
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]), acceptedVerdictDuration: 0.01)
+        sut.coordinator = coordinator
+        loadView()
+        sut.textField.text = " a1 "
+
+        pressReturn()
+
+        XCTAssertEqual(spy.notification, .announcement)
+        XCTAssertEqual(spy.argument as? String, L10n.openAnswerAccepted)
     }
 
 }

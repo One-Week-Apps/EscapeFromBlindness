@@ -48,7 +48,8 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
     /// VoiceOver drops an announcement posted while it still handles the gesture (rotor swipe, action double tap).
     internal var wrongAnswerAnnouncementDelay: TimeInterval = 0.5
     /// Time the "answer accepted" verdict of an open question stays on screen before the next level.
-    internal var openQuestionAcceptedVerdictDuration: TimeInterval = 1.5
+    static let defaultOpenQuestionAcceptedVerdictDuration: TimeInterval = 1.5
+    internal var openQuestionAcceptedVerdictDuration = AppCoordinator.defaultOpenQuestionAcceptedVerdictDuration
     private let gameFlow: GameFlowProtocol
     private let soundPlayer: SoundPlayerProtocol
     
