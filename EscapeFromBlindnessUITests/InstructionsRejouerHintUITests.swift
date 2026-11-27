@@ -7,9 +7,10 @@ import XCTest
 
 final class InstructionsRejouerHintUITests: XCTestCase {
 
-    /// The button only appears after the 6 game end instructions have played (one every 5 s).
-    private let timeout: TimeInterval = 45
+    /// Le bouton n'apparaît qu'après le défilement des 6 instructions de fin : sous `-UITestGameEnd`, la cadence est réduite (quelques ms).
+    private let timeout: TimeInterval = 5
     private let replayButtonIdentifier = "instructions.replayButton"
+    private let lastInstructionIdentifier = "finDeJeu.derniereConsigne"
     private let expectedLabel = "Rejouer !"
     private let lastParagraph = "Cela peut être un scénario totalement différent mais qui reste basé sur les modes de jeu auxquels tu as pu jouer !"
 
@@ -39,7 +40,9 @@ final class InstructionsRejouerHintUITests: XCTestCase {
         XCTAssertEqual(replayButton.label, expectedLabel)
         // XCUITest does not expose accessibilityHint: the value is covered by InstructionsRejouerHintTests.
 
-        XCTAssertTrue(app.staticTexts[lastParagraph].exists)
+        let lastParagraphElement = app.staticTexts[lastInstructionIdentifier]
+        XCTAssertTrue(lastParagraphElement.waitForExistence(timeout: timeout))
+        XCTAssertEqual(lastParagraphElement.label, lastParagraph)
         XCTAssertFalse(app.buttons[lastParagraph].exists)
 
         AITaskerCapture.captureScreen(nodeId: "Instructions", action: "Écran des instructions affiché, bouton Rejouer avec indice VoiceOver")

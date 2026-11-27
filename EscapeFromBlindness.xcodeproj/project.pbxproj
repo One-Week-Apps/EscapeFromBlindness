@@ -97,6 +97,8 @@
 		D8F27A7A23FDF2D000C09E1B /* RandomFramesGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F27A7923FDF2D000C09E1B /* RandomFramesGenerator.swift */; };
 		F3A91C6E27B04D58A1E6C2B9 /* NiveauxTuilesAlignementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2E8B40C9F71A35E0B4D7C1 /* NiveauxTuilesAlignementUITests.swift */; };
 		FAC913BD730F4A31B262E1CE /* EscapeFromBlindnessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867CE172D9312794687982A /* EscapeFromBlindnessUITests.swift */; };
+		B2E36BB84A334B0DA2E77197 /* FinDeJeuLisibiliteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402CFFF13B254D1E80DC0DBE /* FinDeJeuLisibiliteUITests.swift */; };
+		C4D81E2A9F3B47A6B0E5D712 /* InstructionsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A7C93D2B14F68A9C3E174 /* InstructionsInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +132,7 @@
 		A1E5C0DE000000000000000C /* HomeTitleBoldUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeTitleBoldUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccessibiliteVersionEtSousTitreUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintUITests.swift; sourceTree = "<group>"; };
+		402CFFF13B254D1E80DC0DBE /* FinDeJeuLisibiliteUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FinDeJeuLisibiliteUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintTests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000102 /* AppStoreScreenshotsUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppStoreScreenshotsUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000104 /* SearchLevelLayoutUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SearchLevelLayoutUITests.swift; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 		D8F27A7923FDF2D000C09E1B /* RandomFramesGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFramesGenerator.swift; sourceTree = "<group>"; };
 		EDA440EB54F6260A6C2B8221 /* Pods_EscapeFromBlindnessTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EscapeFromBlindnessTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23255916EEFAB207F2D7174 /* SceneDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5E0A7C93D2B14F68A9C3E174 /* InstructionsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsInteractorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +292,7 @@
 				7B2E5D1C94A08F36E1D7B0C8 /* AccueilTitresChapitreUITests.swift */,
 				A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */,
 				A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */,
+				402CFFF13B254D1E80DC0DBE /* FinDeJeuLisibiliteUITests.swift */,
 				A1E5C0DE0000000000000014 /* AccessibiliteVersionEtSousTitreUITests.swift */,
 				6D2E8B40C9F71A35E0B4D7C1 /* NiveauxTuilesAlignementUITests.swift */,
 				2C7F94D1E6A03B85F9D2C40E /* ReglagesLienVoiceOverUITests.swift */,
@@ -380,6 +385,7 @@
 				D84760AA23C14B5A00DF4825 /* LocalLevelFactoryTests.swift */,
 				D88E36F1244EE20100872550 /* LoadLevelViewControllerTests.swift */,
 				A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */,
+				5E0A7C93D2B14F68A9C3E174 /* InstructionsInteractorTests.swift */,
 			);
 			path = EscapeFromBlindnessTests;
 			sourceTree = "<group>";
@@ -768,6 +774,7 @@
 				3F9A07C2D18E46B5A0E2C9D4 /* AccueilTitresChapitreUITests.swift in Sources */,
 				A1E5C0DE0000000000001013 /* ChoixNiveauVerrouilleVoiceOverUITests.swift in Sources */,
 				A1E5C0DE0000000000000021 /* InstructionsRejouerHintUITests.swift in Sources */,
+				B2E36BB84A334B0DA2E77197 /* FinDeJeuLisibiliteUITests.swift in Sources */,
 				A1E5C0DE0000000000000013 /* AccessibiliteVersionEtSousTitreUITests.swift in Sources */,
 				F3A91C6E27B04D58A1E6C2B9 /* NiveauxTuilesAlignementUITests.swift in Sources */,
 				B85C0E3A41D69F27C3A8E516 /* ReglagesLienVoiceOverUITests.swift in Sources */,
@@ -843,6 +850,7 @@
 				D88B1A7323B4337A008BB85D /* ClosedQuestionLevelViewControllerTests.swift in Sources */,
 				D8C2C10823C0DEBD00F8BE78 /* AppCoordinatorSpy.swift in Sources */,
 				A1E5C0DE0000000000000023 /* InstructionsRejouerHintTests.swift in Sources */,
+				C4D81E2A9F3B47A6B0E5D712 /* InstructionsInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
