@@ -138,6 +138,20 @@ class AppCoordinatorTests: XCTestCase {
         assertNavBar(chapterName: title, level: 1)
     }
 
+    func test_openQuestionAcceptedAnswer_shouldOpenTheNextLevelAfterTheInjectedVerdictDuration() {
+        sut.start(window: UIWindow())
+        sut.openQuestionAcceptedVerdictDuration = 0.01
+        sut.presentOpenQuestionController(OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]))
+        let viewController = sut.navigationController.viewControllers.first as! OpenQuestionViewController
+        viewController.loadViewIfNeeded()
+        viewController.textField.text = " a1 "
+
+        _ = viewController.textField.delegate?.textFieldShouldReturn?(viewController.textField)
+        RunLoop.current.run(until: Date().addingTimeInterval(0.1))
+
+        XCTAssertEqual(gameFlowMock.validatedAnswers, ["a1"])
+    }
+
     func test_RotorQuestionVCIsPresented_navigationBarShouldDisplayCurrentChapterAndLevel() {
         sut.start(window: UIWindow())
         

@@ -38,14 +38,15 @@ class OpenQuestionViewController: LevelBaseViewController {
         return label
     }()
     /// Time left to read (or hear) the verdict before the next level replaces this screen.
-    internal var acceptedVerdictDuration: TimeInterval = 1.5
+    private var acceptedVerdictDuration: TimeInterval = 1.5
 
     // MARK: - Initialization
     private var level: OpenQuestionLevel!
-    
-    convenience init(level: OpenQuestionLevel) {
+
+    convenience init(level: OpenQuestionLevel, acceptedVerdictDuration: TimeInterval = 1.5) {
         self.init()
         self.level = level
+        self.acceptedVerdictDuration = acceptedVerdictDuration
     }
     
     override var initialAccessibilityFocus: Any? {
@@ -107,6 +108,8 @@ extension OpenQuestionViewController: UITextFieldDelegate {
     /// Tries the answer and keeps the keyboard: after a wrong answer the player stays in the field to correct it,
     /// and VoiceOver does not jump to the top of the screen. A right answer shows the verdict, then opens the next level.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // The answer is already accepted: a second Return while the verdict is shown must not validate it again.
+        guard verdictLabel.isHidden else { return false }
         let answers = [sanitizeAnswer(textField.text ?? "")]
         guard level.isSolved(by: answers) else {
             coordinator?.validate(answers)

@@ -140,6 +140,20 @@ class OpenQuestionLevelViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.textField.spellCheckingType, .no)
     }
 
+    func test_secondReturnWhileTheVerdictIsShown_shouldValidateTheAnswerOnlyOnce() {
+        sut = OpenQuestionViewController(level: OpenQuestionLevel(question: "Q1", validAnswers: ["a1"]), acceptedVerdictDuration: 0.01)
+        sut.coordinator = coordinator
+        loadView()
+        sut.textField.text = " a1 "
+
+        pressReturn()
+        pressReturn()
+        RunLoop.current.run(until: Date().addingTimeInterval(0.1))
+
+        XCTAssertEqual(coordinator.validateCallCount, 1)
+        XCTAssertEqual(coordinator.validateAnswers, ["a1"])
+    }
+
     func test_levelOpens_shouldPutVoiceOverOnTheQuestion() {
         let spy = AccessibilityNotificationCenterSpy()
         EscapeFromBlindnessAccessibility.shared = spy

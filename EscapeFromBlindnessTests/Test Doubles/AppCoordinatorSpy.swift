@@ -79,7 +79,10 @@ class AppCoordinatorSpy: AppCoordinatorProtocol {
         validateChapterCalled = true
     }
     
+    var validateCallCount = 0
+
     func validate(_ answers: [Level.Answer]) {
+        validateCallCount += 1
         validateAnswers = answers
     }
 }

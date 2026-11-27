@@ -47,6 +47,8 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
     private let userDefaults: UserDefaults
     /// VoiceOver drops an announcement posted while it still handles the gesture (rotor swipe, action double tap).
     internal var wrongAnswerAnnouncementDelay: TimeInterval = 0.5
+    /// Time the "answer accepted" verdict of an open question stays on screen before the next level.
+    internal var openQuestionAcceptedVerdictDuration: TimeInterval = 1.5
     private let gameFlow: GameFlowProtocol
     private let soundPlayer: SoundPlayerProtocol
     
@@ -170,7 +172,7 @@ class AppCoordinator: NSObject, Coordinator, AppCoordinatorProtocol {
     func presentOpenQuestionController(_ level: Level) {
         guard let level = level as? OpenQuestionLevel else { return }
         
-        let viewController = OpenQuestionViewController(level: level)
+        let viewController = OpenQuestionViewController(level: level, acceptedVerdictDuration: openQuestionAcceptedVerdictDuration)
         viewController.coordinator = self
         
         resetNavigationStack(viewController)
