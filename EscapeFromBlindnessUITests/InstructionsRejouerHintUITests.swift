@@ -45,7 +45,7 @@ final class InstructionsRejouerHintUITests: XCTestCase {
         XCTAssertEqual(lastParagraphElement.label, lastParagraph)
         XCTAssertFalse(app.buttons[lastParagraph].exists)
 
-        AITaskerCapture.captureScreen(nodeId: "Instructions", action: "Écran des instructions affiché, bouton Rejouer avec indice VoiceOver")
+        AITaskerCapture.captureScreen(nodeId: "FinDeJeu", action: "toutes les consignes affichées, bouton Rejouer avec indice VoiceOver")
     }
 
 }
