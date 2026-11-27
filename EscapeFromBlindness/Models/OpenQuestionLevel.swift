@@ -4,13 +4,23 @@
 //
 
 import Foundation
+import os
 
 class OpenQuestionLevel: Level {
     typealias Question = String
     var question: Question
-    
+
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "ReponseOuverte")
+
     init(question: Question, validAnswers: [Answer], hints: [String] = []) {
         self.question = question
         super.init(answers: [], validAnswers: validAnswers, hints: hints)
+    }
+
+    /// Spaces typed by mistake before or after an open answer do not make it wrong.
+    override func isSolved(by answers: [Answer]) -> Bool {
+        let isSolved = super.isSolved(by: answers.map { $0.trimmingCharacters(in: .whitespaces) })
+        logger.debug("Open answer \(isSolved ? "accepted" : "refused", privacy: .public)")
+        return isSolved
     }
 }

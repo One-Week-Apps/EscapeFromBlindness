@@ -22,6 +22,8 @@
 		A1E5C0DE0000000000000023 /* InstructionsRejouerHintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */; };
 		A1E5C0DE0000000000000101 /* AppStoreScreenshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000102 /* AppStoreScreenshotsUITests.swift */; };
 		A1E5C0DE0000000000000103 /* SearchLevelLayoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000000104 /* SearchLevelLayoutUITests.swift */; };
+		D15E5A71400081053346DFB8 /* OpenQuestionLevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC5169304290BC960E0B003 /* OpenQuestionLevelTests.swift */; };
+		7F57217E5D2D491692120310 /* OpenAnswerTrimUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A333DFF8808A127BD157DF /* OpenAnswerTrimUITests.swift */; };
 		A1E5C0DE0000000000001013 /* ChoixNiveauVerrouilleVoiceOverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */; };
 		B01D10C10E0000000000000001 /* Luciole-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B01D10C10E0000000000000002 /* Luciole-Bold.ttf */; };
 		B85C0E3A41D69F27C3A8E516 /* ReglagesLienVoiceOverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F94D1E6A03B85F9D2C40E /* ReglagesLienVoiceOverUITests.swift */; };
@@ -132,6 +134,8 @@
 		A1E5C0DE0000000000000022 /* InstructionsRejouerHintUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000024 /* InstructionsRejouerHintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsRejouerHintTests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000102 /* AppStoreScreenshotsUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppStoreScreenshotsUITests.swift; sourceTree = "<group>"; };
+		5BC5169304290BC960E0B003 /* OpenQuestionLevelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OpenQuestionLevelTests.swift; sourceTree = "<group>"; };
+		86A333DFF8808A127BD157DF /* OpenAnswerTrimUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OpenAnswerTrimUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000000104 /* SearchLevelLayoutUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SearchLevelLayoutUITests.swift; sourceTree = "<group>"; };
 		A1E5C0DE0000000000001014 /* ChoixNiveauVerrouilleVoiceOverUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChoixNiveauVerrouilleVoiceOverUITests.swift; sourceTree = "<group>"; };
 		A94EA5CAC843321CF23D4471 /* Pods-EscapeFromBlindness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EscapeFromBlindness.release.xcconfig"; path = "Target Support Files/Pods-EscapeFromBlindness/Pods-EscapeFromBlindness.release.xcconfig"; sourceTree = "<group>"; };
@@ -292,6 +296,7 @@
 				6D2E8B40C9F71A35E0B4D7C1 /* NiveauxTuilesAlignementUITests.swift */,
 				2C7F94D1E6A03B85F9D2C40E /* ReglagesLienVoiceOverUITests.swift */,
 				D3A72B612939A13DA1295019 /* InterfaceScreenshotsUITests.swift */,
+				86A333DFF8808A127BD157DF /* OpenAnswerTrimUITests.swift */,
 			);
 			name = EscapeFromBlindnessUITests;
 			path = EscapeFromBlindnessUITests;
@@ -456,6 +461,7 @@
 				D88B1A7223B4337A008BB85D /* ClosedQuestionLevelViewControllerTests.swift */,
 				D88B1A9723B43E1D008BB85D /* RotorViewControllerTests.swift */,
 				D88B1A7423B433A4008BB85D /* OpenQuestionLevelViewControllerTests.swift */,
+				5BC5169304290BC960E0B003 /* OpenQuestionLevelTests.swift */,
 				D88B1A9923B43E32008BB85D /* SearchLevelViewControllerTests.swift */,
 				D8C2C0EC23C0CD8500F8BE78 /* ChapterViewControllerTests.swift */,
 			);
@@ -772,6 +778,7 @@
 				F3A91C6E27B04D58A1E6C2B9 /* NiveauxTuilesAlignementUITests.swift in Sources */,
 				B85C0E3A41D69F27C3A8E516 /* ReglagesLienVoiceOverUITests.swift in Sources */,
 				590B24DFBDB3DE4B637F516B /* InterfaceScreenshotsUITests.swift in Sources */,
+				7F57217E5D2D491692120310 /* OpenAnswerTrimUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +843,7 @@
 				D8C2C11023C0E33100F8BE78 /* VoiceOverAlertViewControllerTests.swift in Sources */,
 				D824CECF242395F900DD52CB /* GameFlowMock.swift in Sources */,
 				D88B1A7523B433A4008BB85D /* OpenQuestionLevelViewControllerTests.swift in Sources */,
+				D15E5A71400081053346DFB8 /* OpenQuestionLevelTests.swift in Sources */,
 				D88B1A9823B43E1D008BB85D /* RotorViewControllerTests.swift in Sources */,
 				D88E36F2244EE20100872550 /* LoadLevelViewControllerTests.swift in Sources */,
 				D88B1A9A23B43E32008BB85D /* SearchLevelViewControllerTests.swift in Sources */,
