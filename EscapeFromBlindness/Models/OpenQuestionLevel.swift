@@ -17,10 +17,11 @@ class OpenQuestionLevel: Level {
         super.init(answers: [], validAnswers: validAnswers, hints: hints)
     }
 
-    /// Spaces typed by mistake before or after an open answer do not make it wrong.
+    /// Spaces or new lines typed by mistake before or after an open answer do not make it wrong.
+    /// Case, accents and inner spaces are still compared as they are.
     override func isSolved(by answers: [Answer]) -> Bool {
-        let isSolved = super.isSolved(by: answers.map { $0.trimmingCharacters(in: .whitespaces) })
-        logger.debug("Open answer \(isSolved ? "accepted" : "refused", privacy: .public)")
+        let isSolved = super.isSolved(by: answers.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) })
+        logger.debug("Open answer \(answers, privacy: .private) \(isSolved ? "accepted" : "refused", privacy: .public)")
         return isSolved
     }
 }

@@ -230,6 +230,10 @@ internal enum L10n {
   internal static let menu = L10n.tr("Localizable", "menu", fallback: "Menu")
   /// OK
   internal static let ok = L10n.tr("Localizable", "ok", fallback: "OK")
+  /// Answer accepted
+  internal static let openAnswerAccepted = L10n.tr("Localizable", "open_answer_accepted", fallback: "Answer accepted")
+  /// Your answer
+  internal static let openAnswerField = L10n.tr("Localizable", "open_answer_field", fallback: "Your answer")
   /// Touch to play again !
   internal static let replay = L10n.tr("Localizable", "replay", fallback: "Touch to play again !")
   /// Reads the instructions again from the start

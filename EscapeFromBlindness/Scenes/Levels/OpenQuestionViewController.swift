@@ -23,9 +23,23 @@ class OpenQuestionViewController: LevelBaseViewController {
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
         textField.spellCheckingType = .no
+        textField.accessibilityIdentifier = "openQuestion.answerField"
+        textField.accessibilityLabel = L10n.openAnswerField
         return textField
     }()
-    
+    /// Shown once the answer is accepted, before the next level opens. A text, not a button.
+    var verdictLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.accessibilityIdentifier = "openQuestion.verdict"
+        label.accessibilityTraits = .staticText
+        label.isHidden = true
+        return label
+    }()
+    /// Time left to read (or hear) the verdict before the next level replaces this screen.
+    internal var acceptedVerdictDuration: TimeInterval = 1.5
+
     // MARK: - Initialization
     private var level: OpenQuestionLevel!
     
@@ -54,7 +68,8 @@ class OpenQuestionViewController: LevelBaseViewController {
     private func setupViews() {
         self.view.addSubview(self.mainLabel)
         self.view.addSubview(self.textField)
-        
+        self.view.addSubview(self.verdictLabel)
+
         self.mainLabel.translatesAutoresizingMaskIntoConstraints = false
         self.mainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         self.mainLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 30).isActive = true
@@ -67,6 +82,18 @@ class OpenQuestionViewController: LevelBaseViewController {
         self.textField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
         self.textField.topAnchor.constraint(equalTo: self.mainLabel.bottomAnchor, constant: 30).isActive = true
         self.textField.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(-350.heightScaledFromIphoneX())).isActive = true
+
+        self.verdictLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.verdictLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.verdictLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
+        self.verdictLabel.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 16).isActive = true
+    }
+
+    /// Shows the verdict and has VoiceOver read it.
+    private func showAcceptedVerdict() {
+        self.verdictLabel.text = L10n.openAnswerAccepted
+        self.verdictLabel.isHidden = false
+        EscapeFromBlindnessAccessibility.shared.post(notification: .announcement, argument: L10n.openAnswerAccepted)
     }
 
 }
@@ -78,9 +105,17 @@ extension OpenQuestionViewController: UITextFieldDelegate {
     }
     
     /// Tries the answer and keeps the keyboard: after a wrong answer the player stays in the field to correct it,
-    /// and VoiceOver does not jump to the top of the screen. A right answer opens the next level.
+    /// and VoiceOver does not jump to the top of the screen. A right answer shows the verdict, then opens the next level.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        coordinator?.validate([sanitizeAnswer(textField.text ?? "")])
+        let answers = [sanitizeAnswer(textField.text ?? "")]
+        guard level.isSolved(by: answers) else {
+            coordinator?.validate(answers)
+            return false
+        }
+        showAcceptedVerdict()
+        DispatchQueue.main.asyncAfter(deadline: .now() + acceptedVerdictDuration) { [weak self] in
+            self?.coordinator?.validate(answers)
+        }
         return false
     }
 

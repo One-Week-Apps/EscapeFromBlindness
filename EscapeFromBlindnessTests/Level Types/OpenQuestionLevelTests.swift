@@ -8,16 +8,10 @@ import XCTest
 
 class OpenQuestionLevelTests: XCTestCase {
 
-    func test_should_accept_an_open_answer_followed_by_extra_spaces() {
+    func test_should_accept_an_open_answer_surrounded_by_extra_spaces_and_a_new_line() {
         let level = OpenQuestionLevel(question: "Q1", validAnswers: ["heo"])
 
-        XCTAssertTrue(level.isSolved(by: ["heo   "]))
-    }
-
-    func test_should_accept_an_open_answer_preceded_by_extra_spaces() {
-        let level = OpenQuestionLevel(question: "Q1", validAnswers: ["heo"])
-
-        XCTAssertTrue(level.isSolved(by: ["   heo"]))
+        XCTAssertTrue(level.isSolved(by: ["  \n heo \n  "]))
     }
 
 }

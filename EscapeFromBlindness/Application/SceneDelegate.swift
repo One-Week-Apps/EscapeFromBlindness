@@ -29,6 +29,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             currentChapterIndex = 1
             currentLevelIndex = 0
         }
+        // UI tests: progress on the first open question of the game, opened once the window is visible.
+        let openQuestionPosition = ProcessInfo.processInfo.arguments.contains("-UITestReponseOuverte")
+            ? Self.firstOpenQuestionPosition(in: chapters)
+            : nil
+        if let openQuestionPosition {
+            currentChapterIndex = openQuestionPosition.chapterIndex + 1
+            currentLevelIndex = openQuestionPosition.levelIndex
+        }
         #endif
 
         let gameFlow = GameFlow(
@@ -65,7 +73,25 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 appCoordinator.presentChapterController(firstChapter)
             }
         }
+        if let openQuestionPosition {
+            DispatchQueue.main.async {
+                appCoordinator.loadLevel(openQuestionPosition.chapterIndex, levelIndex: openQuestionPosition.levelIndex)
+                (appCoordinator.lastNavigationControllerViewController as? OpenQuestionViewController)?.textField.becomeFirstResponder()
+            }
+        }
         #endif
     }
+
+    #if DEBUG
+    /// Position of the first open question, the chapter index starting at 0.
+    private static func firstOpenQuestionPosition(in chapters: [Chapter]) -> (chapterIndex: Int, levelIndex: Int)? {
+        for (chapterIndex, chapter) in chapters.enumerated() {
+            if let levelIndex = chapter.levels.firstIndex(where: { $0 is OpenQuestionLevel }) {
+                return (chapterIndex, levelIndex)
+            }
+        }
+        return nil
+    }
+    #endif
 
 }

@@ -164,6 +164,8 @@
 "chapter4_title" = "Le Tombeau caché";
 
 "wrong_answer" = "Non, ce n'est pas ça.";
+"open_answer_field" = "Ta réponse";
+"open_answer_accepted" = "Réponse acceptée";
 
 /* Hints */
 "menu" = "Menu";

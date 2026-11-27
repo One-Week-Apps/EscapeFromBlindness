@@ -5,32 +5,36 @@
 
 import XCTest
 
+/// Réponse ouverte : des espaces en trop autour de la bonne réponse ne la rendent pas fausse.
 final class OpenAnswerTrimUITests: XCTestCase {
+
+    private let timeout: TimeInterval = 5
+    private let answerFieldIdentifier = "openQuestion.answerField"
+    private let verdictIdentifier = "openQuestion.verdict"
 
     override func setUp() {
         continueAfterFailure = false
     }
 
-    /// `-UITestReponseOuverte` opens the first open question of chapter 3 directly (answer "heo" in French).
-    /// A right answer opens the next question: that is the "correct answer" feedback of the game.
+    /// `-UITestReponseOuverte` ouvre directement la première question ouverte du jeu (chapitre 3, réponse « heo » en français),
+    /// champ de réponse déjà actif : sur le simulateur, un tap sur le champ ne lui donnait pas le focus clavier.
     func testReponseOuverteAvecEspacesEnTropEstAcceptee() {
         let app = XCUIApplication()
         app.launchArguments = ["-UITestReponseOuverte", "-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
         app.launch()
 
-        let question = app.staticTexts["openQuestion.question"]
-        XCTAssertTrue(question.waitForExistence(timeout: 5))
-        let firstQuestion = question.label
+        let answerField = app.textFields[answerFieldIdentifier]
+        XCTAssertTrue(answerField.waitForExistence(timeout: timeout))
+        XCTAssertEqual(answerField.label, "Ta réponse")
+        let hasFocus = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hasKeyboardFocus == true"), object: answerField)
+        XCTAssertEqual(XCTWaiter.wait(for: [hasFocus], timeout: timeout), .completed, "Le champ de réponse doit recevoir le focus clavier")
+        answerField.typeText("  heo   ")
+        answerField.typeText("\n")
 
-        let answerField = app.textFields.firstMatch
-        XCTAssertTrue(answerField.waitForExistence(timeout: 5))
-        answerField.tap()
-        answerField.typeText("  heo  \n")
+        let verdict = app.staticTexts[verdictIdentifier]
+        XCTAssertTrue(verdict.waitForExistence(timeout: timeout))
+        XCTAssertEqual(verdict.label, "Réponse acceptée")
 
-        let nextQuestion = app.staticTexts.matching(identifier: "openQuestion.question")
-            .matching(NSPredicate(format: "label BEGINSWITH %@", "Hum. La porte d'entrée")).firstMatch
-        XCTAssertTrue(nextQuestion.waitForExistence(timeout: 5))
-        XCTAssertNotEqual(nextQuestion.label, firstQuestion)
-        AITaskerCapture.captureScreen(nodeId: "ReponseOuverte", action: "Validation de « heo » entouré d'espaces : la question suivante s'affiche")
+        AITaskerCapture.captureScreen(nodeId: "ReponseOuverte", action: "réponse avec espaces saisie et acceptée")
     }
 }

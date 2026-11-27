@@ -162,6 +162,8 @@
 "chapter4_title" = "The Hidden Tomb";
 
 "wrong_answer" = "No, that's not it.";
+"open_answer_field" = "Your answer";
+"open_answer_accepted" = "Answer accepted";
 
 /* Hints */
 "menu" = "Menu";
