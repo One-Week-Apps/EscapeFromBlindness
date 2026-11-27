@@ -204,6 +204,8 @@ internal enum L10n {
   internal static let e = L10n.tr("Localizable", "E", fallback: "If you enjoyed the game and feel like you would like to build your own levels, feel free to submit your ideas in the contact section of our website: ")
   /// This can be a completely new story based on the game modes you just played!
   internal static let f = L10n.tr("Localizable", "F", fallback: "This can be a completely new story based on the game modes you just played!")
+  /// End of the adventure
+  internal static let gameEndEyebrow = L10n.tr("Localizable", "game_end_eyebrow", fallback: "End of the adventure")
   /// Go !
   internal static let go = L10n.tr("Localizable", "go", fallback: "Go !")
   /// hint

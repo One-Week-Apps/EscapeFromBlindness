@@ -23,8 +23,9 @@
 "B" = "Tu as réussi à surmonter toutes les épreuves du jeu avec succès !";
 "C" = "Nous espérons que tu as apprécié ce jeu autant que nous avons aimé le développer !";
 "D" = "Nous espérons aussi que ce jeu t'aura sensibilisé à la façon dont une personne déficiente visuelle utilise son smartphone.";
-"E" = "Si tu as apprécié ce jeu et que tu souhaites proposer tes propres niveaux, donne-nous tes idées dans la section contact de notre site: ";
+"E" = "Si tu as apprécié ce jeu et que tu souhaites proposer tes propres niveaux, donne-nous tes idées dans la section contact de notre site\U00a0: ";
 "F" = "Cela peut être un scénario totalement différent mais qui reste basé sur les modes de jeu auxquels tu as pu jouer !";
+"game_end_eyebrow" = "Fin de l’aventure";
 
 "replay" = "Rejouer !";
 "replay_hint" = "Relit les instructions depuis le début";
