@@ -25,6 +25,7 @@
 "D" = "We also hope this game gave you a better idea of how visually impaired people use their smartphone.";
 "E" = "If you enjoyed the game and feel like you would like to build your own levels, feel free to submit your ideas in the contact section of our website: ";
 "F" = "This can be a completely new story based on the game modes you just played!";
+"game_end_eyebrow" = "End of the adventure";
 
 "replay" = "Touch to play again !";
 "replay_hint" = "Reads the instructions again from the start";
